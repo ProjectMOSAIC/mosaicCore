@@ -1,4 +1,4 @@
-#' @import lazyeval lazy
+#' @importFrom lazyeval lazy
 NA
 
 #' Convert formulas into standard shapes

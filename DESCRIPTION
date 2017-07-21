@@ -5,7 +5,13 @@ Version: 0.1.9000
 Date: 2017-07-19
 Depends:
     R (>= 3.0.0),
-VignetteBuilder: knitr
+Imports:
+    stats,
+    dplyr,
+    lazyeval
+Suggests:
+    mosaicData,
+    mosaic
 Author: Randall Pruim <rpruim@calvin.edu>, Daniel T. Kaplan
     <kaplan@macalester.edu>, Nicholas J. Horton <nhorton@amherst.edu>
 Maintainer: Randall Pruim <rpruim@calvin.edu>

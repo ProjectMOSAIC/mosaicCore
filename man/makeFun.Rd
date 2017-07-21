@@ -34,12 +34,12 @@ be specified without naming.}
 \item{...}{additional arguments in the form \code{var = val} that
 set default values for the inputs to the function.}
 
-\item{strict.declaration}{if \code{TRUE} (the default), an error is thrown if 
+\item{strict.declaration}{if \code{TRUE} (the default), an error is thrown if
 default values are given for variables not appearing in the \code{object} formula.}
 
-\item{use.environment}{if \code{TRUE}, then variables implicitly defined in the 
-\code{object} formula can take default values from the environment at the time 
-\code{makeFun} is called.  A warning message alerts the user to this situation, 
+\item{use.environment}{if \code{TRUE}, then variables implicitly defined in the
+\code{object} formula can take default values from the environment at the time
+\code{makeFun} is called.  A warning message alerts the user to this situation,
 unless \code{suppress.warnings} is \code{TRUE}.}
 
 \item{suppress.warnings}{A logical indicating whether warnings should be suppressed.}
@@ -47,7 +47,7 @@ unless \code{suppress.warnings} is \code{TRUE}.}
 \item{transformation}{a function used to transform the response.
 This can be useful to invert a transformation used on the response
 when creating the model.  If \code{NULL}, an attempt will be made to infer
-the transformation from the model formula. A few simple transformations 
+the transformation from the model formula. A few simple transformations
 (\code{log}, \code{log2}, \code{sqrt}) are recognized.  For other transformations,
 \code{transformation} should be provided explicitly.}
 
@@ -58,50 +58,67 @@ for value of function returned.}
 a function
 }
 \description{
-Provides an easy mechanism for creating simple "mathematical" 
+Provides an easy mechanism for creating simple "mathematical"
 functions via a formula interface.
 }
 \details{
 The definition of the function is given by the left side of a formula.  The right
 side lists at least one of the inputs to the function.
-The inputs to the function are all variables appearing on either the left 
-or right sides of the formula.  Those appearing in the right side will 
+The inputs to the function are all variables appearing on either the left
+or right sides of the formula.  Those appearing in the right side will
 occur in the order specified.  Those not appearing in the right side will
 appear in an unspecified order.
 
 When creating a function from a model created with \code{lm}, \code{glm}, or \code{nls},
-  the function produced is a wrapper around the corresponding version of \code{predict}.  
-  This means that having variables in the model with names that match arguments of 
+  the function produced is a wrapper around the corresponding version of \code{predict}.
+  This means that having variables in the model with names that match arguments of
   \code{predict} will lead to potentially ambiguous situations and should be avoided.
 }
 \examples{
 f <- makeFun( sin(x^2 * b) ~ x & y & a); f
-g <- makeFun( sin(x^2 * b) ~ x & y & a, a=2 ); g
-h <- makeFun( a * sin(x^2 * b) ~ b & y, a=2, y=3); h
+g <- makeFun( sin(x^2 * b) ~ x & y & a, a = 2 ); g
+h <- makeFun( a * sin(x^2 * b) ~ b & y, a = 2, y = 3); h
 if (require(mosaicData)) {
-model <- lm( log(length) ~ log(width), data=KidsFeet)
-f <- makeFun(model, transformation = exp)
-f(8.4)
-head(KidsFeet,1)
+  model <- lm( log(length) ~ log(width), data = KidsFeet)
+  f <- makeFun(model, transformation = exp)
+  f(8.4)
+  head(KidsFeet, 1)
 }
 
-model <- lm(wage ~ poly(exper,degree=2), data=CPS85)
-fit <- makeFun(model)
-xyplot(wage ~ exper, data=CPS85)
-plotFun(fit(exper) ~ exper, add=TRUE)
 if (require(mosaicData)) {
-model <- glm(wage ~ poly(exper,degree=2), data=CPS85, family=gaussian)
-fit <- makeFun(model)
-xyplot(wage ~ exper, data=CPS85)
-plotFun(fit(exper) ~ exper, add=TRUE)
+  model <- lm(wage ~ poly(exper, degree = 2), data = CPS85)
+  fit <- makeFun(model)
+  if (require(mosaic)) {
+    xyplot(wage ~ exper, data = CPS85)
+    plotFun(fit(exper) ~ exper, add = TRUE)
+  }
 }
 if (require(mosaicData)) {
-model <- nls( wage ~ A + B * exper + C * exper^2, data=CPS85, start=list(A=1,B=1,C=1) )
+model <- glm(wage ~ poly(exper, degree = 2), data = CPS85, family = gaussian)
 fit <- makeFun(model)
-xyplot(wage ~ exper, data=CPS85)
-plotFun(fit(exper) ~ exper, add=TRUE)
+  if (require(mosaic)) {
+    xyplot(wage ~ exper, data = CPS85)
+    plotFun(fit(exper) ~ exper, add = TRUE)
+  }
+  if (require(ggformula)) {
+    gf_jitter(wage ~ exper, data = CPS85) \%>\%
+    gf_fun(fit(exper) ~ exper, color = "red")
+    gf_jitter(wage ~ exper, data = CPS85) \%>\%
+    gf_function(fun = fit, color = "blue")
+  }
 }
-mod <- gwm(wage ~ sector, data = CPS85)
-modfun <- makeFun(mod)
-modfun(sector = "prof")
+if (require(mosaicData)) {
+model <- nls( wage ~ A + B * exper + C * exper^2, data = CPS85, start = list(A = 1, B = 1, C = 1) )
+fit <- makeFun(model)
+  if (require(mosaic)) {
+    xyplot(wage ~ exper, data = CPS85)
+    plotFun(fit(exper) ~ exper, add = TRUE)
+  }
+}
+
+if (require(mosaicData)) {
+  mod <- gwm(wage ~ sector, data = CPS85)
+  modfun <- makeFun(mod)
+  modfun(sector = "prof")
+}
 }

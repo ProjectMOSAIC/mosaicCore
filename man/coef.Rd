@@ -20,8 +20,8 @@ the model coefficients there to enable this extraction.
 }
 \examples{
 if (require(mosaicData)) {
-model <- lm( width ~ length, data=KidsFeet)
-f <- makeFun( model )
-coef(f)
+  model <- lm( width ~ length, data = KidsFeet)
+  f <- makeFun( model )
+  coef(f)
 }
 }

@@ -1,17 +1,20 @@
 Package: mosaicCore
 Type: Package
 Title: Common Utilities for Other MOSAIC-Family Packages
-Version: 0.1.9000
-Date: 2017-07-19
+Version: 0.1.9001
+Date: 2017-07-23
 Depends:
     R (>= 3.0.0),
 Imports:
     stats,
     dplyr,
-    lazyeval
+    lazyeval,
+    rlang,
+    tidyr
 Suggests:
     mosaicData,
-    mosaic
+    mosaic,
+    ggformula
 Author: Randall Pruim <rpruim@calvin.edu>, Daniel T. Kaplan
     <kaplan@macalester.edu>, Nicholas J. Horton <nhorton@amherst.edu>
 Maintainer: Randall Pruim <rpruim@calvin.edu>

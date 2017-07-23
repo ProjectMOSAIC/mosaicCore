@@ -144,9 +144,9 @@ makeFun.formula <-
 #' if (require(mosaicData)) {
 #'   model <- lm(wage ~ poly(exper, degree = 2), data = CPS85)
 #'   fit <- makeFun(model)
-#'   if (require(mosaic)) {
-#'     xyplot(wage ~ exper, data = CPS85)
-#'     plotFun(fit(exper) ~ exper, add = TRUE)
+#'   if (require(ggformula)) {
+#'     gf_point(wage ~ exper, data = CPS85) %>%
+#'     gf_fun(fit(exper) ~ exper, color = "red")
 #'   }
 #' }
 #' @export
@@ -199,10 +199,6 @@ makeFun.lm <-
 #' if (require(mosaicData)) {
 #' model <- glm(wage ~ poly(exper, degree = 2), data = CPS85, family = gaussian)
 #' fit <- makeFun(model)
-#'   if (require(mosaic)) {
-#'     xyplot(wage ~ exper, data = CPS85)
-#'     plotFun(fit(exper) ~ exper, add = TRUE)
-#'   }
 #'   if (require(ggformula)) {
 #'     gf_jitter(wage ~ exper, data = CPS85) %>%
 #'     gf_fun(fit(exper) ~ exper, color = "red")
@@ -267,9 +263,9 @@ makeFun.glm <-
 #' if (require(mosaicData)) {
 #' model <- nls( wage ~ A + B * exper + C * exper^2, data = CPS85, start = list(A = 1, B = 1, C = 1) )
 #' fit <- makeFun(model)
-#'   if (require(mosaic)) {
-#'     xyplot(wage ~ exper, data = CPS85)
-#'     plotFun(fit(exper) ~ exper, add = TRUE)
+#'   if (require(ggformula)) {
+#'     gf_point(wage ~ exper, data = CPS85) %>%
+#'     gf_fun(fit(exper) ~ exper, color = "red")
 #'   }
 #' }
 #'
@@ -316,56 +312,6 @@ makeFun.nls <-
     attr(result, "coefficients") <- coef(object)
     return(result)
   }
-
-#' @rdname makeFun
-#' @examples
-#' if (require(mosaicData)) {
-#'   mod <- gwm(wage ~ sector, data = CPS85)
-#'   modfun <- makeFun(mod)
-#'   modfun(sector = "prof")
-#' }
-#' @export
-makeFun.groupwiseModel <-
-  function( object, ... , transformation = NULL) {
-    if (is.null(transformation))  transformation <- infer_transformation(formula(object))
-    dnames <- names(eval(object$call$data, parent.frame(1)))
-    vars <- modelVars(object)
-    if (! is.null(dnames) ) vars <- intersect(vars, dnames)
-    result <- function(...){}
-    if ( length( vars ) <  1 ) {
-      result <- function(...) {
-        dots <- list(...)
-        if (length(dots) > 0) {
-          x <- dots[[1]]
-        } else {
-          x <- 1
-        }
-        dots <- dots[names(dots) != ""]
-        transformation( do.call(predict, c(list(model, newdata = data_frame(x = x)), dots)) )
-      }
-    } else {
-      body(result) <-
-        parse( text = paste(
-          "return(transformation(predict(model, newdata = data.frame(",
-          paste(vars, "= ", vars, collapse = ",", sep = ""),
-          ", stringsAsFactors = FALSE), ...)))"
-        )
-        )
-      args <- paste("alist(", paste(vars, "=", collapse = ",", sep = ""), ")")
-      args <- eval(parse(text = args))
-      args['pi'] <- NULL
-      args <- c(args, alist('...' = ), list(transformation = substitute(transformation)))
-      formals(result) <- args
-    }
-
-    # myenv <- parent.frame()
-    # myenv$model <- object
-    # environment(result) <- myenv
-    environment(result) <- list2env( list(model = object, transformation = transformation) )
-    attr(result, "coefficients") <- coef(object)
-    return(result)
-  }
-
 
 #' extract predictor variables from a model
 #'

@@ -7,7 +7,6 @@
 \alias{makeFun.lm}
 \alias{makeFun.glm}
 \alias{makeFun.nls}
-\alias{makeFun.groupwiseModel}
 \title{Create a function from a formula}
 \usage{
 makeFun(object, ...)
@@ -24,8 +23,6 @@ makeFun(object, ...)
   transformation = NULL)
 
 \method{makeFun}{nls}(object, ..., transformation = NULL)
-
-\method{makeFun}{groupwiseModel}(object, ..., transformation = NULL)
 }
 \arguments{
 \item{object}{an object from which to create a function.  This should generally
@@ -88,18 +85,14 @@ if (require(mosaicData)) {
 if (require(mosaicData)) {
   model <- lm(wage ~ poly(exper, degree = 2), data = CPS85)
   fit <- makeFun(model)
-  if (require(mosaic)) {
-    xyplot(wage ~ exper, data = CPS85)
-    plotFun(fit(exper) ~ exper, add = TRUE)
+  if (require(ggformula)) {
+    gf_point(wage ~ exper, data = CPS85) \%>\%
+    gf_fun(fit(exper) ~ exper, color = "red")
   }
 }
 if (require(mosaicData)) {
 model <- glm(wage ~ poly(exper, degree = 2), data = CPS85, family = gaussian)
 fit <- makeFun(model)
-  if (require(mosaic)) {
-    xyplot(wage ~ exper, data = CPS85)
-    plotFun(fit(exper) ~ exper, add = TRUE)
-  }
   if (require(ggformula)) {
     gf_jitter(wage ~ exper, data = CPS85) \%>\%
     gf_fun(fit(exper) ~ exper, color = "red")
@@ -110,15 +103,10 @@ fit <- makeFun(model)
 if (require(mosaicData)) {
 model <- nls( wage ~ A + B * exper + C * exper^2, data = CPS85, start = list(A = 1, B = 1, C = 1) )
 fit <- makeFun(model)
-  if (require(mosaic)) {
-    xyplot(wage ~ exper, data = CPS85)
-    plotFun(fit(exper) ~ exper, add = TRUE)
+  if (require(ggformula)) {
+    gf_point(wage ~ exper, data = CPS85) \%>\%
+    gf_fun(fit(exper) ~ exper, color = "red")
   }
 }
 
-if (require(mosaicData)) {
-  mod <- gwm(wage ~ sector, data = CPS85)
-  modfun <- makeFun(mod)
-  modfun(sector = "prof")
-}
 }

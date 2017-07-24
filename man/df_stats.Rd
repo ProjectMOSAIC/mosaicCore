@@ -10,7 +10,7 @@ df_stats(formula, data, ..., drop = TRUE, fargs = list(), sep = "_",
 }
 \arguments{
 \item{formula}{A formula indicating which variables are to be used.
-Symantics are approximately as in \code{\link{lm}()} since \code{\link[stats]{model.frame}()}
+Semantics are approximately as in \code{\link{lm}()} since \code{\link[stats]{model.frame}()}
 is used to turn the formula into a data frame.  But first conditions and \code{groups}
 are re-expressed into a form that \code{\link[stats]{model.frame}()} can interpret.
 See details.}

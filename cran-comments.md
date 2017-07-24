@@ -11,6 +11,6 @@
 
 ## Reverse dependencies
 
-This is a new release, the only reverse dependencies are ggformula and mosaic which are 
-being released simultaneously.
+This is a new release, the only reverse dependencies are (new versions of) ggformula and mosaic 
+which are being released simultaneously.  
 

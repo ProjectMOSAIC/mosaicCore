@@ -2,7 +2,7 @@ Package: mosaicCore
 Type: Package
 Title: Common Utilities for Other MOSAIC-Family Packages
 Version: 0.2
-Date: 2017-07-23
+Date: 2017-07-24
 Depends:
     R (>= 3.0.0),
 Imports:

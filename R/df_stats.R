@@ -24,7 +24,7 @@ cond2sum <- function(formula) {
 #' for each of the statistics requested as well as columns for any grouping variables.
 #'
 #' @param formula A formula indicating which variables are to be used.
-#'   Symmantics are approximately as in \code{\link{lm}()} since \code{\link[stats]{model.frame}()}
+#'   Symantics are approximately as in \code{\link{lm}()} since \code{\link[stats]{model.frame}()}
 #'   is used to turn the formula into a data frame.  But first conditions and \code{groups}
 #'   are re-expressed into a form that \code{\link[stats]{model.frame}()} can interpret.
 #'   See details.
@@ -34,7 +34,7 @@ cond2sum <- function(formula) {
 #'   a vector of values and return either a (possibly named) single value,
 #'   a (possibly named) vector of values, or a data frame with one row.
 #'   Functions can be specified with character strings, names, or expressions
-#'   that look like function calls wit the first argugment missing.  The latter
+#'   that look like function calls wit the first argument missing.  The latter
 #'   option provides a convenient way to specify additional arguments.  See the
 #'   examples.
 #'   Note: If these arguments are named, those names will be used in the data
@@ -47,7 +47,7 @@ cond2sum <- function(formula) {
 #'   variables that do not occur in \code{data} should be dropped from the
 #'   result.
 #' @param fargs Arguments passed to the functions in \code{...}.
-#' @param long_names A logical indiciting whether the default names should include the name
+#' @param long_names A logical indicating whether the default names should include the name
 #'   of the variable being summarized as well as the summarizing function name in the default
 #'   case when names are not derived from the names of the returned object or
 #'   an argument name.

@@ -10,7 +10,7 @@ df_stats(formula, data, ..., drop = TRUE, fargs = list(), sep = "_",
 }
 \arguments{
 \item{formula}{A formula indicating which variables are to be used.
-Symmantics are approximately as in \code{\link{lm}()} since \code{\link[stats]{model.frame}()}
+Symantics are approximately as in \code{\link{lm}()} since \code{\link[stats]{model.frame}()}
 is used to turn the formula into a data frame.  But first conditions and \code{groups}
 are re-expressed into a form that \code{\link[stats]{model.frame}()} can interpret.
 See details.}
@@ -22,7 +22,7 @@ a default set of summary statistics is used.  Functions used must accept
 a vector of values and return either a (possibly named) single value,
 a (possibly named) vector of values, or a data frame with one row.
 Functions can be specified with character strings, names, or expressions
-that look like function calls wit the first argugment missing.  The latter
+that look like function calls wit the first argument missing.  The latter
 option provides a convenient way to specify additional arguments.  See the
 examples.
 Note: If these arguments are named, those names will be used in the data
@@ -45,7 +45,7 @@ returned data frame.}
 This isn't necessary, since these can be placed into the formula, but it is provided
 for similarity to other functions from the \pkg{mosaic} package.}
 
-\item{long_names}{A logical indiciting whether the default names should include the name
+\item{long_names}{A logical indicating whether the default names should include the name
 of the variable being summarized as well as the summarizing function name in the default
 case when names are not derived from the names of the returned object or
 an argument name.}

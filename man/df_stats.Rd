@@ -123,6 +123,6 @@ gf_violin(hp ~ cyl, data = mtcars, group = ~ cyl) \%>\%
 
 # can be used on a categorical response, too
 if (require(mosaic)) {
-  df_stats(sex ~ substance, data = HELPrct, props, counts)
+  df_stats(sex ~ substance, data = HELPrct, table, prop_female = prop)
 }
 }

@@ -120,7 +120,7 @@ cond2sum <- function(formula) {
 #'
 #' # can be used on a categorical response, too
 #' if (require(mosaic)) {
-#'   df_stats(sex ~ substance, data = HELPrct, props, counts)
+#'   df_stats(sex ~ substance, data = HELPrct, table, prop_female = prop)
 #' }
 #' @export
 #' @importFrom rlang eval_tidy exprs expr quos new_quosure

@@ -14,7 +14,7 @@
 \alias{lhs.parsedFormula}
 \alias{operator.parsedFormula}
 \alias{condition.parsedFormula}
-\title{Parse formulas}
+\title{Parse Formulas}
 \usage{
 parse.formula(formula, ...)
 
@@ -53,9 +53,9 @@ operator(x, ...)
 an object of class \code{parsedFormula} from which information is easy to extract
 }
 \description{
-utilities for exptracting portions of formulas.
+Utilities for extracting portions of formulas.
 }
 \details{
-currently this is primarily concerned with extracting the operator, left hand side, right hand 
+currently this is primarily concerned with extracting the operator, left hand side, right hand
 side (minus any condition) and the condition. Improvements/extensions may come in the future.
 }

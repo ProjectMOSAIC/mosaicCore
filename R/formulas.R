@@ -3,7 +3,7 @@ NA
 
 #' Convert formulas into standard shapes
 #'
-#' These functions convert formauls into standard shapes, including by
+#' These functions convert formulas into standard shapes, including by
 #' incorporating a groups argument.
 #' @rdname mosaicformula
 #' @param formula a formula

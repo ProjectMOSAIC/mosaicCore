@@ -28,7 +28,7 @@ ahead of the condition (else after).}
 \item{...}{additional arguments (currently ignored)}
 }
 \description{
-These functions convert formauls into standard shapes, including by
+These functions convert formulas into standard shapes, including by
 incorporating a groups argument.
 }
 \details{

@@ -10,7 +10,7 @@ df_stats(formula, data, ..., drop = TRUE, fargs = list(), sep = "_",
 }
 \arguments{
 \item{formula}{A formula indicating which variables are to be used.
-Symmatics are approximately as in \code{\link{lm}()} since \code{\link[stats]{model.frame}()}
+Symmantics are approximately as in \code{\link{lm}()} since \code{\link[stats]{model.frame}()}
 is used to turn the formula into a data frame.  But first conditions and \code{groups}
 are re-expressed into a form that \code{\link[stats]{model.frame}()} can interpret.
 See details.}
@@ -23,7 +23,7 @@ a vector of values and return either a (possibly named) single value,
 a (possibly named) vector of values, or a data frame with one row.
 Functions can be specified with character strings, names, or expressions
 that look like function calls wit the first argugment missing.  The latter
-option provides a convenient way to specify additional argumnts.  See the
+option provides a convenient way to specify additional arguments.  See the
 examples.
 Note: If these arguments are named, those names will be used in the data
 frame returned (see details).  Such names may not be among the names of the named
@@ -35,7 +35,7 @@ result.}
 
 \item{fargs}{Arguments passed to the functions in \code{...}.}
 
-\item{sep}{A charachter string to separate components of names.  Set to \code{""} if
+\item{sep}{A character string to separate components of names.  Set to \code{""} if
 you don't want separation.}
 
 \item{format}{One of \code{"long"} or \code{"wide"} indicating the desired shape of the
@@ -45,7 +45,7 @@ returned data frame.}
 This isn't necessary, since these can be placed into the formula, but it is provided
 for similarity to other functions from the \pkg{mosaic} package.}
 
-\item{long_names}{A logical indciting whether the default names should include the name
+\item{long_names}{A logical indiciting whether the default names should include the name
 of the variable being summarized as well as the summarizing function name in the default
 case when names are not derived from the names of the returned object or
 an argument name.}
@@ -66,7 +66,7 @@ for each of the statistics requested as well as columns for any grouping variabl
 Use a one-sided formula to compute summary statistics for the left hand side
 expression over the entire data.
 Use a two-sided formula to compute summary statistics for the left hand expression
-for each combination of levels of the expressions ocurring on the right hand side.
+for each combination of levels of the expressions occurring on the right hand side.
 This is most useful when the left hand side is quantitative and each expression
 on the right hand side has relatively few unique values.  A function like
 \code{\link[mosaic]{ntiles}()} is often useful to create a few groups of roughly equal size
@@ -88,7 +88,7 @@ See the examples.
 
 The use of \code{|} to define groups is tricky because (a) \code{\link[stats]{model.frame}()}
 doesn't handle this sort of thing and (b) \code{|} is also used for logical or.  The
-current algorithm for handling this will turn the first  ocurance of \code{|} into an attempt
+current algorithm for handling this will turn the first  occurrence of \code{|} into an attempt
 to condition, so logical or cannot be used before conditioning in the formula.
 If you have need of logical or, we suggest creating a new variable that contains the
 results of evaluating the expression.

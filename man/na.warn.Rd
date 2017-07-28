@@ -13,6 +13,6 @@ na.warn(object, ...)
 }
 \description{
 Similar to \code{\link[stats]{na.exclude}()} this function excludes missing data.
-When missing data are removed, a warning message indicating the number of excluded
+When missing data are excluded, a warning message indicating the number of excluded
 rows is emited as a caution for the user.
 }

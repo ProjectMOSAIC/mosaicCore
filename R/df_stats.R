@@ -290,7 +290,7 @@ gf_favstats <- function (x, ..., na.rm = TRUE, type = 7)
 #' Exclude Missing Data with Warning
 #'
 #' Similar to \code{\link[stats]{na.exclude}()} this function excludes missing data.
-#' When missing data are removed, a warning message indicating the number of excluded
+#' When missing data are excluded, a warning message indicating the number of excluded
 #' rows is emited as a caution for the user.
 #'
 #' @export
@@ -298,9 +298,9 @@ gf_favstats <- function (x, ..., na.rm = TRUE, type = 7)
 
 na.warn <- function(object, ...) {
   res <- na.exclude(object, ...)
-  n_removed <- nrow(object) - nrow(res)
-  if (n_removed > 0L) {
-    warning(paste0("Removing ", n_removed, " rows due to missing data [df_stats()]."), call. = FALSE)
+  n_excluded <- nrow(object) - nrow(res)
+  if (n_excluded > 0L) {
+    warning(paste0("Excluding ", n_excluded, " rows due to missing data [df_stats()]."), call. = FALSE)
   }
   res
 }

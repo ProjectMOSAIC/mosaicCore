@@ -58,10 +58,14 @@ cond2sum <- function(formula) {
 #'   returned data frame.
 #' @param sep A character string to separate components of names.  Set to \code{""} if
 #'   you don't want separation.
-#' @param na.action how NAs are treated. The default is \code{"na.pass"} which includes
-#'   all of the data.  Other options include \code{"na.omit"} or \code{"na.exclude"} which
-#'   discard missing data, and \code{"na.fail"} which fails if there is missing data.
-#'   See \code{link[stats]{na.pass}()} for details.
+#' @param na.action A function (or character string naming a function) that determines how NAs are treated.
+#'   Options include \code{"na.warn"} which removes missing data and emits a warning,
+#'   \code{"na.pass"} which includes all of the data,
+#'   \code{"na.omit"} or \code{"na.exclude"} which silently discard missing data,
+#'   and \code{"na.fail"} which fails if there is missing data.
+#'   See \code{link[stats]{na.pass}()} and \code{\link{na.warn}()} for details.
+#'   The default is \code{"na.warn"} unless no function are specified in \code{...}, in which case
+#'   \code{"na.pass"} is used since the default function reports the number of missing values.
 #' @importFrom stats quantile
 #'
 #' @details
@@ -135,7 +139,7 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
                      sep = "_",
                      format = c("wide", "long"), groups = NULL,
                      long_names = TRUE, nice_names = FALSE,
-                     na.action = "na.pass") {
+                     na.action = "na.warn") {
   qdots <- quos(...)
   # dots <- rlang::exprs(...)
   format <- match.arg(format)
@@ -143,6 +147,7 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   if (length(qdots) < 1) {
     qdots <- list(rlang::quo(gf_favstats))
     names(qdots) <- ""
+    na.action = "na.pass"
   }
 
   if (inherits(formula, "data.frame") && inherits(data, "formula")) {
@@ -282,3 +287,20 @@ gf_favstats <- function (x, ..., na.rm = TRUE, type = 7)
   return(val)
 }
 
+#' Exclude Missing Data with Warning
+#'
+#' Similar to \code{\link[stats]{na.exclude}()} this function excludes missing data.
+#' When missing data are removed, a warning message indicating the number of excluded
+#' rows is emited as a caution for the user.
+#'
+#' @export
+#' @inheritParams stats::na.exclude
+
+na.warn <- function(object, ...) {
+  res <- na.exclude(object, ...)
+  n_removed <- nrow(object) - nrow(res)
+  if (n_removed > 0L) {
+    warning(paste0("Removing ", n_removed, " rows due to missing data [df_stats()]."), call. = FALSE)
+  }
+  res
+}

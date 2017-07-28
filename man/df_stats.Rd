@@ -6,7 +6,7 @@
 \usage{
 df_stats(formula, data, ..., drop = TRUE, fargs = list(), sep = "_",
   format = c("wide", "long"), groups = NULL, long_names = TRUE,
-  nice_names = FALSE, na.action = "na.pass")
+  nice_names = FALSE, na.action = "na.warn")
 }
 \arguments{
 \item{formula}{A formula indicating which variables are to be used.
@@ -53,10 +53,14 @@ an argument name.}
 \item{nice_names}{A logical indicating whether \code{\link{make.names}()} should be
 used to force names of the returned data frame to by syntactically valid.}
 
-\item{na.action}{how NAs are treated. The default is \code{"na.pass"} which includes
-all of the data.  Other options include \code{"na.omit"} or \code{"na.exclude"} which
-discard missing data, and \code{"na.fail"} which fails if there is missing data.
-See \code{link[stats]{na.pass}()} for details.}
+\item{na.action}{A function (or character string naming a function) that determines how NAs are treated.
+Options include \code{"na.warn"} which removes missing data and emits a warning,
+\code{"na.pass"} which includes all of the data,
+\code{"na.omit"} or \code{"na.exclude"} which silently discard missing data,
+and \code{"na.fail"} which fails if there is missing data.
+See \code{link[stats]{na.pass}()} and \code{\link{na.warn}()} for details.
+The default is \code{"na.warn"} unless no function are specified in \code{...}, in which case
+\code{"na.pass"} is used since the default function reports the number of missing values.}
 }
 \value{
 A data frame.

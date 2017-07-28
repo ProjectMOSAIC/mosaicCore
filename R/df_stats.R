@@ -22,6 +22,7 @@ cond2sum <- function(formula) {
 #' group formed by combinations of additional variables.
 #' The resulting data frame has one column
 #' for each of the statistics requested as well as columns for any grouping variables.
+#' @inheritParams stats::model.frame
 #'
 #' @param formula A formula indicating which variables are to be used.
 #'   Semantics are approximately as in \code{\link{lm}()} since \code{\link[stats]{model.frame}()}
@@ -57,6 +58,10 @@ cond2sum <- function(formula) {
 #'   returned data frame.
 #' @param sep A character string to separate components of names.  Set to \code{""} if
 #'   you don't want separation.
+#' @param na.action how NAs are treated. The default is \code{"na.pass"} which includes
+#'   all of the data.  Other options include \code{"na.omit"} or \code{"na.exclude"} which
+#'   discard missing data, and \code{"na.fail"} which fails if there is missing data.
+#'   See \code{link[stats]{na.pass}()} for details.
 #' @importFrom stats quantile
 #'
 #' @details
@@ -129,7 +134,8 @@ cond2sum <- function(formula) {
 df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
                      sep = "_",
                      format = c("wide", "long"), groups = NULL,
-                     long_names = TRUE, nice_names = FALSE) {
+                     long_names = TRUE, nice_names = FALSE,
+                     na.action = "na.pass") {
   qdots <- quos(...)
   # dots <- rlang::exprs(...)
   format <- match.arg(format)
@@ -150,7 +156,7 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
 
   formula <- cond2sum(mosaic_formula_q(formula, groups = groups))
 
-  MF <- model.frame(formula, data)
+  MF <- model.frame(formula, data, na.action = na.action)
 
   one_group <- FALSE
   if (ncol(MF) == 1) {

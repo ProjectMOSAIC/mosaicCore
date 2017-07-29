@@ -161,6 +161,8 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
 
   formula <- cond2sum(mosaic_formula_q(formula, groups = groups))
 
+  if (identical(na.action, "na.warn")) na.action <- na.warn
+
   MF <- model.frame(formula, data, na.action = na.action)
 
   one_group <- FALSE

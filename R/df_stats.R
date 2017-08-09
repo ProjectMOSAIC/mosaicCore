@@ -1,7 +1,7 @@
 #' @importFrom tidyr gather
 #' @importFrom dplyr %>%
 #' @importFrom rlang is_character f_rhs eval_tidy quos
-#' @importFrom stats as.formula
+#' @importFrom stats as.formula na.exclude
 NA
 utils::globalVariables(c("stat", "value"))
 
@@ -299,7 +299,7 @@ gf_favstats <- function (x, ..., na.rm = TRUE, type = 7)
 #' @inheritParams stats::na.exclude
 
 na.warn <- function(object, ...) {
-  res <- na.exclude(object, ...)
+  res <- stats::na.exclude(object, ...)
   n_excluded <- nrow(object) - nrow(res)
   if (n_excluded > 0L) {
     warning(paste0("Excluding ", n_excluded, " rows due to missing data [df_stats()]."), call. = FALSE)

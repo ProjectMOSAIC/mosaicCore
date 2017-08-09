@@ -240,7 +240,7 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
 
   # return the appropriate format
   if (format == "long") {
-    res %>% tidyr::gather(stat, value, -(1:d))
+    res %>% tidyr::gather(stat, value, !! -(1:d))
   } else {
     res
   }

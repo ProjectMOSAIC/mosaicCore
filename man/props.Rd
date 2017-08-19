@@ -32,21 +32,25 @@ Compute vector of counts, proportions, or percents for each unique value (and \c
 is missing data) in a vector.
 }
 \examples{
-props(HELPrct$substance)
-# Formula version removes missing data (for now, may change this in future versions)
-props(HELPmiss$link)
-props( ~ link, data = HELPmiss)
-tally( ~ link, data = HELPmiss, format = "prop")
-props( ~ substance | sex, data = HELPrct)
-props( ~ substance | sex, data = HELPrct, format = "percent")
-counts( ~ substance | sex, data = HELPrct)
-if (require(ggformula)) {
+if (require(mosaicData)) {
+  props(HELPrct$substance)
+  # numeric version tallies missing values as well
+  props(HELPmiss$link)
+  # Formula version omits missing data with warning (by default)
+  props( ~ link, data = HELPmiss)                       # omit NAs with warning
+  props( ~ link, data = HELPmiss, na.action = na.pass)  # no warning; tally NAs
+  props( ~ link, data = HELPmiss, na.action = na.omit)  # no warning, omit NAs
+  props( ~ substance | sex, data = HELPrct)
+  props( ~ substance | sex, data = HELPrct, format = "percent")
+  percs( ~ substance | sex, data = HELPrct)
+  counts( ~ substance | sex, data = HELPrct)
   df_stats( ~ substance | sex, data = HELPrct, props, counts)
+  df_stats( ~ substance | sex, data = HELPmiss, props, na.action = na.pass)
 }
 
 }
 \seealso{
-\code{\link{prop}()}
+\code{\link[mosaic]{prop}()}
 
-\code{\link{count}()}
+\code{\link[mosaic]{count}()}
 }

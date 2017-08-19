@@ -125,13 +125,17 @@ df_stats( hp ~ cyl | gear, data = mtcars, mean, median, range)
 df_stats( hp ~ cyl, groups = gear, data = mtcars, mean, median, range)
 # magrittr style piping is also supported
 if(require(ggformula)) {
-mtcars \%>\% df_stats(hp ~ cyl)
-gf_violin(hp ~ cyl, data = mtcars, group = ~ cyl) \%>\%
+  mtcars \%>\%
+  df_stats(hp ~ cyl)
+  gf_violin(hp ~ cyl, data = mtcars, group = ~ cyl) \%>\%
   gf_point(mean_hp ~ cyl, data = df_stats(hp ~ cyl, data = mtcars, mean))
 }
 
 # can be used on a categorical response, too
 if (require(mosaic)) {
   df_stats(sex ~ substance, data = HELPrct, table, prop_female = prop)
+}
+if (require(mosaic)) {
+  df_stats(sex ~ substance, data = HELPrct, table, props)
 }
 }

@@ -1,5 +1,5 @@
 #' @importFrom tidyr gather
-#' @importFrom dplyr %>%
+#' @importFrom dplyr %>% bind_rows
 #' @importFrom rlang is_character f_rhs eval_tidy quos
 #' @importFrom stats as.formula na.exclude
 NA
@@ -122,14 +122,18 @@ cond2sum <- function(formula) {
 #' df_stats( hp ~ cyl, groups = gear, data = mtcars, mean, median, range)
 #' # magrittr style piping is also supported
 #' if(require(ggformula)) {
-#' mtcars %>% df_stats(hp ~ cyl)
-#' gf_violin(hp ~ cyl, data = mtcars, group = ~ cyl) %>%
+#'   mtcars %>%
+#'   df_stats(hp ~ cyl)
+#'   gf_violin(hp ~ cyl, data = mtcars, group = ~ cyl) %>%
 #'   gf_point(mean_hp ~ cyl, data = df_stats(hp ~ cyl, data = mtcars, mean))
 #' }
 #'
 #' # can be used on a categorical response, too
 #' if (require(mosaic)) {
 #'   df_stats(sex ~ substance, data = HELPrct, table, prop_female = prop)
+#' }
+#' if (require(mosaic)) {
+#'   df_stats(sex ~ substance, data = HELPrct, table, props)
 #' }
 #' @export
 #' @importFrom rlang eval_tidy exprs expr quos new_quosure
@@ -193,15 +197,26 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
       }
     )
 
+  # extract argument names from names of list
+  arg_names <- names(res)
+
   d <- ncol(MF) - 1
   groups <- res[[1]][, 1:d, drop = FALSE]
 
-  res_names <- lapply(res, function(x) colnames(as.matrix(x$x)))
-  arg_names <- names(res)
+  # res[[i]]$x can have a variety of formats depending on the function.
+  # so we have to do some work to get things into our desired format (a
+  # traditional data frame with columns that are numeric vectors.
 
-  # res has an odd format where res[[i]]$x is a list-based matrix
-  # here we convert these to data frames of vectors
-  res <- lapply(res, function(x) data.frame(lapply(data.frame(x$x), unlist)))
+  # res <- lapply(res, function(x) data.frame(lapply(data.frame(x$x), unlist)))
+
+  res0 <- res
+  res1 <- lapply(res, function(x) make_df(x$x))
+  res <- res1
+
+  # extract result names from data frames just created.
+  res_names <- lapply(res1, names)
+  res_names <- lapply(res_names, function(x) if(all(x == ".")) NULL else x)
+
   ncols <- sapply(res, ncol)
 
   fun_names <-
@@ -225,10 +240,9 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
 
   res_names <-
     mapply(
-      function(x, y) { if (is.null(x)) y else x },
+      function(x, y) { if (is.null(x) || x == "") y else x },
       res_names, alt_res_names
     )
-  # print(res_names)
 
   final_names <-
     mapply(
@@ -243,13 +257,16 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   final_names <- gsub(paste0(sep, "$"), "", final_names)
   final_names <- gsub(paste0("^", sep), "", final_names)
 
+  # paste groups back in
   res <- do.call(cbind, c(list(groups), res))
+
   names(res) <- c(names(res)[1:d], unlist(final_names))
   if (nice_names) names(res) <- base::make.names(names(res), unique = TRUE)
   if (one_group) {
     res <- res[, -1]
   }
   row.names(res) <- NULL
+
 
   # return the appropriate format
   if (format == "long") {

@@ -263,7 +263,7 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   names(res) <- c(names(res)[1:d], unlist(final_names))
   if (nice_names) names(res) <- base::make.names(names(res), unique = TRUE)
   if (one_group) {
-    res <- res[, -1]
+    res <- res[, -1, drop = FALSE]
   }
   row.names(res) <- NULL
 

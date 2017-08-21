@@ -14,7 +14,8 @@ Imports:
 Suggests:
     mosaicData,
     mosaic,
-    ggformula
+    ggformula,
+    testthat
 Author: Randall Pruim <rpruim@calvin.edu>, Daniel T. Kaplan
     <kaplan@macalester.edu>, Nicholas J. Horton <nhorton@amherst.edu>
 Maintainer: Randall Pruim <rpruim@calvin.edu>

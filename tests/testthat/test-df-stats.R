@@ -22,6 +22,26 @@ test_that("always get a data frame", {
   expect_is(df_stats(cesd ~ substance + sex, data = mosaicData::HELPmiss), "data.frame")
 })
 
+test_that("always get a data frame with simple vectors as columns", {
+  is_simple_df <- function(data) {
+    all(sapply(1:ncol(data), rlang::is_bare_numeric))
+  }
+  expect_true(
+    df_stats(~ cesd, data = mosaicData::HELPmiss) %>% is_simple_df())
+  expect_true(
+    df_stats(~ cesd | sex, data = mosaicData::HELPmiss) %>% is_simple_df())
+  expect_true(
+    df_stats(cesd ~ sex, data = mosaicData::HELPmiss) %>% is_simple_df())
+  expect_true(
+    df_stats(cesd ~ substance, data = mosaicData::HELPmiss) %>% is_simple_df())
+  expect_true(
+    df_stats(cesd ~ substance + sex, data = mosaicData::HELPmiss) %>% is_simple_df())
+  expect_true(
+    df_stats(~ cesd, data = mosaicData::HELPmiss, mean, median) %>% is_simple_df())
+  expect_true(
+    df_stats(~ cesd, data = mosaicData::HELPmiss, mean, median, range) %>% is_simple_df())
+})
+
 test_that("naming works", {
   expect_equivalent(
     names(df_stats(~ cesd, data = mosaicData::HELPmiss)),

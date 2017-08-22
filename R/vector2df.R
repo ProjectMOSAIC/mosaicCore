@@ -58,7 +58,8 @@ make_df.list <- function(object, ...) {
 #' @rdname make_df
 #' @export
 make_df.matrix <- function(object, ...) {
-  as.data.frame(object, ...) %>%
+  lapply(1:ncol(object), function(c) unlist(object[, c, drop = FALSE])) %>%
+    as.data.frame() %>%
     setNames(colnames(object))
 }
 

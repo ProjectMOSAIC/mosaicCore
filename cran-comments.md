@@ -5,12 +5,14 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-* This is a new release.
+0 errors | 0 warnings | 0 notes
 
 ## Reverse dependencies
 
-This is a new release, the only reverse dependencies are (new versions of) ggformula and mosaic 
-which are being released simultaneously.  
+This package was released for the first time earlier this summer.  The main reverse
+dependencies are mosaic and ggformula.  The development versions of these 
+packages check cleanly locally. I'll be posting new versions of those pacakges as 
+soon as this one clears CRAN.
 
+Some functions are moving between packages for (a) better modularity and (b)
+reduction in size of the mosaic package.

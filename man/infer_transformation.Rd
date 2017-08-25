@@ -7,7 +7,7 @@
 infer_transformation(formula, warn = TRUE)
 }
 \arguments{
-\item{formula}{A formula as used by, for example, \code{\link{lm}}.}
+\item{formula}{A formula as used by, for example, \code{\link[=lm]{lm()}}.}
 
 \item{warn}{A logical.}
 }

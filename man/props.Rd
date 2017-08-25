@@ -50,7 +50,7 @@ if (require(mosaicData)) {
 
 }
 \seealso{
-\code{\link[mosaic]{prop}()}
+\code{\link[mosaic:prop]{mosaic::prop()}}
 
-\code{\link[mosaic]{count}()}
+\code{\link[mosaic:count]{mosaic::count()}}
 }

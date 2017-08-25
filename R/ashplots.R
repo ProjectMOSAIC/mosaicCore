@@ -2,13 +2,13 @@
 #' Compute knot points of an average shifted histogram
 #'
 #' Mainly a utility for the \pkg{lattice} and \pkg{ggplot2} plotting
-#' functions, \code{ash_points()} returns the points to be plotted.
+#' functions, `ash_points()` returns the points to be plotted.
 #'
 #' @param x A numeric vector
-#' @param binwidth The width of the histogram bins.  If \code{NULL} (the default) the
-#'   binwidth will be chosen so that approximately 10 bins cover the data.  \code{adjust}
-#'   can be used to to increase or decrease \code{binwidth}.
-#' @param adjust A number used to scale \code{binwidth}.
+#' @param binwidth The width of the histogram bins.  If `NULL` (the default) the
+#'   binwidth will be chosen so that approximately 10 bins cover the data.  `adjust`
+#'   can be used to to increase or decrease `binwidth`.
+#' @param adjust A number used to scale `binwidth`.
 #' @return A data frame containing x and y coordinates of the resulting ASH plot.
 #' @rdname ashplot
 #' @export

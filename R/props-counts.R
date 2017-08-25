@@ -1,16 +1,16 @@
 
 #' Compute all proportions or counts
 #'
-#' Compute vector of counts, proportions, or percents for each unique value (and \code{NA} if there
+#' Compute vector of counts, proportions, or percents for each unique value (and `NA` if there
 #' is missing data) in a vector.
 #'
 #' @param x A vector or a formula.
-#' @param format One of \code{"count"}, \code{"proportion"}, or \code{"percent"}.  May be abbreviated.
+#' @param format One of `"count"`, `"proportion"`, or `"percent"`.  May be abbreviated.
 #' @param data A data frame.
 #' @param ... Arguments passed to methods.
 #'
-#' @seealso \code{\link[mosaic]{prop}()}
-#' @seealso \code{\link[mosaic]{count}()}
+#' @seealso [mosaic::prop()]
+#' @seealso [mosaic::count()]
 #' @examples
 #' if (require(mosaicData)) {
 #'   props(HELPrct$substance)

@@ -5,7 +5,7 @@
 #'
 #' @param l A list.
 #' @param n A vector of character strings (potential names).
-#' @return A sublist of \code{l} determined by \code{names(l)}.
+#' @return A sublist of `l` determined by `names(l)`.
 
 #' @export
 #' @rdname list-utils

@@ -15,7 +15,7 @@
 \description{
 \code{coef}  will extract the coefficients attribute from a function.
 Functions created by applying \code{link{makeFun}} to a model produced
-by \code{\link{lm}}, \code{\link{glm}}, or \code{\link{nls}} store
+by \code{\link[=lm]{lm()}}, \code{\link[=glm]{glm()}}, or \code{\link[=nls]{nls()}} store
 the model coefficients there to enable this extraction.
 }
 \examples{

@@ -26,3 +26,16 @@ make_df(object, ...)
 \description{
 A generic and several methods for converting objects into data frames.
 }
+\details{
+These methods are primarily for internal use inside \code{\link[=df_stats]{df_stats()}},
+but are exported in case they have other uses. The conversion works as follows.
+Data frames are left as is.
+Matrices are converted column-by-column and the columns
+assembled with \code{\link[=as.data.frame]{as.data.frame()}}; this allows matrices that are lists
+to be converted into data frames where columns can have differing types.
+The names are then set to the column
+names of \code{object}, even if that results in \code{NULL}.
+A numeric vector is converted into a data frame with 1 column.
+If \code{object} is a list, each element is converted using \code{\link[=vector2df]{vector2df()}}
+and the resulting columns are joined with \code{\link[=bind_rows]{bind_rows()}}.
+}

@@ -11,14 +11,14 @@ NA
 #' @param max.slots an integer specifying the maximum number of slots for the resulting formula.
 #' An error results from trying to create a formula that is too complex.
 #' @param envir the environment in which the resulting formula may be evaluated.
-#' May also be \code{NULL}, a list, a data frame, or a pairlist.
+#' May also be `NULL`, a list, a data frame, or a pairlist.
 #' @param groups.first a logical indicating whether groups should be inserted
 #' ahead of the condition (else after).
 #'
 #' @details
-#' \code{mosaic_formula_q} uses nonstandard evaluation of \code{groups} that may be
-#' necessary for use within other functions.  \code{mosaic_formula} is a wrapper
-#' around \code{mosaic_formula_q} and quotes \code{groups} before passing it along.
+#' `mosaic_formula_q` uses nonstandard evaluation of `groups` that may be
+#' necessary for use within other functions.  `mosaic_formula` is a wrapper
+#' around `mosaic_formula_q` and quotes `groups` before passing it along.
 #' @examples
 #' mosaic_formula( ~ x | z )
 #' mosaic_formula( ~ x, groups=g )
@@ -52,7 +52,7 @@ mosaic_formula <- function(
 #'
 #' Convert lazy objects into a formula
 #'
-#' @param lazy_formula an object of class \code{lazy}
+#' @param lazy_formula an object of class `lazy`
 #' @param envir an environment that will be come the environment of the returned formula
 #' @return a formula
 #' @details The expression of the lazy object is evaluated in its environment.  If the

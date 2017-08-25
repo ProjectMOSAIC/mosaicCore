@@ -67,9 +67,9 @@ occur in the order specified.  Those not appearing in the right side will
 appear in an unspecified order.
 
 When creating a function from a model created with \code{lm}, \code{glm}, or \code{nls},
-  the function produced is a wrapper around the corresponding version of \code{predict}.
-  This means that having variables in the model with names that match arguments of
-  \code{predict} will lead to potentially ambiguous situations and should be avoided.
+the function produced is a wrapper around the corresponding version of \code{predict}.
+This means that having variables in the model with names that match arguments of
+\code{predict} will lead to potentially ambiguous situations and should be avoided.
 }
 \examples{
 f <- makeFun( sin(x^2 * b) ~ x & y & a); f

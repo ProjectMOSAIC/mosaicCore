@@ -5,8 +5,8 @@
 #' @rdname parseFormula
 #' @param formula, a formula
 #' @param \dots additional arguments, current ignored
-#' @param x, an object (currently a \code{formula} or \code{parsedFormula})
-#' @return an object of class \code{parsedFormula} from which information is easy to extract
+#' @param x, an object (currently a `formula` or `parsedFormula`)
+#' @return an object of class `parsedFormula` from which information is easy to extract
 #' @details
 #' currently this is primarily concerned with extracting the operator, left hand side, right hand
 #' side (minus any condition) and the condition. Improvements/extensions may come in the future.

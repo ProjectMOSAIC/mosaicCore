@@ -4,7 +4,7 @@
 #' transformation is not recognized, return the identity function.  This is primarily
 #' intended to be used for setting a default value in other functions.
 #'
-#' @param formula A formula as used by, for example, \code{\link{lm}}.
+#' @param formula A formula as used by, for example, [lm()].
 #' @param warn A logical.
 #' @return A function.
 #'

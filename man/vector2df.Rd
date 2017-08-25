@@ -7,16 +7,16 @@
 vector2df(x, nice_names = FALSE)
 }
 \arguments{
-\item{x}{a vector}
+\item{x}{A vector.}
 
-\item{nice_names}{a logical indicating whether names should be nicified}
+\item{nice_names}{A logical indicating whether names should be nicified.}
 }
 \value{
-a data frame
+A data frame.
 }
 \description{
-Convert a vector into a 1-raw data frame using the names of the vector as
-column names for the data frame
+Convert a vector into a 1-row data frame using the names of the vector as
+column names for the data frame.
 }
 \examples{
 vector2df(c(1, b = 2, `(Intercept)` = 3))

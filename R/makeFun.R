@@ -12,7 +12,7 @@ NA
 #'
 #' @param object an object from which to create a function.  This should generally
 #'         be specified without naming.
-#' @param ... additional arguments in the form \code{var = val} that
+#' @param ... additional arguments in the form `var = val` that
 #' set default values for the inputs to the function.
 #' @return a function
 #'
@@ -45,23 +45,23 @@ makeFun.function <-
 
 
 #' @rdname makeFun
-#' @param strict.declaration  if \code{TRUE} (the default), an error is thrown if
-#' default values are given for variables not appearing in the \code{object} formula.
-#' @param use.environment if \code{TRUE}, then variables implicitly defined in the
-#' \code{object} formula can take default values from the environment at the time
-#' \code{makeFun} is called.  A warning message alerts the user to this situation,
-#' unless \code{suppress.warnings} is \code{TRUE}.
+#' @param strict.declaration  if `TRUE` (the default), an error is thrown if
+#' default values are given for variables not appearing in the `object` formula.
+#' @param use.environment if `TRUE`, then variables implicitly defined in the
+#' `object` formula can take default values from the environment at the time
+#' `makeFun` is called.  A warning message alerts the user to this situation,
+#' unless `suppress.warnings` is `TRUE`.
 #' @param suppress.warnings A logical indicating whether warnings should be suppressed.
 #' @param transformation a function used to transform the response.
 #' This can be useful to invert a transformation used on the response
-#' when creating the model.  If \code{NULL}, an attempt will be made to infer
+#' when creating the model.  If `NULL`, an attempt will be made to infer
 #' the transformation from the model formula. A few simple transformations
-#' (\code{log}, \code{log2}, \code{sqrt}) are recognized.  For other transformations,
-#' \code{transformation} should be provided explicitly.
-#' @details When creating a function from a model created with \code{lm}, \code{glm}, or \code{nls},
-#'   the function produced is a wrapper around the corresponding version of \code{predict}.
+#' (`log`, `log2`, `sqrt`) are recognized.  For other transformations,
+#' `transformation` should be provided explicitly.
+#' @details When creating a function from a model created with `lm`, `glm`, or `nls`,
+#'   the function produced is a wrapper around the corresponding version of `predict`.
 #'   This means that having variables in the model with names that match arguments of
-#'   \code{predict} will lead to potentially ambiguous situations and should be avoided.
+#'   `predict` will lead to potentially ambiguous situations and should be avoided.
 #' @examples
 #' if (require(mosaicData)) {
 #'   model <- lm( log(length) ~ log(width), data = KidsFeet)
@@ -193,7 +193,7 @@ makeFun.lm <-
   }
 
 #' @rdname makeFun
-#' @param type one of \code{'response'} (default) or \code{'link'} specifying scale to be used
+#' @param type one of `'response'` (default) or `'link'` specifying scale to be used
 #' for value of function returned.
 #' @examples
 #' if (require(mosaicData)) {
@@ -315,7 +315,7 @@ makeFun.nls <-
 
 #' extract predictor variables from a model
 #'
-#' @param model a model, typically of class \code{lm} or \code{glm}
+#' @param model a model, typically of class `lm` or `glm`
 #' @return a vector of variable names
 #' @examples
 #' if (require(mosaicData)) {
@@ -330,9 +330,9 @@ modelVars <- function(model) {
 
 #' Extract coefficients from a function
 #'
-#' \code{coef}  will extract the coefficients attribute from a function.
+#' `coef`  will extract the coefficients attribute from a function.
 #' Functions created by applying \code{link{makeFun}} to a model produced
-#' by \code{\link{lm}}, \code{\link{glm}}, or \code{\link{nls}} store
+#' by [lm()], [glm()], or [nls()] store
 #' the model coefficients there to enable this extraction.
 #'
 #' @name coef.function

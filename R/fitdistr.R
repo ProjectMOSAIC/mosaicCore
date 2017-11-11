@@ -1,3 +1,7 @@
+
+#' @importFrom stats IQR dexp dgeom dlnorm dnorm dpois median sd var
+NA
+
 #' Fit a distribution to data and return a function
 #'
 #' Given the name of a family of 1-dimensional distributions, this function chooses a
@@ -5,7 +9,9 @@
 #' selected p, d, q, or r format. When analytical solutions do not exist, `MASS::fitdistr()`
 #' is used to estimate the parameters by numerical maximum likelihood.
 #'
-#' @param x A vector of numerical data
+#' @param data A data frame.
+#' @param formula A formula.  A distribution will be fit to the data defined by the
+#' right side and evaluated in `data`.
 #' @param dist A distribution function or the equivalent character string
 #' for the family desired,  e.g., `pnorm`, `rgamma`. (see MASS:fitdistr for the
 #' distributions that are available)
@@ -74,7 +80,7 @@ analytic_fit_distr <- function(x, distname) {
     if (any(x <= 0))
       stop("need positive values to fit a log-Normal")
     lx <- log(x)
-    sd0 <- sqrt((n - 1)/n) * sd(lx)
+    sd0 <- sqrt((n - 1)/n) * stats::sd(lx)
     mx <- mean(lx)
     estimate <- c(mx, sd0)
     sds <- c(sd0/sqrt(n), sd0/sqrt(2 * n))
@@ -85,7 +91,7 @@ analytic_fit_distr <- function(x, distname) {
     return(
       structure(
         list(estimate = estimate, sd = sds, vcov = vc, n = n,
-             loglik = sum(dlnorm(x, mx, sd0, log = TRUE))),
+             loglik = sum(stats::dlnorm(x, mx, sd0, log = TRUE))),
         class = "fitdistr"))
   }
   if (distname == "dnorm") {
@@ -99,7 +105,7 @@ analytic_fit_distr <- function(x, distname) {
     return(
       structure(
         list(estimate = estimate, sd = sds, vcov = vc, n = n,
-             loglik = sum(dnorm(x, mx, sd0, log = TRUE))),
+             loglik = sum(stats::dnorm(x, mx, sd0, log = TRUE))),
         class = "fitdistr"))
   }
   if (distname == "poisson") {
@@ -111,7 +117,7 @@ analytic_fit_distr <- function(x, distname) {
     return(
       structure(
         list(estimate = estimate, sd = sds, vcov = vc, n = n,
-             loglik = sum(dpois(x, estimate, log = TRUE))),
+             loglik = sum(stats::dpois(x, estimate, log = TRUE))),
         class = "fitdistr"))
   }
   if (distname == "dexp") {
@@ -124,19 +130,18 @@ analytic_fit_distr <- function(x, distname) {
     return(
       structure(
         list(estimate = estimate, sd = sds, vcov = vc, n = n,
-             loglik = sum(dexp(x, estimate, log = TRUE))),
+             loglik = sum(stats::dexp(x, estimate, log = TRUE))),
         class = "fitdistr"))
   }
   if (distname == "dgeom") {
     estimate <- 1/(1 + mean(x))
     sds <- estimate * sqrt((1 - estimate)/n)
-    vc <- matrix(sds^2, ncol = 1, nrow = 1, dimnames = list("prob",
-                                                            "prob"))
+    vc <- matrix(sds^2, ncol = 1, nrow = 1, dimnames = list("prob", "prob"))
     names(estimate) <- names(sds) <- "prob"
     return(
       structure(
         list(estimate = estimate, sd = sds, vcov = vc, n = n,
-             loglik = sum(dgeom(x, estimate, log = TRUE))),
+             loglik = sum(stats::dgeom(x, estimate, log = TRUE))),
         class = "fitdistr"))
   }
 
@@ -150,7 +155,7 @@ get_start_params <- function(x, distname, ...) {
       stop("Weibull values must be > 0")
     lx <- log(x)
     m <- mean(lx)
-    v <- var(lx)
+    v <- stats::var(lx)
     shape <- 1.2/sqrt(v)
     scale <- exp(m + 0.572/shape)
     start <- list(shape = shape, scale = scale)
@@ -160,14 +165,14 @@ get_start_params <- function(x, distname, ...) {
     if (any(x < 0))
       stop("gamma values must be >= 0")
     m <- mean(x)
-    v <- var(x)
+    v <- stats::var(x)
     start <- list(shape = m^2/v, rate = m/v)
     start <- start[!is.element(names(start), dots)]
     control <- list(parscale = c(1, start$rate))
   }
   if (distname == "dnbinom") {
     m <- mean(x)
-    v <- var(x)
+    v <- stats::var(x)
     size <- if (v > m)
       m^2/(v - m)
     else 100
@@ -175,11 +180,11 @@ get_start_params <- function(x, distname, ...) {
     start <- start[!is.element(names(start), dots)]
   }
   if (distname %in% c("dcauchy", "dlogis")) {
-    start <- list(location = median(x), scale = IQR(x)/2)
+    start <- list(location = stats::median(x), scale = stats::IQR(x)/2)
     start <- start[!is.element(names(start), dots)]
   }
   if (distname == "t") {
-    start <- list(m = median(x), s = IQR(x)/2, df = 10)
+    start <- list(m = stats::median(x), s = stats::IQR(x)/2, df = 10)
     start <- start[!is.element(names(start), dots)]
   }
 

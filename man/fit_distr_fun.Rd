@@ -7,6 +7,11 @@
 fit_distr_fun(data, formula, dist, start = NULL, ...)
 }
 \arguments{
+\item{data}{A data frame.}
+
+\item{formula}{A formula.  A distribution will be fit to the data defined by the
+right side and evaluated in \code{data}.}
+
 \item{dist}{A distribution function or the equivalent character string
 for the family desired,  e.g., \code{pnorm}, \code{rgamma}. (see MASS:fitdistr for the
 distributions that are available)
@@ -16,8 +21,6 @@ what format the generated function should take.}
 (passed to \code{MASS::fitdistr}).}
 
 \item{...}{Additional arguments to MASS::fitdistr()}
-
-\item{x}{A vector of numerical data}
 }
 \value{
 A function of one variable that acts like, say,

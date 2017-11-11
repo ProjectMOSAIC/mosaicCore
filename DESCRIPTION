@@ -11,8 +11,7 @@ Imports:
     lazyeval,
     rlang,
     tidyr,
-    MASS,
-    rlang
+    MASS
 Suggests:
     mosaicData,
     mosaic,

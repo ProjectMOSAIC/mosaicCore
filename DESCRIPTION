@@ -10,7 +10,9 @@ Imports:
     dplyr,
     lazyeval,
     rlang,
-    tidyr
+    tidyr,
+    MASS,
+    rlang
 Suggests:
     mosaicData,
     mosaic,

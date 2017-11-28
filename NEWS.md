@@ -1,4 +1,8 @@
 
+# mosaicCore 0.4.2
+
+* Add `fit_distr_fun()` which fits distribtuions using `MASS::fitdistr()` but returns a function (density, cdf, quantile, or random sampling) instead of just the parameters of the fit.
+
 # mosaicCore 0.4.0
 
 * Additional functions from `mosaic` have been moved here.

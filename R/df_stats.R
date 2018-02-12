@@ -1,4 +1,5 @@
 #' @importFrom tidyr gather
+#' @importFrom tidyr gather
 #' @importFrom dplyr %>% bind_rows
 #' @importFrom rlang is_character f_rhs eval_tidy quos
 #' @importFrom stats as.formula na.exclude
@@ -164,7 +165,8 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   if ( ! inherits(data, "data.frame")) stop("second arg must be a data.frame")
 
   formula <- cond2sum(mosaic_formula_q(formula, groups = groups))
-
+  n_groups <- if(length(formula) == 3) length(all.vars(formula[[3]])) else 1
+  
   if (identical(na.action, "na.warn")) na.action <- na.warn
 
   MF <- model.frame(formula, data, na.action = na.action)
@@ -198,7 +200,12 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
     )
 
   # extract argument names from names of list
-  arg_names <- names(res)
+  #arg_names <- names(res)
+  
+
+  arg_names <- rep(names(res), 
+                   unlist(lapply(res, 
+                          FUN = function(x) ncol(x[ , -(1:n_groups), drop = FALSE]))))
 
   d <- ncol(MF) - 1
   groups <- res[[1]][, 1:d, drop = FALSE]
@@ -243,6 +250,7 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
       function(x, y) { if (is.null(x) || x == "") y else x },
       res_names, alt_res_names
     )
+
 
   final_names <-
     mapply(

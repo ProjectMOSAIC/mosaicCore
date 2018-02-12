@@ -64,7 +64,10 @@ make_df.list <- function(object, ...) {
 make_df.matrix <- function(object, ...) {
   lapply(1:ncol(object), function(c) unlist(object[, c, drop = FALSE])) %>%
     as.data.frame() %>%
-    setNames(colnames(object))
+    setNames(colnames(object)) -> tmp
+  if (is.null(names(tmp))) names(tmp) <- NA
+  
+  tmp
 }
 
 #' @rdname make_df

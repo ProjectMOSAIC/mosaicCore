@@ -106,6 +106,8 @@ cond2sum <- function(formula) {
 #'
 #' @examples
 #' df_stats( ~ hp, data = mtcars)
+#' df_stats( ~ hp | cyl, data = mtcars)
+#' df_stats( hp ~ cyl, data = mtcars)
 #' # There are several ways to specify functions
 #' df_stats( ~ hp, data = mtcars, mean, trimmed_mean = mean(trim = 0.1), "median",
 #'   range, Q = quantile(c(0.25, 0.75)))
@@ -149,12 +151,6 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   # dots <- rlang::exprs(...)
   format <- match.arg(format)
 
-  if (length(qdots) < 1) {
-    qdots <- list(rlang::quo(gf_favstats))
-    names(qdots) <- ""
-    na.action = "na.pass"
-  }
-
   if (inherits(formula, "data.frame") && inherits(data, "formula")) {
     # switched at birth. Likely because input is piped in
     tmp <- data
@@ -165,7 +161,6 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   if ( ! inherits(data, "data.frame")) stop("second arg must be a data.frame")
 
   formula <- cond2sum(mosaic_formula_q(formula, groups = groups))
-  n_groups <- if(length(formula) == 3) length(all.vars(formula[[3]])) else 1
   
   if (identical(na.action, "na.warn")) na.action <- na.warn
 
@@ -180,8 +175,22 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
       MF[, "group"] <- 1
     }
   }
+  # number of grouping variables
+  d <- ncol(MF) - 1
 
-
+  if (length(qdots) < 1) {
+    Q1 <- function(x) quantile(x, 0.25, na.rm = TRUE)
+    Q3 <- function(x) quantile(x, 0.75, na.rm = TRUE)
+    n <- function(x) length(x)
+    missing <- function(x) sum(is.na(x))
+    res <- df_stats(formula, data = data, 
+                    min, Q1, median, Q3, max, mean, sd, n, missing, 
+                    drop = drop, groups = groups, 
+                    format = format,
+                    long_names = long_names, nice_names = nice_names, na.action = na.action)
+    return(res)
+  }  
+  
 #  if (is.null(fargs) || length(fargs) < 1L) {
   res <-
     lapply(
@@ -198,33 +207,36 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
         }
       }
     )
-
-  # extract argument names from names of list
-  #arg_names <- names(res)
-  
-
-  arg_names <- rep(names(res), 
-                   unlist(lapply(res, 
-                          FUN = function(x) ncol(x[ , -(1:n_groups), drop = FALSE]))))
-
-  d <- ncol(MF) - 1
+  # the grouping columns for later use
   groups <- res[[1]][, 1:d, drop = FALSE]
-
   # res[[i]]$x can have a variety of formats depending on the function.
   # so we have to do some work to get things into our desired format (a
   # traditional data frame with columns that are numeric vectors.
 
-  # res <- lapply(res, function(x) data.frame(lapply(data.frame(x$x), unlist)))
+  
+  # we drop the grouping columns here so that we have
+  # just the results of applying the ... functions
+  res <- lapply(res, function(x) make_df(x$x))
 
-  res0 <- res
-  res1 <- lapply(res, function(x) make_df(x$x))
-  res <- res1
+  # number of values in each statistic
+  ncols <- sapply(res, ncol)
+  
+  # extract argument names from the stats listed in ...
+  # repeat as needed in the case of multiple values returned by any one stat.
+  arg_names <- rep(names(res), ncols)
+  # arg_names <- rep(names(res), 
+  #                  unlist(lapply(res, 
+  #                         FUN = function(x) length(x[ 1, -(1:d), drop = TRUE]))))
 
   # extract result names from data frames just created.
-  res_names <- lapply(res1, names)
-  res_names <- lapply(res_names, function(x) if(all(x == ".")) NULL else x)
+  res_names <- lapply(res, names)
+  res_names <- lapply(res_names, 
+                      FUN = function(x) {
+                        nums <- 1:length(x)
+                        ifelse(is.na(x) | x == ".", nums, x)
+                      })
 
-  ncols <- sapply(res, ncol)
+  
 
   fun_names <-
     sapply(
@@ -240,25 +252,35 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   if (long_names) {
     fun_names <- paste0(fun_names, sep, deparse(formula[[2]]))
   }
-  fun_names <- ifelse(sapply(res_names, is.null), fun_names, "")
+  # fun_names <- ifelse(sapply(res_names, is.null), fun_names, "")
+  fun_names <- rep(fun_names, ncols)
 
   # # Use numbers or "" if there are no names.
   alt_res_names <- lapply(ncols, function(nc) if (nc > 1) format(1:nc) else "")
+  alt_res_names <- unlist(alt_res_names)
+  res_names <- unlist(res_names)
+  
+  res_names <- ifelse(is.null(alt_res_names) | is.na(alt_res_names) | alt_res_names == "",
+                      alt_res_names, res_names)
+  
+  # res_names <-
+  #   mapply(
+  #     function(x, y) { if (is.null(x) || x == "") y else x },
+  #     res_names, alt_res_names
+  #   )
 
-  res_names <-
-    mapply(
-      function(x, y) { if (is.null(x) || x == "") y else x },
-      res_names, alt_res_names
-    )
 
-
-  final_names <-
-    mapply(
-      paste0,
-      ifelse(arg_names == "", fun_names, arg_names),
-      sep,
-      res_names) %>%
-    unlist()
+  final_names <- paste0(ifelse(arg_names == "", fun_names, arg_names),
+                        sep,
+                        res_names)
+    
+  # final_names <- 
+  #   mapply(
+  #     paste0,
+  #     ifelse(arg_names == "", fun_names, arg_names),
+  #     sep,
+  #     unlist(res_names)) %>%
+  #   unlist()
 
   # remove unneccessary seperators
   final_names <- gsub(paste0(sep, sep), sep, final_names)

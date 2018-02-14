@@ -64,6 +64,9 @@ test_that("naming works", {
   expect_equivalent(
     names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss, range, long_names = FALSE)),
     c("sex", "range_1", "range_2"))
+  expect_equivalent(
+    names(df_stats(~ hp, data = mtcars, spread = quantile(c(0.1, 0.9)), percentiles = range)),
+    c("spread_10%", "spread_90%", "percentiles_1", "percentiles_2"))
 })
 
 test_that("mean works", {

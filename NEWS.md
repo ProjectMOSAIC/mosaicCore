@@ -1,4 +1,8 @@
 
+# mosaicCore 0.4.3
+
+* Added interval calculations `ci.mean()`, `ci.median()`, `ci.sd()`, `ci.prop()`, and `coverage()` for use with `df_stats()`.
+
 # mosaicCore 0.4.2
 
 * Add `fit_distr_fun()` which fits distribtuions using `MASS::fitdistr()` but returns a function (density, cdf, quantile, or random sampling) instead of just the parameters of the fit.

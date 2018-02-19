@@ -108,6 +108,8 @@ arithmetic.
 
 \examples{
 df_stats( ~ hp, data = mtcars)
+df_stats( ~ hp | cyl, data = mtcars)
+df_stats( hp ~ cyl, data = mtcars)
 # There are several ways to specify functions
 df_stats( ~ hp, data = mtcars, mean, trimmed_mean = mean(trim = 0.1), "median",
   range, Q = quantile(c(0.25, 0.75)))

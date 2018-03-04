@@ -43,7 +43,7 @@ counts.default <-
     format = match.arg(format)
     uval <- sort(unique(x))
 
-    res <- sapply(uval, function(v) base::sum(x == v, na.rm = TRUE))
+    res <- sapply(uval, function(v) base::sum(x == v, na.rm = TRUE)) 
     names (res) <-
       paste0(
         switch(format, count = "n_", proportion = "prop_", percent = "perc_"),
@@ -62,13 +62,15 @@ counts.default <-
       count = res,
       proportion =   res / length(x),
       percent =  100 * res / length(x)
-    )
+    ) 
   }
 
 #' @rdname props
 #' @export
 counts.formula <- function(x, data, ..., format = "count") {
-  mosaicCore::df_stats(x, data = data, "counts", fargs = list(format = format), ...)
+  # The use of the argument name ` ` avoids the redundant "counts" and "n" in the name 
+  # of the output.
+  mosaicCore::df_stats(x, data = data, ` ` = "counts", fargs = list(format = format), ...) 
 }
 
 #' @rdname props

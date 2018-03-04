@@ -224,19 +224,24 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   # extract argument names from the stats listed in ...
   # repeat as needed in the case of multiple values returned by any one stat.
   arg_names <- rep(names(res), ncols)
-  # arg_names <- rep(names(res), 
-  #                  unlist(lapply(res, 
-  #                         FUN = function(x) length(x[ 1, -(1:d), drop = TRUE]))))
-
-  # extract result names from data frames just created.
+  
+  # extract any result names from data frames just created. If none, number them for 
+  # each compoent of res
   res_names <- lapply(res, names)
   res_names <- lapply(res_names, 
                       FUN = function(x) {
                         nums <- 1:length(x)
                         ifelse(is.na(x) | x == ".", nums, x)
                       })
-
+  res_names <- unlist(res_names)
   
+
+  # # Use numbers or "" if there are no names.
+  alt_res_names <- lapply(ncols, function(nc) if (nc > 1) format(1:nc) else "")
+  alt_res_names <- unlist(alt_res_names)
+  
+  res_names <- ifelse(is.null(alt_res_names) | is.na(alt_res_names) | alt_res_names == "",
+                      alt_res_names, res_names)
 
   fun_names <-
     sapply(
@@ -248,44 +253,22 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
           deparse(rlang::f_rhs(x))
       }
       )
-
+  fun_names <- unlist(rep(fun_names, ncols))
+  
+  # Use the explicit argument names if they are available
+  fun_names <- ifelse(arg_names == "", fun_names, arg_names)
   if (long_names) {
     fun_names <- paste0(fun_names, sep, deparse(formula[[2]]))
   }
-  # fun_names <- ifelse(sapply(res_names, is.null), fun_names, "")
-  fun_names <- rep(fun_names, ncols)
 
-  # # Use numbers or "" if there are no names.
-  alt_res_names <- lapply(ncols, function(nc) if (nc > 1) format(1:nc) else "")
-  alt_res_names <- unlist(alt_res_names)
-  res_names <- unlist(res_names)
-  
-  res_names <- ifelse(is.null(alt_res_names) | is.na(alt_res_names) | alt_res_names == "",
-                      alt_res_names, res_names)
-  
-  # res_names <-
-  #   mapply(
-  #     function(x, y) { if (is.null(x) || x == "") y else x },
-  #     res_names, alt_res_names
-  #   )
-
-
-  final_names <- paste0(ifelse(arg_names == "", fun_names, arg_names),
+  final_names <- paste0(fun_names,
                         sep,
                         res_names)
-    
-  # final_names <- 
-  #   mapply(
-  #     paste0,
-  #     ifelse(arg_names == "", fun_names, arg_names),
-  #     sep,
-  #     unlist(res_names)) %>%
-  #   unlist()
 
-  # remove unneccessary seperators
+  # remove unneccessary separators
   final_names <- gsub(paste0(sep, sep), sep, final_names)
-  final_names <- gsub(paste0(sep, "$"), "", final_names)
-  final_names <- gsub(paste0("^", sep), "", final_names)
+  final_names <- gsub(paste0(sep, "*", "$"), "", final_names)
+  final_names <- gsub(paste0("^[ ", sep, "]*"), "", final_names)
 
   # paste groups back in
   res <- do.call(cbind, c(list(groups), res))

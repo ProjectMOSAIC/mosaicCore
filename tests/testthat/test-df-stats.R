@@ -50,14 +50,17 @@ test_that("naming works", {
     names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss)),
     c("sex", paste0(c("min", "Q1", "median", "Q3", "max", "mean", "sd", "n", "missing"), "_cesd")))
   expect_equivalent(
+    names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss, long_names = FALSE)),
+    c("sex","min", "Q1", "median", "Q3", "max", "mean", "sd", "n", "missing"))
+  expect_equivalent(
     names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss, mean)),
     c("sex", "mean_cesd"))
   expect_equivalent(
     names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss, A = mean, median)),
-    c("sex", "A", "median_cesd"))
+    c("sex", "A_cesd", "median_cesd"))
   expect_equivalent(
     names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss, A = range, median)),
-    c("sex", "A_1", "A_2", "median_cesd"))
+    c("sex", "A_cesd_1", "A_cesd_2", "median_cesd"))
   expect_equivalent(
     names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss, range)),
     c("sex", "range_cesd_1", "range_cesd_2"))
@@ -65,7 +68,7 @@ test_that("naming works", {
     names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss, range, long_names = FALSE)),
     c("sex", "range_1", "range_2"))
   expect_equivalent(
-    names(df_stats(~ hp, data = mtcars, spread = quantile(c(0.1, 0.9)), percentiles = range)),
+    names(df_stats(~ hp, data = mtcars, spread = quantile(c(0.1, 0.9)), percentiles = range, long_names = FALSE)),
     c("spread_10%", "spread_90%", "percentiles_1", "percentiles_2"))
 })
 
@@ -80,5 +83,12 @@ test_that("mean works", {
         mean( subset(mosaicData::HELPmiss$cesd, mosaicData::HELPmiss$substance == s), na.rm = TRUE)
       )
     )
+})
+
+test_that("names for counts and props work", {
+  expect_equivalent(
+    names(counts(cyl ~ gear, data = mtcars)),
+    c("gear", "cyl_n_4", "cyl_n_6", "cyl_n_8")
+  )
 })
 

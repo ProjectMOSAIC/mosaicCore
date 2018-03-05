@@ -92,3 +92,8 @@ test_that("names for counts and props work", {
   )
 })
 
+test_that("in counts(), a non-existent combination gives a count of 0.", {
+  tmp <- props(cyl ~ gear, data = mtcars)
+  expect_false(any(is.na(tmp[])))
+})
+

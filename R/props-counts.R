@@ -70,7 +70,11 @@ counts.default <-
 counts.formula <- function(x, data, ..., format = "count") {
   # The use of the argument name ` ` avoids the redundant "counts" and "n" in the name 
   # of the output.
-  mosaicCore::df_stats(x, data = data, ` ` = "counts", fargs = list(format = format), ...) 
+  res <- mosaicCore::df_stats(x, data = data, ` ` = "counts", 
+                              fargs = list(format = format), ...) 
+  res[is.na(res)] <- 0 # for counts, give back 0 instead of NA
+  
+  res
 }
 
 #' @rdname props

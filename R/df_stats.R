@@ -144,12 +144,12 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
                      format = c("wide", "long"), groups = NULL,
                      long_names = TRUE, nice_names = FALSE,
                      na.action = "na.warn") {
-  qdots <- quos(...)
+  qdots <- dplyr::quos(...)
   # dots <- rlang::exprs(...)
   format <- match.arg(format)
 
   if (length(qdots) < 1) {
-    qdots <- list(rlang::quo(gf_favstats))
+    qdots <- list(dplyr::quo(gf_favstats))
     names(qdots) <- ""
     na.action = "na.pass"
   }
@@ -244,13 +244,11 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
       res_names, alt_res_names
     )
 
+  part1 <-
+    rep(ifelse(arg_names == "", fun_names, arg_names), ncols)
+
   final_names <-
-    mapply(
-      paste0,
-      ifelse(arg_names == "", fun_names, arg_names),
-      sep,
-      res_names) %>%
-    unlist()
+    paste0(part1, sep, unlist(res_names))
 
   # remove unneccessary seperators
   final_names <- gsub(paste0(sep, sep), sep, final_names)

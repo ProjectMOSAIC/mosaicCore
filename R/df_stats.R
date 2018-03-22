@@ -233,6 +233,10 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
       }
       )
 
+  # ignore function names if results are named.
+
+  fun_names <- ifelse(sapply(res_names, is.null), fun_names, "")
+
   # part1: argument name if exists, else function name
   part1 <-
     rep(ifelse(arg_names == "", fun_names, arg_names), ncols)
@@ -243,6 +247,9 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
     rep(ifelse(arg_names == "" & long_names & ! fun_names == "df_favstats",
                deparse(formula[[2]]), ""),
         ncols)
+  # no part2 if part1 is empty
+  part2 <-
+    ifelse(part1 == "", "", part2)
 
   # part3: res_names if they exist, else numbers or ""
   res_names <-

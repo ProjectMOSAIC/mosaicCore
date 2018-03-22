@@ -106,11 +106,11 @@ counts.formula <- function(x, data, ..., format = "count") {
 #' @rdname props
 #' @export
 props <- function(x, ..., format = "proportion") {
-  counts(x, format = format, ...)
+  counts(x, ..., format = format)
 }
 
 #' @rdname props
 #' @export
 percs <- function(x, ..., format = "percent") {
-  counts(x, ..., format = "percent")
+  counts(x, ..., format = format)
 }

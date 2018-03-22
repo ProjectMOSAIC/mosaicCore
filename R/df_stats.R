@@ -81,13 +81,7 @@ cond2sum <- function(formula) {
 #' Note that unlike \code{dplyr::\link[dplyr]{summarise}()}, `df_stats()` ignores
 #' any grouping defined in `data` if `data` is a grouped `tibble`.
 #'
-#' Names of columns in the resulting data frame are determined as follows.  For named
-#' arguments in `...`, the argument name is used.  For unnamed arguments, if the
-#' statistic function returns a result with names, those names are used.  Else, a name is
-#' computed from the expression in `...` and the name of the variable being summarized.
-#' For functions that produce multiple
-#' outputs without names, consecutive integers are appended to the names.
-#' See the examples.
+
 #'
 #' @section Cautions Regarding Formulas:
 #'
@@ -101,7 +95,15 @@ cond2sum <- function(formula) {
 #' Similarly, addition (`+`) is used to separate grouping variables, not for
 #' arithmetic.
 #'
-#' @return A data frame.
+#' @return A data frame. Names of columns in the resulting data frame consist of three
+#'   parts separated by `sep`.
+#'   The first part is the argument name, if it exists, else the function.
+#'   The second part is the name of the variable being summarised if `long_names == TRUE` and
+#'   the first part is the function name, else ""
+#'   The third part is the names of the object returned by the summarizing function, if they
+#'   exist, else a sequence of consecutive integers or "" if there is only one component
+#'   returned by the summarizing function.
+#'   See the examples.
 #'
 #' @examples
 #' df_stats( ~ hp, data = mtcars)

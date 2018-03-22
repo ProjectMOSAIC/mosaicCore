@@ -63,7 +63,15 @@ The default is \code{"na.warn"} unless no function are specified in \code{...}, 
 \code{"na.pass"} is used since the default function reports the number of missing values.}
 }
 \value{
-A data frame.
+A data frame. Names of columns in the resulting data frame consist of three
+parts separated by \code{sep}.
+The first part is the argument name, if it exists, else the function.
+The second part is the name of the variable being summarised if \code{long_names == TRUE} and
+the first part is the function name, else ""
+The third part is the names of the object returned by the summarizing function, if they
+exist, else a sequence of consecutive integers or "" if there is only one component
+returned by the summarizing function.
+See the examples.
 }
 \description{
 Creates a data frame of statistics calculated on one variable, possibly for each
@@ -83,14 +91,6 @@ determined by ranges of a quantitative variable.  See the examples.
 
 Note that unlike \code{dplyr::\link[dplyr]{summarise}()}, \code{df_stats()} ignores
 any grouping defined in \code{data} if \code{data} is a grouped \code{tibble}.
-
-Names of columns in the resulting data frame are determined as follows.  For named
-arguments in \code{...}, the argument name is used.  For unnamed arguments, if the
-statistic function returns a result with names, those names are used.  Else, a name is
-computed from the expression in \code{...} and the name of the variable being summarized.
-For functions that produce multiple
-outputs without names, consecutive integers are appended to the names.
-See the examples.
 }
 \section{Cautions Regarding Formulas}{
 

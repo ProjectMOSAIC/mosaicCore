@@ -2,6 +2,7 @@
 % Please edit documentation in R/props-counts.R
 \name{counts}
 \alias{counts}
+\alias{counts.factor}
 \alias{counts.default}
 \alias{counts.formula}
 \alias{props}
@@ -9,6 +10,8 @@
 \title{Compute all proportions or counts}
 \usage{
 counts(x, ...)
+
+\method{counts}{factor}(x, ..., format = c("count", "proportion", "percent"))
 
 \method{counts}{default}(x, ..., format = c("count", "proportion", "percent"))
 

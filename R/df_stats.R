@@ -144,12 +144,13 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
                      format = c("wide", "long"), groups = NULL,
                      long_names = TRUE, nice_names = FALSE,
                      na.action = "na.warn") {
+
   qdots <- dplyr::quos(...)
   # dots <- rlang::exprs(...)
   format <- match.arg(format)
 
   if (length(qdots) < 1) {
-    qdots <- list(dplyr::quo(gf_favstats))
+    qdots <- list(dplyr::quo(df_favstats))
     names(qdots) <- ""
     na.action = "na.pass"
   }
@@ -230,25 +231,28 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
       }
       )
 
-  if (long_names) {
-    fun_names <- paste0(fun_names, sep, deparse(formula[[2]]))
-  }
-  fun_names <- ifelse(sapply(res_names, is.null), fun_names, "")
-
-  # # Use numbers or "" if there are no names.
-  alt_res_names <- lapply(ncols, function(nc) if (nc > 1) format(1:nc) else "")
-
-  res_names <-
-    mapply(
-      function(x, y) { if (is.null(x) || x == "") y else x },
-      res_names, alt_res_names
-    )
-
+  # part1: argument name if exists, else function name
   part1 <-
     rep(ifelse(arg_names == "", fun_names, arg_names), ncols)
 
+  # part2: variable name or ""
+  part2 <-
+    rep(ifelse(arg_names == "" & long_names, deparse(formula[[2]]), ""), ncols)
+
+  # part3: res_names if they exist, else numbers or ""
+  res_names <-
+    ifelse(sapply(res_names, is.null), "", res_names)
+  alt_res_names <- lapply(ncols, function(nc) if (nc > 1) format(1:nc) else "")
+  part3 <-
+    mapply(
+      function(r, a) { if (is.null(r) || r == "") a else r },
+      res_names, alt_res_names
+    )
+  part3 <- unlist(part3)
+
+  # paste it all together
   final_names <-
-    paste0(part1, sep, unlist(res_names))
+    paste(part1, part2, part3, sep = sep)
 
   # remove unneccessary seperators
   final_names <- gsub(paste0(sep, sep), sep, final_names)
@@ -274,7 +278,7 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   }
 }
 
-gf_favstats <- function (x, ..., na.rm = TRUE, type = 7)
+df_favstats <- function (x, ..., na.rm = TRUE, type = 7)
 {
   if (!is.null(dim(x)) && min(dim(x)) != 1)
     warning("Not respecting matrix dimensions.  Hope that's OK.")

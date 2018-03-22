@@ -234,10 +234,13 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   # part1: argument name if exists, else function name
   part1 <-
     rep(ifelse(arg_names == "", fun_names, arg_names), ncols)
+  part1 <- gsub("df_favstats", "", part1)
 
   # part2: variable name or ""
   part2 <-
-    rep(ifelse(arg_names == "" & long_names, deparse(formula[[2]]), ""), ncols)
+    rep(ifelse(arg_names == "" & long_names & ! fun_names == "df_favstats",
+               deparse(formula[[2]]), ""),
+        ncols)
 
   # part3: res_names if they exist, else numbers or ""
   res_names <-

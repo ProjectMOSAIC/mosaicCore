@@ -35,12 +35,16 @@ cond2sum <- function(formula) {
 #'   a vector of values and return either a (possibly named) single value,
 #'   a (possibly named) vector of values, or a data frame with one row.
 #'   Functions can be specified with character strings, names, or expressions
-#'   that look like function calls wit the first argument missing.  The latter
+#'   that look like function calls with the first argument missing.  The latter
 #'   option provides a convenient way to specify additional arguments.  See the
 #'   examples.
 #'   Note: If these arguments are named, those names will be used in the data
 #'   frame returned (see details).  Such names may not be among the names of the named
 #'   arguments of `df_stats`().
+#'
+#'   If a function is specified using `::`, be sure to include the trailing
+#'   parens, even if there are no additional arguments required.
+#'
 #' @param groups An expression to be evaluated in `data` and defining (additional) groups.
 #'   This isn't necessary, since these can be placed into the formula, but it is provided
 #'   for similarity to other functions from the \pkg{mosaic} package.
@@ -110,6 +114,9 @@ cond2sum <- function(formula) {
 #' # There are several ways to specify functions
 #' df_stats( ~ hp, data = mtcars, mean, trimmed_mean = mean(trim = 0.1), "median",
 #'   range, Q = quantile(c(0.25, 0.75)))
+#' # When using ::, be sure to include parents, even if there are no additional arguments.
+#' df_stats( ~ hp, data = mtcars, mean = base::mean(), trimmed_mean = base::mean(trim = 0.1))
+#'
 #' # force names to by syntactically valid
 #' df_stats( ~ hp, data = mtcars, Q = quantile(c(0.25, 0.75)), nice_names = TRUE)
 #' # shorter names
@@ -189,11 +196,11 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
       qdots,
       function(f) {
         if (inherits(rlang::f_rhs(f), "call")) {
-          aggregate(MF[, 1], by = MF[, -1, drop = FALSE],
+          df_aggregate(MF[, 1], by = MF[, -1, drop = FALSE],
                     FUN = function(x) eval(substitute(x %>% foo, list(foo = rlang::f_rhs(f)))),
                     drop = drop)
         } else {
-          aggregate(MF[, 1], by = MF[, -1, drop = FALSE],
+          df_aggregate(MF[, 1], by = MF[, -1, drop = FALSE],
                     FUN = function(x) do.call(rlang::eval_tidy(f), c(list(x), fargs)),
                     drop = drop)
         }

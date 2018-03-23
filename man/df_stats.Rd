@@ -22,12 +22,15 @@ a default set of summary statistics is used.  Functions used must accept
 a vector of values and return either a (possibly named) single value,
 a (possibly named) vector of values, or a data frame with one row.
 Functions can be specified with character strings, names, or expressions
-that look like function calls wit the first argument missing.  The latter
+that look like function calls with the first argument missing.  The latter
 option provides a convenient way to specify additional arguments.  See the
 examples.
 Note: If these arguments are named, those names will be used in the data
 frame returned (see details).  Such names may not be among the names of the named
-arguments of \code{df_stats}().}
+arguments of \code{df_stats}().
+
+If a function is specified using \code{::}, be sure to include the trailing
+parens, even if there are no additional arguments required.}
 
 \item{drop}{A logical indicating whether combinations of the grouping
 variables that do not occur in \code{data} should be dropped from the
@@ -111,6 +114,9 @@ df_stats( ~ hp, data = mtcars)
 # There are several ways to specify functions
 df_stats( ~ hp, data = mtcars, mean, trimmed_mean = mean(trim = 0.1), "median",
   range, Q = quantile(c(0.25, 0.75)))
+# When using ::, be sure to include parents, even if there are no additional arguments.
+df_stats( ~ hp, data = mtcars, mean = base::mean(), trimmed_mean = base::mean(trim = 0.1))
+
 # force names to by syntactically valid
 df_stats( ~ hp, data = mtcars, Q = quantile(c(0.25, 0.75)), nice_names = TRUE)
 # shorter names

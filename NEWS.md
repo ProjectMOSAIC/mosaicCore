@@ -1,7 +1,21 @@
 
+# mosaicCore 0.5
+
+* **breaking change:** Naming conventions for `prop()` and `df_stats()` have
+been adjusted somewhat.  While this has the potential to break old code that
+relied on the names, the new system is clearer, supports a wider range of
+applications, and fixes a bug.
+
+* A `counts()` method for factors has been added.  This method includes counts
+of 0 for levels that do not occur.
+
+* Added `ci.mean()`, `ci.median()`, `ci.prop()`, and `ci.sd()` for computing confidence intervals.
+
 # mosaicCore 0.4.2
 
-* Add `fit_distr_fun()` which fits distribtuions using `MASS::fitdistr()` but returns a function (density, cdf, quantile, or random sampling) instead of just the parameters of the fit.
+* Add `fit_distr_fun()` which fits distribtuions using `MASS::fitdistr()` but
+returns a function (density, cdf, quantile, or random sampling) instead of just
+the parameters of the fit.
 
 # mosaicCore 0.4.0
 

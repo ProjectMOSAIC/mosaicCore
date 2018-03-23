@@ -44,6 +44,12 @@ test_that("always get a data frame with simple vectors as columns", {
 
 test_that("naming works", {
   expect_equivalent(
+    names(df_stats(~ substance, data = mosaicData::HELPmiss, mosaic::prop())),
+    c("prop_alcohol"))
+  expect_equivalent(
+    names(df_stats(substance ~ sex, data = mosaicData::HELPmiss, mosaic::prop())),
+    c("sex", "prop_alcohol"))
+  expect_equivalent(
     names(df_stats(~ cesd, data = mosaicData::HELPmiss)),
     c("min", "Q1", "median", "Q3", "max", "mean", "sd", "n", "missing"))
   expect_equivalent(

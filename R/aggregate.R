@@ -1,6 +1,9 @@
 # this is a modification of aggregate that retains the name when FUN returns a single named value.
 # intended for use in df_stats()
 
+#' @importFrom stats aggregate complete.cases
+NA
+
 df_aggregate <-
   function (x, by, FUN, ..., simplify = TRUE, drop = TRUE)
 {
@@ -11,7 +14,7 @@ df_aggregate <-
     stop("no rows to aggregate")
   if (NCOL(x) == 0L) {
     x <- data.frame(x = rep(1, NROW(x)))
-    return(aggregate.data.frame(x, by, function(x) 0L)[seq_along(by)])
+    return(stats::aggregate(x, by, function(x) 0L)[seq_along(by)])
   }
   if (!is.list(by))
     stop("'by' must be a list")
@@ -25,7 +28,7 @@ df_aggregate <-
   if (any(lengths(by) != NROW(x)))
     stop("arguments must have same length")
   y <- as.data.frame(by, stringsAsFactors = FALSE)
-  keep <- complete.cases(by)
+  keep <- stats::complete.cases(by)
   y <- y[keep, , drop = FALSE]
   x <- x[keep, , drop = FALSE]
   nrx <- NROW(x)

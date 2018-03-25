@@ -21,10 +21,9 @@ if \code{x} has rows or columns, a vector of indices, else \code{default}
 return a vector of row or column indices
 }
 \examples{
+dim(iris)
 columns(iris)
-dim(HELPrct)
-columns(HELPrct)
-rows(HELPrct)
+rows(iris)
 columns(NULL)
 columns("this doesn't have columns")
 }

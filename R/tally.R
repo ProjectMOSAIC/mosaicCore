@@ -1,6 +1,13 @@
-#' Turn logicals into factors; leave other things alone
+
+#' @importFrom utils head tail
+#' @importFrom stats addmargins
+NA
+
 #'
-#' Turn logicals into factors; leave other things alone
+#' Convert logical vector into factor
+#'
+#' Turn logicals into factors with levels ordered with `TRUE` before `FALSE`.
+#' Other inputs are returned unaltered.
 #'
 #' @param x a vector or data frame
 #' @param \dots additional arguments (currently ignored)
@@ -63,7 +70,7 @@ logical2factor.data.frame  <- function( x, ... ) {
 #' @param subset an expression evaluating to a logical vector used to select a subset of `data`
 #' @param quiet a logical indicating whether messages about order in which
 #'   marginal distributions are calculated should be suppressed.
-#'   See [addmargins()].
+#'   See [stats::addmargins()].
 #' @param groups used to specify a condition as an alternative to using a formula
 #' with a condition.
 #' @param margins a logical indicating whether marginal distributions should be displayed.
@@ -100,6 +107,7 @@ logical2factor.data.frame  <- function( x, ... ) {
 #' @note The current implementation when `format = "sparse"` first creates the full data frame
 #' and then removes the unneeded rows.  So the savings is in terms of space, not time.
 #' @examples
+#' if (require(mosaicData)) {
 #' tally( ~ substance, data = HELPrct)
 #' tally( ~ substance + sex , data = HELPrct)
 #' tally( sex ~ substance, data = HELPrct)   # equivalent to tally( ~ sex | substance, ... )
@@ -113,6 +121,7 @@ logical2factor.data.frame  <- function( x, ... ) {
 #' tally( ~ link, data = HELPrct)
 #' # ignore the NAs
 #' tally( ~ link, data = HELPrct, useNA = "no")
+#' }
 #' @export
 
 tally <- function(x, ...) {
@@ -183,12 +192,12 @@ tally.formula <-
 
     dims <- seq_along(dim(res))
     if (!is.null(evalF$condition) && ncol(evalF$condition) > 0) {
-      prop_columns <- tail(dims, ncol(evalF$condition))
+      prop_columns <- utils::tail(dims, ncol(evalF$condition))
     } else {
       if (is.null(evalF$left)) {
         prop_columns <- numeric(0)
       } else {
-        prop_columns <- tail(dims, ncol(evalF$right))
+        prop_columns <- utils::tail(dims, ncol(evalF$right))
       }
     }
 
@@ -204,9 +213,9 @@ tally.formula <-
     if (margins & ! format %in% c("data.frame", "sparse")) {
       # default: add margins for the non-condition dimensions of the table
       # but there are some exceptions when everything is marginal
-      margin_columns <- head(dims, -length(prop_columns))
+      margin_columns <- utils::head(dims, -length(prop_columns))
       if (length(margin_columns) == 0L)  margin_columns <- dims
-      res <-  addmargins(res, margin_columns, FUN = list(Total = sum), quiet = quiet)
+      res <-  stats::addmargins(res, margin_columns, FUN = list(Total = sum), quiet = quiet)
     }
     return(res)
   }
@@ -237,10 +246,9 @@ tally.default <-
 #' @return if `x` has rows or columns, a vector of indices, else `default`
 #' @rdname columns
 #' @examples
+#' dim(iris)
 #' columns(iris)
-#' dim(HELPrct)
-#' columns(HELPrct)
-#' rows(HELPrct)
+#' rows(iris)
 #' columns(NULL)
 #' columns("this doesn't have columns")
 #' @export
@@ -290,11 +298,13 @@ rows <- function(x, default=c()) {
 #' `pval.adjust`.
 #'
 #' @examples
-#' prop( ~sex, data=HELPrct)
-#' prop( ~sex, data=HELPrct, success = "male")
-#' count( ~sex | substance, data=HELPrct)
-#' prop( ~sex | substance, data=HELPrct)
-#' perc( ~sex | substance, data=HELPrct)
+#' if (require(mosaicData)) {
+#'   prop( ~sex, data=HELPrct)
+#'   prop( ~sex, data=HELPrct, success = "male")
+#'   count( ~sex | substance, data=HELPrct)
+#'   prop( ~sex | substance, data=HELPrct)
+#'   perc( ~sex | substance, data=HELPrct)
+#' }
 #' @export
 
 prop <- function(x, data=parent.frame(), useNA = "no", ...,

@@ -51,7 +51,7 @@ which case proportions are used instead.  Note that prior to version 0.9.3,
 
 \item{quiet}{a logical indicating whether messages about order in which
 marginal distributions are calculated should be suppressed.
-See \code{\link[=addmargins]{addmargins()}}.}
+See \code{\link[stats:addmargins]{stats::addmargins()}}.}
 
 \item{subset}{an expression evaluating to a logical vector used to select a subset of \code{data}}
 
@@ -98,6 +98,7 @@ The current implementation when \code{format = "sparse"} first creates the full 
 and then removes the unneeded rows.  So the savings is in terms of space, not time.
 }
 \examples{
+if (require(mosaicData)) {
 tally( ~ substance, data = HELPrct)
 tally( ~ substance + sex , data = HELPrct)
 tally( sex ~ substance, data = HELPrct)   # equivalent to tally( ~ sex | substance, ... )
@@ -111,4 +112,5 @@ tally( ~ sex, data = HELPrct, useNA = "always")
 tally( ~ link, data = HELPrct)
 # ignore the NAs
 tally( ~ link, data = HELPrct, useNA = "no")
+}
 }

@@ -129,15 +129,22 @@ cond2sum <- function(formula) {
 #' df_stats( hp ~ cyl + gear, data = mtcars, mean, median, range)
 #' df_stats( hp ~ cyl | gear, data = mtcars, mean, median, range)
 #' df_stats( hp ~ cyl, groups = gear, data = mtcars, mean, median, range)
+#'
 #' # magrittr style piping is also supported
+#' mtcars %>%
+#'   df_stats(hp ~ cyl, mean, median, range)
+#'
+#' # because the result is a data frame, df_stats() is also useful for creating plots
 #' if(require(ggformula)) {
-#'   mtcars %>%
-#'   df_stats(hp ~ cyl)
 #'   gf_violin(hp ~ cyl, data = mtcars, group = ~ cyl) %>%
-#'   gf_point(mean_hp ~ cyl, data = df_stats(hp ~ cyl, data = mtcars, mean))
+#'   gf_point(mean_hp ~ cyl, data = df_stats(hp ~ cyl, data = mtcars, mean),
+#'     color = ~ "mean") %>%
+#'   gf_point(median_hp ~ cyl, data = df_stats(hp ~ cyl, data = mtcars, median),
+#'     color = ~"median") %>%
+#'   gf_labs(color = "")
 #' }
 #'
-#' # can be used on a categorical response, too
+#' # can be used with a categorical response, too
 #' if (require(mosaic)) {
 #'   df_stats(sex ~ substance, data = HELPrct, table, prop_female = prop)
 #' }
@@ -173,7 +180,7 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   if ( ! inherits(formula, "formula")) stop("first arg must be a formula")
   if ( ! inherits(data, "data.frame")) stop("second arg must be a data.frame")
 
-  formula <- cond2sum(mosaic_formula_q(formula, groups = groups))
+  formula <- cond2sum(mosaic_formula_q(reop_formula(formula), groups = groups))
 
   if (identical(na.action, "na.warn")) na.action <- na.warn
 

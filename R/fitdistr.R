@@ -150,6 +150,7 @@ analytic_fit_distr <- function(x, distname) {
 
 get_start_params <- function(x, distname, ...) {
   dots <- list(...)
+  start <- list()
   if (distname == "dweibull") {
     if (any(x <= 0))
       stop("Weibull values must be > 0")

@@ -15,7 +15,7 @@ makeFun(object, ...)
   use.environment = TRUE, suppress.warnings = FALSE)
 
 \method{makeFun}{formula}(object, ..., strict.declaration = TRUE,
-  use.environment = TRUE, suppress.warnings = FALSE)
+  use.environment = TRUE, suppress.warnings = TRUE)
 
 \method{makeFun}{lm}(object, ..., transformation = NULL)
 

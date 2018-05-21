@@ -73,7 +73,8 @@ makeFun.function <-
 #' @export
 
 makeFun.formula <-
-  function( object, ..., strict.declaration  = TRUE, use.environment = TRUE, suppress.warnings = FALSE) {
+  function( object, ..., strict.declaration  = TRUE, use.environment = TRUE,
+            suppress.warnings = TRUE) {
 	  sexpr <- object
 	  if (! inherits( sexpr, "formula") || length(sexpr) != 3)
 		  stop('First argument must be a formula with both left and right sides.')

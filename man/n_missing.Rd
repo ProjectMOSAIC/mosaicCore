@@ -2,17 +2,26 @@
 % Please edit documentation in R/nmissing.R
 \name{n_missing}
 \alias{n_missing}
-\title{counting missing elements}
+\alias{n_not_missing}
+\alias{n_total}
+\title{Counting missing/non-missing elements}
 \usage{
 n_missing(..., type = c("any", "all"))
+
+n_not_missing(..., type = c("any", "all"))
+
+n_total(..., type = c("any", "all"))
 }
 \arguments{
 \item{...}{vectors of equal length to be checked in parallel for missing values.}
 
 \item{type}{one of \code{"any"} (default) or \code{"all"}.}
 }
+\value{
+a vector of counts of missing or non-missing values.
+}
 \description{
-counting missing elements
+Counting missing/non-missing elements
 }
 \examples{
 if (require(NHANES) && require(mosaic)) {

@@ -15,6 +15,8 @@ withClass <- function(object, class, add=TRUE) {
 #' @param signif.stars a logical indicating whether to display stars to
 #'   indicate significance
 #' @param ... additional arguments
+#' @importFrom stats printCoefmat
+#' @importFrom utils capture.output
 #' @export
 print.msummary.lm <-
   function (x, digits = max(3L, getOption("digits") - 3L),

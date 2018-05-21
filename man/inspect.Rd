@@ -52,6 +52,8 @@ Print a short summary of the contents of an object.  Most useful as a way to
 get a quick overview of the variables in data frame.
 }
 \examples{
-inspect(Births78)
-inspect(Births78, is.numeric)
+if (require(mosaicData)) {
+  inspect(Births78)
+  inspect(Births78, is.numeric)
+}
 }

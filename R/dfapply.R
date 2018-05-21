@@ -16,12 +16,14 @@
 #' [inspect()]
 #'
 #' @examples
-#' dfapply(iris, favstats, select = is.numeric)
-#' dfapply(iris, favstats, select = c(TRUE, TRUE, FALSE, FALSE, FALSE))
-#' dfapply(iris, favstats, select = c(1,2))
-#' dfapply(iris, favstats, select = c("Sepal.Length", "Petal.Length"))
-#' dfapply(HELPrct, table, select = is.factor)
-#' do.call(rbind, dfapply(HELPrct, favstats, select = is.numeric))
+#' dfapply(iris, mean, select = is.numeric)
+#' dfapply(iris, mosaic::favstats, select = c(TRUE, TRUE, FALSE, FALSE, FALSE))
+#' dfapply(iris, mean, select = c(1,2))
+#' dfapply(iris, mean, select = c("Sepal.Length", "Petal.Length"))
+#' if (require(mosaicData)) {
+#'   dfapply(HELPrct, table, select = is.factor)
+#'   do.call(rbind, dfapply(HELPrct, mean, select = is.numeric))
+#' }
 #' @export
 
 dfapply <-

@@ -130,10 +130,6 @@ df_stats( hp ~ cyl + gear, data = mtcars, mean, median, range)
 df_stats( hp ~ cyl | gear, data = mtcars, mean, median, range)
 df_stats( hp ~ cyl, groups = gear, data = mtcars, mean, median, range)
 
-# magrittr style piping is also supported
-mtcars \%>\%
-  df_stats(hp ~ cyl, mean, median, range)
-
 # because the result is a data frame, df_stats() is also useful for creating plots
 if(require(ggformula)) {
   gf_violin(hp ~ cyl, data = mtcars, group = ~ cyl) \%>\%
@@ -142,6 +138,16 @@ if(require(ggformula)) {
   gf_point(median_hp ~ cyl, data = df_stats(hp ~ cyl, data = mtcars, median),
     color = ~"median") \%>\%
   gf_labs(color = "")
+}
+
+# magrittr style piping is also supported
+if (require(ggformula)) {
+  mtcars \%>\%
+    df_stats(hp ~ cyl, mean, median, range)
+  mtcars \%>\%
+    df_stats(hp ~ cyl + gear, mean, median, range) \%>\%
+    gf_point(mean_hp ~ cyl, color = ~ factor(gear)) \%>\%
+    gf_line(mean_hp ~ cyl, color = ~ factor(gear))
 }
 
 # can be used with a categorical response, too

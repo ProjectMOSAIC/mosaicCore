@@ -15,14 +15,18 @@
 #'
 #' @export
 #' @examples
-#' inspect(Births78)
-#' inspect(Births78, is.numeric)
+#' if (require(mosaicData)) {
+#'   inspect(Births78)
+#'   inspect(Births78, is.numeric)
+#' }
 
 inspect <- function(object, ...) {
   UseMethod("inspect")
 }
 
 #' @rdname inspect
+#' @importFrom utils str
+
 #' @export
 inspect.list <- function(object, max.level = 2, ...) {
   str(object, max.level = max.level, ...)
@@ -31,21 +35,21 @@ inspect.list <- function(object, max.level = 2, ...) {
 #' @rdname inspect
 #' @export
 inspect.character <- function(object, ...) {
-  inspect(factor(object)) %>% mutate(class = "character")
+  inspect(factor(object)) %>% dplyr::mutate(class = "character")
 }
 
 #' @rdname inspect
 #' @export
 inspect.logical <- function(object, ...) {
-  inspect(as.character(object, ...)) %>% mutate(class = "logical")
+  inspect(as.character(object, ...)) %>% dplyr::mutate(class = "logical")
 }
 
 #' @rdname inspect
 #' @export
 inspect.numeric <- function(object, ...) {
-  bind_cols(
+  dplyr::bind_cols(
     data_frame(class = head(class(object),1)),
-    favstats(object, ...)
+    mosaic::favstats(object, ...)
   )
 }
 
@@ -96,7 +100,7 @@ inspect.data.frame <- function(object, select = TRUE, digits = getOption("digits
   for (class in uclasses) {
     idx <- which(classes == class)
     res[[class]] <-
-      bind_cols(data_frame(name = names(L[idx])), bind_rows(L[idx]))
+      dplyr::bind_cols(data_frame(name = names(L[idx])), dplyr::bind_rows(L[idx]))
   }
 
   structure(res, class = "inspected_data_frame", digits = digits)

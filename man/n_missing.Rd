@@ -15,7 +15,7 @@ n_missing(..., type = c("any", "all"))
 counting missing elements
 }
 \examples{
-if (require(NHANES)) {
+if (require(NHANES) && require(mosaic)) {
   tally( ~ is.na(Height) + is.na(Weight), data = NHANES, margins = TRUE)
   NHANES \%>\%
     summarise(

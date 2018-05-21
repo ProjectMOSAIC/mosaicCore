@@ -25,12 +25,12 @@
 #' x <- cumsum(cumsum(1:10))
 #' ediff(x, lag = 2)
 #' ediff(x, differences = 2)
-#' ediff(x, differences = 2, pad="symmetric")
+#' ediff(x, differences = 2, pad = "symmetric")
 #' ediff(.leap.seconds)
-#' if (require(mosaicData)) {
-#' Men <- subset(SwimRecords, sex=="M")
-#' Men <- mutate(Men, change=ediff(time), interval=ediff(year))
-#' head(Men)
+#' if (require(mosaic)) {
+#'   Men <- subset(SwimRecords, sex == "M")
+#'   Men <- mutate(Men, change = ediff(time), interval = ediff(year))
+#'   head(Men)
 #' }
 #' @export
 

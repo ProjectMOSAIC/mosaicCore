@@ -16,6 +16,7 @@ Suggests:
     mosaicData,
     mosaic,
     ggformula,
+    NHANES,
     testthat
 Author: Randall Pruim <rpruim@calvin.edu>, Daniel T. Kaplan
     <kaplan@macalester.edu>, Nicholas J. Horton <nhorton@amherst.edu>

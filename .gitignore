@@ -26,3 +26,4 @@ vignettes/*.pdf
 mosaicCore.Rproj
 revdep/checks
 revdep/library
+/revdep/.cache.rds

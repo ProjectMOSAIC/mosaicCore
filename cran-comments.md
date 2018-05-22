@@ -9,3 +9,8 @@
 
 This is a minor update that adds one new function.
 
+## Reverse Dependencies
+
+Checked with `devtools::revdep_check()`.  There is a NOTE regarding `mosaic`, but 
+that should go away with the upate to `mosaic` (coming essentialy simultaneously 
+with this one).

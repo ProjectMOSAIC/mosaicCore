@@ -1,6 +1,7 @@
 
 # mosaicCore 0.5
 
+
 * **breaking change:** Naming conventions for `prop()` and `df_stats()` have
 been adjusted somewhat.  While this has the potential to break old code that
 relied on the names, the new system is clearer, supports a wider range of
@@ -8,6 +9,11 @@ applications, and fixes a bug.
 
 * A `counts()` method for factors has been added.  This method includes counts
 of 0 for levels that do not occur.
+
+* Formulas in `df_stats()` are preprosessed so that `I()` is now seldom (if ever) 
+needed when doing on-the-fly calculations.
+
+* Added `n_not_missing()` and `n_total()` similar to `n_missing()`.
 
 * Added `ci.mean()`, `ci.median()`, `ci.prop()`, and `ci.sd()` for computing confidence intervals.
 

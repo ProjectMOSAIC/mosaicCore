@@ -24,6 +24,4 @@ vignettes/*.pdf
 *.knit.md
 .Rproj.user
 mosaicCore.Rproj
-revdep/checks
-revdep/library
-/revdep/.cache.rds
+revdep/

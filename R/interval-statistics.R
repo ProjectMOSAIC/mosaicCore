@@ -62,7 +62,7 @@
 #' @rdname interval_statistics
 #' @export
 coverage <- function(x, level = 0.95, na.rm = TRUE) {
-  if (! is.numeric(x)) stop("The variable x must be quantitative.")
+  x <- as.numeric(x)
   level <- check.level(level)
   bottom = (1 - level) / 2
   top = 1 - bottom
@@ -77,7 +77,7 @@ coverage <- function(x, level = 0.95, na.rm = TRUE) {
 #' @rdname interval_statistics
 #' @export
 ci.mean <- function(x, level = 0.95, na.rm = TRUE) {
-  if (! is.numeric(x)) stop("The variable x must be quantitative.")
+  x <- as.numeric(x)
   level <- check.level(level)
 
   n <- length(x)
@@ -95,7 +95,7 @@ ci.mean <- function(x, level = 0.95, na.rm = TRUE) {
 #' @rdname interval_statistics
 #' @export
 ci.median <- function(x, level = 0.9, na.rm = TRUE) {
-  if (! is.numeric(x)) stop("The variable x must be quantitative.")
+  x <- as.numeric(x)
   level <- check.level(level)
   x <- sort(x)
   n <- length(x)
@@ -112,7 +112,7 @@ ci.median <- function(x, level = 0.9, na.rm = TRUE) {
 #' @rdname interval_statistics
 #' @export
 ci.sd <- function(x, level = 0.95, na.rm = TRUE) {
-  if (! is.numeric(x)) stop("The variable x must be quantitative.")
+  x <- as.numeric(x)
   level <- check.level(level)
   n <- length(x)
   bottom <- (1 - level) / 2

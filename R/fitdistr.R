@@ -36,7 +36,14 @@ fit_distr_fun <- function(data, formula, dist, start = NULL, ... ) {
 
   x <- rlang::eval_tidy(formula[[2]], data = data)
 
+  # since pois and ppois both start with p, a little hack...
+  if (grepl("^pois", dist_name)) { dist_name <- "dpois" }
+
   ddist_name <- sub("^[pdqr]", "d", dist_name)
+  if (! grepl("^d", ddist_name)) {
+    ddist_name <- paste0("d", ddist_name)
+    dist_name <- paste0("d", dist_name)
+  }
   params <- analytic_fit_distr(x, ddist_name)
 
   # print(c(dist_name = dist_name))
@@ -150,7 +157,9 @@ analytic_fit_distr <- function(x, distname) {
 
 get_start_params <- function(x, distname, ...) {
   dots <- list(...)
-  start <- list()
+  # some distributions don't accept starting parameters.
+  # set default value to NULL to handle those.
+  start <- NULL
   if (distname == "dweibull") {
     if (any(x <= 0))
       stop("Weibull values must be > 0")

@@ -12,10 +12,11 @@ NA
 #' @param data A data frame.
 #' @param formula A formula.  A distribution will be fit to the data defined by the
 #' right side and evaluated in `data`.
-#' @param dist A distribution function or the equivalent character string
-#' for the family desired,  e.g., `pnorm`, `rgamma`. (see MASS:fitdistr for the
-#' distributions that are available)
-#' what format the generated function should take.
+#' @param dist A string naming the function desired.  Tyically this will be
+#'   "d", "p", "q", or "r" followed by the (abbrevation for) a family of
+#'   distributions such as "pnorm", "rgamma". Fitting is done use
+#'   [`MASS::fitdistr()`]; see the help there for a list of distributions that
+#'   are available.
 #' @param start Starting values for the numerical maximum likelihood method
 #' (passed to `MASS::fitdistr`).
 #' @param ... Additional arguments to MASS::fitdistr()
@@ -26,6 +27,11 @@ NA
 #' @export
 #' @importFrom MASS fitdistr
 #' @importFrom rlang enquo eval_tidy expr_text
+#' @examples
+#'
+#' fit_distr_fun( ~ cesd, data = mosaicData::HELPrct, dist = "dnorm")
+#' fit_distr_fun( ~ cesd, data = mosaicData::HELPrct, dist = "pnorm")
+#' fit_distr_fun( ~ cesd, data = mosaicData::HELPrct, dist = "qpois")
 
 fit_distr_fun <- function(data, formula, dist, start = NULL, ... ) {
 

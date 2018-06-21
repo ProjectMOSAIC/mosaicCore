@@ -12,10 +12,11 @@ fit_distr_fun(data, formula, dist, start = NULL, ...)
 \item{formula}{A formula.  A distribution will be fit to the data defined by the
 right side and evaluated in \code{data}.}
 
-\item{dist}{A distribution function or the equivalent character string
-for the family desired,  e.g., \code{pnorm}, \code{rgamma}. (see MASS:fitdistr for the
-distributions that are available)
-what format the generated function should take.}
+\item{dist}{A string naming the function desired.  Tyically this will be
+"d", "p", "q", or "r" followed by the (abbrevation for) a family of
+distributions such as "pnorm", "rgamma". Fitting is done use
+\code{\link[MASS:fitdistr]{MASS::fitdistr()}}; see the help there for a list of distributions that
+are available.}
 
 \item{start}{Starting values for the numerical maximum likelihood method
 (passed to \code{MASS::fitdistr}).}
@@ -32,4 +33,10 @@ Given the name of a family of 1-dimensional distributions, this function chooses
 particular member  of the family that fits the data and returns a function in the
 selected p, d, q, or r format. When analytical solutions do not exist, \code{MASS::fitdistr()}
 is used to estimate the parameters by numerical maximum likelihood.
+}
+\examples{
+
+fit_distr_fun( ~ cesd, data = mosaicData::HELPrct, dist = "dnorm")
+fit_distr_fun( ~ cesd, data = mosaicData::HELPrct, dist = "pnorm")
+fit_distr_fun( ~ cesd, data = mosaicData::HELPrct, dist = "qpois")
 }

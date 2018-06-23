@@ -7,6 +7,7 @@
 \alias{inspect.logical}
 \alias{inspect.numeric}
 \alias{inspect.factor}
+\alias{inspect.Date}
 \alias{inspect.POSIXt}
 \alias{inspect.data.frame}
 \alias{print.inspected_data_frame}
@@ -23,6 +24,8 @@ inspect(object, ...)
 \method{inspect}{numeric}(object, ...)
 
 \method{inspect}{factor}(object, ...)
+
+\method{inspect}{Date}(object, ...)
 
 \method{inspect}{POSIXt}(object, ...)
 

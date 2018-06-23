@@ -1,16 +1,22 @@
 ## Test environments
 
-* local OS X install, R version 3.4.2 (2017-09-28)
+* local
+
+  * R version 3.5.0 (2018-04-23)
+  * Platform: x86_64-apple-darwin15.6.0 (64-bit)
+  * Running under: macOS High Sierra 10.13.5
+
 * win-builder
 
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
 
-This is a minor update that adds one new function.
+This is a minor update, but part of a plan to submit several packages in the mosaic suite. 
 
 ## Reverse Dependencies
 
-Checked with `devtools::revdep_check()`.  There is a NOTE regarding `mosaic`, but 
-that should go away with the upate to `mosaic` (coming essentialy simultaneously 
-with this one).
+Checked with `devtools::revdep_check()`.  There is an error in `ggformula`, but
+that should go away when `ggformula` is submitted.  (`ggformula` builds and checks
+cleanly on my system.)
+

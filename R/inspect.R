@@ -75,6 +75,20 @@ inspect.factor <- function(object, ...) {
 
 #' @rdname inspect
 #' @export
+inspect.Date <- function(object, ...) {
+  data_frame(
+    class = head(class(object), 1),
+    first = min(object),
+    last = max(object),
+    min_diff = min(diff(sort(object))),
+    max_diff = max(diff(sort(object))),
+    n = length(object) - n_missing(object),
+    missing = n_missing(object)
+  )
+}
+
+#' @rdname inspect
+#' @export
 inspect.POSIXt <- function(object, ...) {
   data_frame(
     class = head(class(object),1),

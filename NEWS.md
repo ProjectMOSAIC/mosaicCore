@@ -1,6 +1,12 @@
 
-# mosaicCore 0.5
+# mosaicCore 0.6
 
+* API for for `fit_distr_fun()` relaxed a small amount.
+* `ci.mean()`, `ci.median()`, etc. now coerce inputs to numeric rather than
+throwing an error when they are not.
+* 
+  
+# mosaicCore 0.5
 
 * **breaking change:** Naming conventions for `prop()` and `df_stats()` have
 been adjusted somewhat.  While this has the potential to break old code that

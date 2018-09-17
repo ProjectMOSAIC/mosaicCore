@@ -157,7 +157,7 @@ tally.data.frame <- function(x, wt, sort=FALSE, ..., envir=parent.frame()) {
 #' @rdname tally
 #' @export
 tally.formula <-
-  function(x, data = parent.frame(2),
+  function(x, data = parent.frame(),
            format=c('count', 'proportion', 'percent', 'data.frame', 'sparse', 'default'),
            margins=FALSE,
            quiet=TRUE,
@@ -227,7 +227,7 @@ tally.default <-
            quiet=TRUE,
            subset,
            useNA = "ifany",
-           data = parent.frame(2),
+           data = parent.frame(),
            ...) {
     D <- data_frame(X = x)
     tally(

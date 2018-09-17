@@ -11,12 +11,13 @@ tally(x, ...)
 
 \method{tally}{tbl}(x, wt, sort = FALSE, ..., envir = parent.frame())
 
-\method{tally}{data.frame}(x, wt, sort = FALSE, ..., envir = parent.frame())
+\method{tally}{data.frame}(x, wt, sort = FALSE, ...,
+  envir = parent.frame())
 
-\method{tally}{formula}(x, data = parent.frame(2), format = c("count",
+\method{tally}{formula}(x, data = parent.frame(), format = c("count",
   "proportion", "percent", "data.frame", "sparse", "default"),
-  margins = FALSE, quiet = TRUE, subset, groups = NULL, useNA = "ifany",
-  groups.first = FALSE, ...)
+  margins = FALSE, quiet = TRUE, subset, groups = NULL,
+  useNA = "ifany", groups.first = FALSE, ...)
 }
 \arguments{
 \item{x}{an object}

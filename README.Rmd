@@ -1,0 +1,29 @@
+--
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# mosaicCore
+
+mosaicCore provides functions used in or exported from other mosaic-family
+packages.  While it is possible to load this package in isolation, it will most
+often be imported from other packages.
+
+## Installation
+
+You can install mosaicCore from github with:
+
+```{r gh-installation, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("ProjectMOSAIC/mosaicCore")
+```
+

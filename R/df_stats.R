@@ -233,7 +233,8 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   # res <- lapply(res, function(x) data.frame(lapply(data.frame(x$x), unlist)))
 
   res0 <- res
-  res1 <- lapply(res, function(x) make_df(x$x))
+  # reference by position -- last column -- to avoid bug when x is one of the grouping vars
+  res1 <- lapply(res, function(x) make_df(x[[dim(x)[2]]]))
   res <- res1
 
   # extract result names from data frames just created.

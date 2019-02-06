@@ -304,7 +304,11 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
 
   # return the appropriate format
   if (format == "long") {
-    res %>% tidyr::gather(stat, value, !! -(1:d))
+    if (one_group) {
+      res %>% tidyr::gather(stat, value)
+    } else {
+      res %>% tidyr::gather(stat, value, !! -(1:d))
+    }
   } else {
     res
   }

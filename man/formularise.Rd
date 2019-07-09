@@ -23,8 +23,9 @@ result is not a formula, then the formula is created with an empty left hand sid
 and the expression on the right hand side.
 }
 \examples{
-formularise(lazyeval::lazy(foo))
-formularise(lazyeval::lazy(y ~ x))
+
+formularise(rlang::quo(foo))
+formularise(rlang::quo(y ~ x))
 bar <- a ~ b
-formularise(lazyeval::lazy(bar))
+formularise(rlang::quo(bar))
 }

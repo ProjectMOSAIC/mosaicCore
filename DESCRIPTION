@@ -7,7 +7,6 @@ Depends:
 Imports:
     stats,
     dplyr,
-    lazyeval,
     rlang,
     tidyr,
     MASS

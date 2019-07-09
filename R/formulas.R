@@ -1,8 +1,5 @@
-#' @importFrom lazyeval lazy
-NA
-
 #' Convert formulas into standard shapes
-#'
+#' 
 #' These functions convert formulas into standard shapes, including by
 #' incorporating a groups argument.
 #' @rdname mosaicformula
@@ -60,10 +57,11 @@ mosaic_formula <- function(
 #' and the expression on the right hand side.
 #'
 #' @examples
-#' formularise(lazyeval::lazy(foo))
-#' formularise(lazyeval::lazy(y ~ x))
+#' 
+#' formularise(rlang::quo(foo))
+#' formularise(rlang::quo(y ~ x))
 #' bar <- a ~ b
-#' formularise(lazyeval::lazy(bar))
+#' formularise(rlang::quo(bar))
 #' @export
 
 formularise <- function(lazy_formula, envir = parent.frame()) {
@@ -90,7 +88,7 @@ mosaic_formula_q <- function( formula,
                               groups.first = FALSE,
                               ...
 ) {
-  lazy_groups <- lazyeval::lazy(groups)
+  lazy_groups <- rlang::quo(groups)
 
   slots <- alist()
   if (groups.first) {

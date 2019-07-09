@@ -377,14 +377,14 @@ count <- function(x, ...) {
 
 #' @export
 count.data.frame <- function(x, ..., wt = NULL, sort = FALSE) {
-  vars <- lazyeval::lazy_dots(...)
+  vars <- rlang::dots_list(...)
   wt <- substitute(wt)
   dplyr::count_(x, vars, wt, sort = sort)
 }
 
 #' @export
 count.tbl <- function(x, ..., wt = NULL, sort = FALSE) {
-  vars <- lazyeval::lazy_dots(...)
+  vars <- rlang::dots_list(...)
   wt <- substitute(wt)
   dplyr::count_(x, vars, wt, sort = sort)
 }

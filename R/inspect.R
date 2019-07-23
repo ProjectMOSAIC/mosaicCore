@@ -48,7 +48,7 @@ inspect.logical <- function(object, ...) {
 #' @export
 inspect.numeric <- function(object, ...) {
   dplyr::bind_cols(
-    data_frame(class = head(class(object),1)),
+    dplyr::tibble(class = head(class(object),1)),
     mosaic::favstats(object, ...)
   )
 }
@@ -64,7 +64,7 @@ inspect.factor <- function(object, ...) {
   if (length(idx) < length(p)) popular <- paste(popular, "...")
   popular <- sprintf("%-45s", popular)
 
-  data_frame(
+  dplyr::tibble(
     class = head(class(object),1),
     levels = length(levels(object)),
     n = length(object) - n_missing(object),
@@ -76,7 +76,7 @@ inspect.factor <- function(object, ...) {
 #' @rdname inspect
 #' @export
 inspect.Date <- function(object, ...) {
-  data_frame(
+  dplyr::tibble(
     class = head(class(object), 1),
     first = min(object),
     last = max(object),
@@ -90,7 +90,7 @@ inspect.Date <- function(object, ...) {
 #' @rdname inspect
 #' @export
 inspect.POSIXt <- function(object, ...) {
-  data_frame(
+  dplyr::tibble(
     class = head(class(object),1),
     first = min(object),
     last = max(object),
@@ -114,7 +114,7 @@ inspect.data.frame <- function(object, select = TRUE, digits = getOption("digits
   for (class in uclasses) {
     idx <- which(classes == class)
     res[[class]] <-
-      dplyr::bind_cols(data_frame(name = names(L[idx])), dplyr::bind_rows(L[idx]))
+      dplyr::bind_cols(dplyr::tibble(name = names(L[idx])), dplyr::bind_rows(L[idx]))
   }
 
   structure(res, class = "inspected_data_frame", digits = digits)

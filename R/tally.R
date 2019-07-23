@@ -229,7 +229,7 @@ tally.default <-
            useNA = "ifany",
            data = parent.frame(),
            ...) {
-    D <- data_frame(X = x)
+    D <- dplyr::tibble(X = x)
     tally(
       ~ X, data = D, format = format, margins = margins,
       quiet = quiet, subset = subset, useNA = useNA,
@@ -376,23 +376,31 @@ count <- function(x, ...) {
 }
 
 #' @export
-count.data.frame <- function(x, ..., wt = NULL, sort = FALSE) {
-  vars <- rlang::dots_list(...)
-  wt <- substitute(wt)
-  dplyr::count_(x, vars, wt, sort = sort)
-}
+count.data.frame <-
+  function(
+    x, ...) {
+    dplyr::count(x, ...)
+  }
+
+#' #' @export
+#' count.tbl <-
+#'   function(
+#'     x, ..., wt = NULL, sort = FALSE,
+#'     name = "n", .drop = group_by_drop_default(x)) {
+#'     # vars <- rlang::dots_list(...)
+#'     vars <- enquos(...)
+#'     # wt <- substitute(wt)
+#'     dplyr::count(x, !!! vars, wt = wt, sort = sort,
+#'                  name = name, .drop = .drop)
+#'
+#'   }
 
 #' @export
-count.tbl <- function(x, ..., wt = NULL, sort = FALSE) {
-  vars <- rlang::dots_list(...)
-  wt <- substitute(wt)
-  dplyr::count_(x, vars, wt, sort = sort)
-}
-
-#' @export
-count.default <- function(x, data = parent.frame(), ..., format="count") {
-  prop(x, data = data, ..., format = format)
-}
+count.default <-
+  function(
+    x, data = parent.frame(), ..., format="count") {
+    prop(x, data = data, ..., format = format)
+  }
 
 # count_ <- function(x, data=parent.frame(), ..., format="count") {
 #	prop(x, data=data, ..., format=format)

@@ -382,29 +382,12 @@ count.data.frame <-
     dplyr::count(x, ...)
   }
 
-#' #' @export
-#' count.tbl <-
-#'   function(
-#'     x, ..., wt = NULL, sort = FALSE,
-#'     name = "n", .drop = group_by_drop_default(x)) {
-#'     # vars <- rlang::dots_list(...)
-#'     vars <- enquos(...)
-#'     # wt <- substitute(wt)
-#'     dplyr::count(x, !!! vars, wt = wt, sort = sort,
-#'                  name = name, .drop = .drop)
-#'
-#'   }
-
 #' @export
 count.default <-
   function(
     x, data = parent.frame(), ..., format="count") {
     prop(x, data = data, ..., format = format)
   }
-
-# count_ <- function(x, data=parent.frame(), ..., format="count") {
-#	prop(x, data=data, ..., format=format)
-# }
 
 #' @rdname prop
 #' @export

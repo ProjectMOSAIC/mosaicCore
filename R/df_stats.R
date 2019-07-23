@@ -167,7 +167,7 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
                      long_names = TRUE, nice_names = FALSE,
                      na.action = "na.warn") {
 
-  qdots <- dplyr::quos(...)
+  qdots <- rlang::enquos(...)
   # dots <- rlang::exprs(...)
   format <- match.arg(format)
 

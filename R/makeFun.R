@@ -1,7 +1,7 @@
 utils::globalVariables(c('model', 'result'))
 
 #' @importFrom stats formula predict coef
-#' @importFrom dplyr data_frame
+#' @importFrom dplyr tibble
 NA
 
 

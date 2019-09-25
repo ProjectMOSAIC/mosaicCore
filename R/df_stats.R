@@ -29,7 +29,7 @@ cond2sum <- function(formula) {
 #'   is used to turn the formula into a data frame.  But first conditions and `groups`
 #'   are re-expressed into a form that [stats::model.frame()] can interpret.
 #'   Multiple response variables can be separated by `+` on the left hand side of
-#'   the formula.
+#'   the formula.  A one-sided formula `~ rhs | cond` is treated as `rhs ~ 1 | cond`.
 #'   See details.
 #' @param data A data frame or list containing the variables.
 #' @param ... Functions used to compute the statistics.  If this is empty,
@@ -191,6 +191,10 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   if ( ! inherits(data, "data.frame")) stop("second arg must be a data.frame")
 
   formula <- cond2sum(mosaic_formula_q(reop_formula(formula), groups = groups))
+
+  if (length(formula) == 2L) {
+    formula <- substitute(x ~ 1, list(x = formula[[2]]))
+  }
 
   left <- rlang::f_lhs(formula)
 

@@ -14,7 +14,7 @@ Semantics are approximately as in \code{\link[=lm]{lm()}} since \code{\link[stat
 is used to turn the formula into a data frame.  But first conditions and \code{groups}
 are re-expressed into a form that \code{\link[stats:model.frame]{stats::model.frame()}} can interpret.
 Multiple response variables can be separated by \code{+} on the left hand side of
-the formula.
+the formula.  A one-sided formula \code{~ rhs | cond} is treated as \code{rhs ~ 1 | cond}.
 See details.}
 
 \item{data}{A data frame or list containing the variables.}

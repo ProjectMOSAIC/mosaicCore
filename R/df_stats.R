@@ -16,10 +16,10 @@ cond2sum <- function(formula) {
 }
 
 
-#' Calculate statistics on a variable
+#' Calculate statistics "response" variables
 #'
-#' Creates a data frame of statistics calculated on one variable, possibly for each
-#' group formed by combinations of additional variables.
+#' Creates a data frame of statistics calculated on one or more response variables,
+#' possibly for each group formed by combinations of additional variables.
 #' The resulting data frame has one column
 #' for each of the statistics requested as well as columns for any grouping variables.
 #' @inheritParams stats::model.frame
@@ -28,6 +28,8 @@ cond2sum <- function(formula) {
 #'   Semantics are approximately as in [lm()] since [stats::model.frame()]
 #'   is used to turn the formula into a data frame.  But first conditions and `groups`
 #'   are re-expressed into a form that [stats::model.frame()] can interpret.
+#'   Multiple response variables can be separated by `+` on the left hand side of
+#'   the formula.
 #'   See details.
 #' @param data A data frame or list containing the variables.
 #' @param ... Functions used to compute the statistics.  If this is empty,
@@ -73,10 +75,11 @@ cond2sum <- function(formula) {
 #' @importFrom stats quantile
 #'
 #' @details
-#' Use a one-sided formula to compute summary statistics for the left hand side
+#' Use a one-sided formula to compute summary statistics for the right hand side
 #' expression over the entire data.
-#' Use a two-sided formula to compute summary statistics for the left hand expression
-#' for each combination of levels of the expressions occurring on the right hand side.
+#' Use a two-sided formula to compute summary statistics for the left hand (response)
+#' expression(s) for each combination of levels of the expressions occurring on the
+#' right hand side.
 #' This is most useful when the left hand side is quantitative and each expression
 #' on the right hand side has relatively few unique values.  A function like
 #' [mosaic::ntiles()] is often useful to create a few groups of roughly equal size
@@ -124,6 +127,7 @@ cond2sum <- function(formula) {
 #'   long_names = FALSE)
 #' # wide vs long format
 #' df_stats( hp ~ cyl, data = mtcars, mean, median, range)
+#' df_stats( hp + wt + mpg ~ cyl, data = mtcars, mean, median, range)
 #' df_stats( hp ~ cyl, data = mtcars, mean, median, range, format = "long")
 #' # More than one grouping variable -- 3 ways.
 #' df_stats( hp ~ cyl + gear, data = mtcars, mean, median, range)
@@ -187,6 +191,38 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   if ( ! inherits(data, "data.frame")) stop("second arg must be a data.frame")
 
   formula <- cond2sum(mosaic_formula_q(reop_formula(formula), groups = groups))
+
+  left <- rlang::f_lhs(formula)
+
+  if (length(left) > 1 && left[[1]] == "+") {
+    long_names <- FALSE
+    lefts <- parse_call(left)
+    formulas <-
+      lapply(
+        lefts,
+        function(x) {
+          my_form <- substitute(L ~ R, list(L = x, R = rlang::f_rhs(formula)))
+          class(my_form) <- "formula"
+          my_form
+        }
+      )
+    res <-
+    lapply(
+      formulas,
+      function(f) {
+        df_stats(f, data, ..., drop = drop,
+                 fargs = fargs, sep = sep, format = format,
+                 groups = groups, long_names = long_names,
+                 nice_names = nice_names, na.action = na.action)
+        #   dplyr::mutate(`_response_` = deparse(rlang::f_lhs(f)))
+        # res <- dplyr::select(res,  `_response_`, names(res))
+        # if (! "response" %in% names(data)) {
+        #   res <- dplyr::rename(res, response = `_response_`)
+        # }
+      }
+    )
+    return(bind_rows(res))
+  }
 
   if (identical(na.action, "na.warn")) na.action <- na.warn
 
@@ -301,6 +337,15 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
     res <- res[, -1, drop = FALSE]
   }
   row.names(res) <- NULL
+
+  res <-
+    res %>%
+    dplyr::mutate(`_response_` = deparse(rlang::f_lhs(formula))) %>%
+    dplyr::select(`_response_`, names(res))
+
+  if (! "response" %in% names(data)) {
+    res <- dplyr::rename(res, response = `_response_`)
+  }
 
 
   # return the appropriate format

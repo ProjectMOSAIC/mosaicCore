@@ -2,7 +2,7 @@
 % Please edit documentation in R/df_stats.R
 \name{df_stats}
 \alias{df_stats}
-\title{Calculate statistics on a variable}
+\title{Calculate statistics "response" variables}
 \usage{
 df_stats(formula, data, ..., drop = TRUE, fargs = list(), sep = "_",
   format = c("wide", "long"), groups = NULL, long_names = TRUE,
@@ -13,6 +13,8 @@ df_stats(formula, data, ..., drop = TRUE, fargs = list(), sep = "_",
 Semantics are approximately as in \code{\link[=lm]{lm()}} since \code{\link[stats:model.frame]{stats::model.frame()}}
 is used to turn the formula into a data frame.  But first conditions and \code{groups}
 are re-expressed into a form that \code{\link[stats:model.frame]{stats::model.frame()}} can interpret.
+Multiple response variables can be separated by \code{+} on the left hand side of
+the formula.
 See details.}
 
 \item{data}{A data frame or list containing the variables.}
@@ -77,16 +79,17 @@ returned by the summarizing function.
 See the examples.
 }
 \description{
-Creates a data frame of statistics calculated on one variable, possibly for each
-group formed by combinations of additional variables.
+Creates a data frame of statistics calculated on one or more response variables,
+possibly for each group formed by combinations of additional variables.
 The resulting data frame has one column
 for each of the statistics requested as well as columns for any grouping variables.
 }
 \details{
-Use a one-sided formula to compute summary statistics for the left hand side
+Use a one-sided formula to compute summary statistics for the right hand side
 expression over the entire data.
-Use a two-sided formula to compute summary statistics for the left hand expression
-for each combination of levels of the expressions occurring on the right hand side.
+Use a two-sided formula to compute summary statistics for the left hand (response)
+expression(s) for each combination of levels of the expressions occurring on the
+right hand side.
 This is most useful when the left hand side is quantitative and each expression
 on the right hand side has relatively few unique values.  A function like
 \code{\link[mosaic:ntiles]{mosaic::ntiles()}} is often useful to create a few groups of roughly equal size
@@ -124,6 +127,7 @@ df_stats( ~ hp, data = mtcars, mean, trimmed_mean = mean(trim = 0.1), "median", 
   long_names = FALSE)
 # wide vs long format
 df_stats( hp ~ cyl, data = mtcars, mean, median, range)
+df_stats( hp + wt + mpg ~ cyl, data = mtcars, mean, median, range)
 df_stats( hp ~ cyl, data = mtcars, mean, median, range, format = "long")
 # More than one grouping variable -- 3 ways.
 df_stats( hp ~ cyl + gear, data = mtcars, mean, median, range)

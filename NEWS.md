@@ -1,4 +1,8 @@
 
+# mosaicCore 0.7
+
+* `df_stats()` has been updated to handle multiple response variables on the LHS.
+
 # mosaicCore 0.6
 
 * API for for `fit_distr_fun()` relaxed a small amount.

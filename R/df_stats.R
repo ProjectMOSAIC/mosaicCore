@@ -198,9 +198,19 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
 
   left <- rlang::f_lhs(formula)
 
-  if (length(left) > 1 && left[[1]] == "+") {
+  if (left == "." || (length(left) > 1 && left[[1]] == "+")) {
+    if (left == ".") {
+      # create lefts as list of names in data but not on rhs
+      lefts <-
+        setdiff(
+          names(data),
+          sapply(parse_call(rlang::f_rhs(formula)), deparse)
+      )
+      lefts <- lapply(lefts, as.name)
+    } else { # ie,  if (length(left) > 1 && left[[1]] == "+") {
+      lefts <- parse_call(left)
+    }
     long_names <- FALSE
-    lefts <- parse_call(left)
     formulas <-
       lapply(
         lefts,
@@ -211,20 +221,20 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
         }
       )
     res <-
-    lapply(
-      formulas,
-      function(f) {
-        df_stats(f, data, ..., drop = drop,
-                 fargs = fargs, sep = sep, format = format,
-                 groups = groups, long_names = long_names,
-                 nice_names = nice_names, na.action = na.action)
-        #   dplyr::mutate(`_response_` = deparse(rlang::f_lhs(f)))
-        # res <- dplyr::select(res,  `_response_`, names(res))
-        # if (! "response" %in% names(data)) {
-        #   res <- dplyr::rename(res, response = `_response_`)
-        # }
-      }
-    )
+      lapply(
+        formulas,
+        function(f) {
+          df_stats(f, data, ..., drop = drop,
+                   fargs = fargs, sep = sep, format = format,
+                   groups = groups, long_names = long_names,
+                   nice_names = nice_names, na.action = na.action)
+          #   dplyr::mutate(`_response_` = deparse(rlang::f_lhs(f)))
+          # res <- dplyr::select(res,  `_response_`, names(res))
+          # if (! "response" %in% names(data)) {
+          #   res <- dplyr::rename(res, response = `_response_`)
+          # }
+        }
+      )
     return(bind_rows(res))
   }
 

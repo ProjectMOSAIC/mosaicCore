@@ -344,11 +344,11 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
 
   res <-
     res %>%
-    dplyr::mutate(`_response_` = deparse(rlang::f_lhs(formula))) %>%
-    dplyr::select(`_response_`, names(res))
+    dplyr::mutate(`response_var_` = deparse(rlang::f_lhs(formula))) %>%
+    dplyr::select(`response_var_`, names(res))
 
-  if (! "response" %in% names(data)) {
-    res <- dplyr::rename(res, response = `_response_`)
+  if (! "response" %in% names(res)) {
+    res <- dplyr::rename(res, response = `response_var_`)
   }
 
 

@@ -15,7 +15,7 @@ parse_call <- function(x) {
   if (x[[1]] == "+") {
     return(
       c(
-        foo(x[[2]]),
+        parse_call(x[[2]]),
         list(x[[length(x)]])
       )
     )

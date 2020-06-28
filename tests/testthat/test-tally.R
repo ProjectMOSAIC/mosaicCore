@@ -83,8 +83,11 @@ test_that("... passes through to table()", {
 context('Count Expansion')
 
 test_that("Count works", {
-  expect_equal(count( ~sex | substance, data=HELPrct), c(n_female.alcohol = 36L, n_female.cocaine = 41L, n_female.heroin = 30L)) 
-  expect_equal(mosaicCore::count( HELPrct, sort =TRUE), structure(list(n = 453L), class = c("tbl_df", "tbl", "data.frame"
-  ), row.names = c(NA, -1L))
+  expect_equal(
+    count( ~sex | substance, data = mosaicData::HELPrct),
+    c(n_female.alcohol = 36L, n_female.cocaine = 41L, n_female.heroin = 30L))
+  expect_equal(
+    mosaicCore::count( mosaicData::HELPrct, sort =TRUE),
+    data.frame(n = 453L)
   )
 })

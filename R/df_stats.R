@@ -3,7 +3,7 @@
 #' @importFrom rlang is_character f_rhs eval_tidy quos
 #' @importFrom stats as.formula na.exclude
 NA
-utils::globalVariables(c("stat", "value"))
+utils::globalVariables(c("stat", "value", "response_var_"))
 
 
 # crude way to convert | to + in formulas
@@ -327,10 +327,7 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
     ifelse(sapply(res_names, is.null), "", res_names)
   alt_res_names <- lapply(ncols, function(nc) if (nc > 1) format(1:nc) else "")
   part3 <-
-    mapply(
-      function(r, a) { if (is.null(r) || r == "") a else r },
-      res_names, alt_res_names
-    )
+    ifelse(res_names == "", alt_res_names, res_names)
   part3 <- unlist(part3)
 
   # paste it all together
@@ -354,11 +351,11 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
 
   res <-
     res %>%
-    dplyr::mutate(`response_var_` = deparse(rlang::f_lhs(formula))) %>%
-    dplyr::select(`response_var_`, names(res))
+    dplyr::mutate(response_var_ = deparse(rlang::f_lhs(formula))) %>%
+    dplyr::select(response_var_, names(res))
 
   if (! "response" %in% names(res)) {
-    res <- dplyr::rename(res, response = `response_var_`)
+    res <- dplyr::rename(res, response = response_var_)
   }
 
 

@@ -4,12 +4,12 @@ context('df_stats()')
 
 test_that("favstats works", {
   expect_equivalent(
-    df_stats(~ cesd, data = mosaicData::HELPmiss),
+    df_stats(~ cesd, data = mosaicData::HELPmiss)[, -1],
     mosaic::favstats(~ cesd, data = mosaicData::HELPmiss)
   )
-  # df_stats makes first column a factor, favstats() does not
+  # df_stats makes first non-response column a factor, favstats() does not
   expect_equivalent(
-    df_stats(cesd ~ sex, data = mosaicData::HELPmiss)[, -1],
+    df_stats(cesd ~ sex, data = mosaicData::HELPmiss)[, -c(1,2)],
     mosaic::favstats(cesd ~ sex, data = mosaicData::HELPmiss)[, -1]
   )
 })
@@ -45,31 +45,31 @@ test_that("always get a data frame with simple vectors as columns", {
 test_that("naming works", {
   expect_equivalent(
     names(df_stats(~ substance, data = mosaicData::HELPmiss, prop())),
-    c("prop_alcohol"))
+    c("response", "prop_alcohol"))
   expect_equivalent(
     names(df_stats(substance ~ sex, data = mosaicData::HELPmiss, prop())),
-    c("sex", "prop_alcohol"))
+    c("response", "sex", "prop_alcohol"))
   expect_equivalent(
     names(df_stats(~ cesd, data = mosaicData::HELPmiss)),
-    c("min", "Q1", "median", "Q3", "max", "mean", "sd", "n", "missing"))
+    c("response", "min", "Q1", "median", "Q3", "max", "mean", "sd", "n", "missing"))
   expect_equivalent(
     names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss)),
-    c("sex", "min", "Q1", "median", "Q3", "max", "mean", "sd", "n", "missing"))
+    c("response", "sex", "min", "Q1", "median", "Q3", "max", "mean", "sd", "n", "missing"))
   expect_equivalent(
     names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss, mean)),
-    c("sex", "mean_cesd"))
+    c("response", "sex", "mean_cesd"))
   expect_equivalent(
     names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss, A = mean, median)),
-    c("sex", "A", "median_cesd"))
+    c("response", "sex", "A", "median_cesd"))
   expect_equivalent(
     names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss, A = range, median)),
-    c("sex", "A_1", "A_2", "median_cesd"))
+    c("response", "sex", "A_1", "A_2", "median_cesd"))
   expect_equivalent(
     names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss, range)),
-    c("sex", "range_cesd_1", "range_cesd_2"))
+    c("response", "sex", "range_cesd_1", "range_cesd_2"))
   expect_equivalent(
     names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss, range, long_names = FALSE)),
-    c("sex", "range_1", "range_2"))
+    c("response", "sex", "range_1", "range_2"))
 })
 
 test_that("mean works", {

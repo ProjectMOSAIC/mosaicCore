@@ -9,13 +9,21 @@
 \alias{msummary.glm}
 \title{Modified summaries}
 \usage{
-\method{print}{msummary.lm}(x, digits = max(3L, getOption("digits") -
-  3L), symbolic.cor = x$symbolic.cor,
-  signif.stars = getOption("show.signif.stars"), ...)
+\method{print}{msummary.lm}(
+  x,
+  digits = max(3L, getOption("digits") - 3L),
+  symbolic.cor = x$symbolic.cor,
+  signif.stars = getOption("show.signif.stars"),
+  ...
+)
 
-\method{print}{msummary.glm}(x, digits = max(3L, getOption("digits") -
-  3L), symbolic.cor = x$symbolic.cor,
-  signif.stars = getOption("show.signif.stars"), ...)
+\method{print}{msummary.glm}(
+  x,
+  digits = max(3L, getOption("digits") - 3L),
+  symbolic.cor = x$symbolic.cor,
+  signif.stars = getOption("show.signif.stars"),
+  ...
+)
 
 msummary(object, ...)
 

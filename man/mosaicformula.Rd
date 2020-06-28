@@ -5,11 +5,21 @@
 \alias{mosaic_formula_q}
 \title{Convert formulas into standard shapes}
 \usage{
-mosaic_formula(formula, groups = NULL, envir = parent.frame(),
-  max.slots = 3, groups.first = FALSE)
+mosaic_formula(
+  formula,
+  groups = NULL,
+  envir = parent.frame(),
+  max.slots = 3,
+  groups.first = FALSE
+)
 
-mosaic_formula_q(formula, groups = NULL, max.slots = 3,
-  groups.first = FALSE, ...)
+mosaic_formula_q(
+  formula,
+  groups = NULL,
+  max.slots = 3,
+  groups.first = FALSE,
+  ...
+)
 }
 \arguments{
 \item{formula}{a formula}

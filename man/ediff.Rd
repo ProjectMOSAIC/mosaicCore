@@ -4,8 +4,15 @@
 \alias{ediff}
 \title{Lagged Differences with equal length}
 \usage{
-ediff(x, lag = 1, differences = 1, pad = c("head", "tail",
-  "symmetric"), pad.value = NA, frontPad, ...)
+ediff(
+  x,
+  lag = 1,
+  differences = 1,
+  pad = c("head", "tail", "symmetric"),
+  pad.value = NA,
+  frontPad,
+  ...
+)
 }
 \arguments{
 \item{x}{a numeric vector or a matrix containing the values to be differenced}

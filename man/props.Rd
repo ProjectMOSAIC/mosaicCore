@@ -11,11 +11,9 @@
 \usage{
 counts(x, ...)
 
-\method{counts}{factor}(x, ..., format = c("count", "proportion",
-  "percent"))
+\method{counts}{factor}(x, ..., format = c("count", "proportion", "percent"))
 
-\method{counts}{default}(x, ..., format = c("count", "proportion",
-  "percent"))
+\method{counts}{default}(x, ..., format = c("count", "proportion", "percent"))
 
 \method{counts}{formula}(x, data, ..., format = "count")
 

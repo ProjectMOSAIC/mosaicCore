@@ -4,8 +4,7 @@
 \alias{evalSubFormula}
 \title{Evaluate a part of a formula}
 \usage{
-evalSubFormula(x, data = NULL, ops = c("+", "&"),
-  env = parent.frame())
+evalSubFormula(x, data = NULL, ops = c("+", "&"), env = parent.frame())
 }
 \arguments{
 \item{x}{an object appearing as a subformula (typically a name or a call)}

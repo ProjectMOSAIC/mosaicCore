@@ -29,8 +29,7 @@ inspect(object, ...)
 
 \method{inspect}{POSIXt}(object, ...)
 
-\method{inspect}{data.frame}(object, select = TRUE,
-  digits = getOption("digits", 3), ...)
+\method{inspect}{data.frame}(object, select = TRUE, digits = getOption("digits", 3), ...)
 
 \method{print}{inspected_data_frame}(x, digits = NULL, ...)
 }

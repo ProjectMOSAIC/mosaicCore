@@ -17,9 +17,13 @@ ci.median(x, level = 0.9, na.rm = TRUE)
 
 ci.sd(x, level = 0.95, na.rm = TRUE)
 
-ci.prop(x, success = NULL, level = 0.95,
-  method = c("Clopper-Pearson", "binom.test", "Score", "Wilson",
-  "prop.test", "Wald", "Agresti-Coull", "Plus4"))
+ci.prop(
+  x,
+  success = NULL,
+  level = 0.95,
+  method = c("Clopper-Pearson", "binom.test", "Score", "Wilson", "prop.test", "Wald",
+    "Agresti-Coull", "Plus4")
+)
 }
 \arguments{
 \item{x}{a variable.}

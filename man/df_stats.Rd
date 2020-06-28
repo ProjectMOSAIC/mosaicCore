@@ -4,9 +4,19 @@
 \alias{df_stats}
 \title{Calculate statistics "response" variables}
 \usage{
-df_stats(formula, data, ..., drop = TRUE, fargs = list(), sep = "_",
-  format = c("wide", "long"), groups = NULL, long_names = TRUE,
-  nice_names = FALSE, na.action = "na.warn")
+df_stats(
+  formula,
+  data,
+  ...,
+  drop = TRUE,
+  fargs = list(),
+  sep = "_",
+  format = c("wide", "long"),
+  groups = NULL,
+  long_names = TRUE,
+  nice_names = FALSE,
+  na.action = "na.warn"
+)
 }
 \arguments{
 \item{formula}{A formula indicating which variables are to be used.

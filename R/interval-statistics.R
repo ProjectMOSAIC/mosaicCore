@@ -46,7 +46,6 @@
 #'
 #' @seealso [mosaicCore::df_stats()], [mosaic::binom.test()], [mosaic::t.test()]
 #'
-#' @rdname intervals
 #' @aliases coverage ci.mean ci.median ci.sd ci.prop
 #'
 #' @examples
@@ -59,7 +58,6 @@
 #' # Use without `df_stats()` (rare)
 #' ci.mean(mtcars$hp)
 #'
-#' @rdname interval_statistics
 #' @export
 coverage <- function(x, level = 0.95, na.rm = TRUE) {
   x <- as.numeric(x)

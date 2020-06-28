@@ -11,16 +11,25 @@
 \usage{
 makeFun(object, ...)
 
-\method{makeFun}{function}(object, ..., strict.declaration = TRUE,
-  use.environment = TRUE, suppress.warnings = FALSE)
+\method{makeFun}{`function`}(
+  object,
+  ...,
+  strict.declaration = TRUE,
+  use.environment = TRUE,
+  suppress.warnings = FALSE
+)
 
-\method{makeFun}{formula}(object, ..., strict.declaration = TRUE,
-  use.environment = TRUE, suppress.warnings = TRUE)
+\method{makeFun}{formula}(
+  object,
+  ...,
+  strict.declaration = TRUE,
+  use.environment = TRUE,
+  suppress.warnings = TRUE
+)
 
 \method{makeFun}{lm}(object, ..., transformation = NULL)
 
-\method{makeFun}{glm}(object, ..., type = c("response", "link"),
-  transformation = NULL)
+\method{makeFun}{glm}(object, ..., type = c("response", "link"), transformation = NULL)
 
 \method{makeFun}{nls}(object, ..., transformation = NULL)
 }

@@ -5,7 +5,7 @@
 \alias{coef}
 \title{Extract coefficients from a function}
 \usage{
-\method{coef}{function}(object, ...)
+\method{coef}{`function`}(object, ...)
 }
 \arguments{
 \item{object}{a function}

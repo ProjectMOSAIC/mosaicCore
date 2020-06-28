@@ -7,10 +7,19 @@
 \alias{perc}
 \title{Compute proportions, percents, or counts for a single level}
 \usage{
-prop(x, data = parent.frame(), useNA = "no", ..., success = NULL,
-  level = NULL, long.names = TRUE, sep = ".",
-  format = c("proportion", "percent", "count"), quiet = TRUE,
-  pval.adjust = FALSE)
+prop(
+  x,
+  data = parent.frame(),
+  useNA = "no",
+  ...,
+  success = NULL,
+  level = NULL,
+  long.names = TRUE,
+  sep = ".",
+  format = c("proportion", "percent", "count"),
+  quiet = TRUE,
+  pval.adjust = FALSE
+)
 
 prop1(..., pval.adjust = TRUE)
 

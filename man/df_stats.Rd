@@ -2,7 +2,7 @@
 % Please edit documentation in R/df_stats.R
 \name{df_stats}
 \alias{df_stats}
-\title{Calculate statistics "response" variables}
+\title{Calculate statistics for "response" variables}
 \usage{
 df_stats(
   formula,
@@ -13,7 +13,7 @@ df_stats(
   sep = "_",
   format = c("wide", "long"),
   groups = NULL,
-  long_names = TRUE,
+  long_names = FALSE,
   nice_names = FALSE,
   na.action = "na.warn"
 )
@@ -56,7 +56,7 @@ you don't want separation.}
 \item{format}{One of \code{"long"} or \code{"wide"} indicating the desired shape of the
 returned data frame.}
 
-\item{groups}{An expression to be evaluated in \code{data} and defining (additional) groups.
+\item{groups}{An expression or formula to be evaluated in \code{data} and defining (additional) groups.
 This isn't necessary, since these can be placed into the formula, but it is provided
 for similarity to other functions from the \pkg{mosaic} package.}
 
@@ -92,7 +92,8 @@ See the examples.
 Creates a data frame of statistics calculated on one or more response variables,
 possibly for each group formed by combinations of additional variables.
 The resulting data frame has one column
-for each of the statistics requested as well as columns for any grouping variables.
+for each of the statistics requested as well as columns for any grouping variables and a
+column identifying the response variable for which the statistics was calculated.
 }
 \details{
 Use a one-sided formula to compute summary statistics for the right hand side
@@ -127,29 +128,30 @@ df_stats( ~ hp, data = mtcars)
 # There are several ways to specify functions
 df_stats( ~ hp, data = mtcars, mean, trimmed_mean = mean(trim = 0.1), "median",
   range, Q = quantile(c(0.25, 0.75)))
-# When using ::, be sure to include parents, even if there are no additional arguments.
+# When using ::, be sure to include parens, even if there are no additional arguments.
 df_stats( ~ hp, data = mtcars, mean = base::mean(), trimmed_mean = base::mean(trim = 0.1))
 
 # force names to by syntactically valid
 df_stats( ~ hp, data = mtcars, Q = quantile(c(0.25, 0.75)), nice_names = TRUE)
-# shorter names
+# longer names
 df_stats( ~ hp, data = mtcars, mean, trimmed_mean = mean(trim = 0.1), "median", range,
-  long_names = FALSE)
+  long_names = TRUE)
 # wide vs long format
 df_stats( hp ~ cyl, data = mtcars, mean, median, range)
 df_stats( hp + wt + mpg ~ cyl, data = mtcars, mean, median, range)
 df_stats( hp ~ cyl, data = mtcars, mean, median, range, format = "long")
-# More than one grouping variable -- 3 ways.
+# More than one grouping variable -- 4 ways.
 df_stats( hp ~ cyl + gear, data = mtcars, mean, median, range)
 df_stats( hp ~ cyl | gear, data = mtcars, mean, median, range)
+df_stats( hp ~ cyl, groups = ~gear, data = mtcars, mean, median, range)
 df_stats( hp ~ cyl, groups = gear, data = mtcars, mean, median, range)
 
 # because the result is a data frame, df_stats() is also useful for creating plots
 if(require(ggformula)) {
   gf_violin(hp ~ cyl, data = mtcars, group = ~ cyl) \%>\%
-  gf_point(mean_hp ~ cyl, data = df_stats(hp ~ cyl, data = mtcars, mean),
+  gf_point(mean ~ cyl, data = df_stats(hp ~ cyl, data = mtcars, mean),
     color = ~ "mean") \%>\%
-  gf_point(median_hp ~ cyl, data = df_stats(hp ~ cyl, data = mtcars, median),
+  gf_point(median ~ cyl, data = df_stats(hp ~ cyl, data = mtcars, median),
     color = ~"median") \%>\%
   gf_labs(color = "")
 }
@@ -160,8 +162,8 @@ if (require(ggformula)) {
     df_stats(hp ~ cyl, mean, median, range)
   mtcars \%>\%
     df_stats(hp ~ cyl + gear, mean, median, range) \%>\%
-    gf_point(mean_hp ~ cyl, color = ~ factor(gear)) \%>\%
-    gf_line(mean_hp ~ cyl, color = ~ factor(gear))
+    gf_point(mean ~ cyl, color = ~ factor(gear)) \%>\%
+    gf_line(mean ~ cyl, color = ~ factor(gear))
 }
 
 # can be used with a categorical response, too

@@ -124,9 +124,9 @@ cond2sum <- function(formula) {
 #'
 #' # force names to by syntactically valid
 #' df_stats( ~ hp, data = mtcars, Q = quantile(c(0.25, 0.75)), nice_names = TRUE)
-#' # shorter names
+#' # longer names
 #' df_stats( ~ hp, data = mtcars, mean, trimmed_mean = mean(trim = 0.1), "median", range,
-#'   long_names = FALSE)
+#'   long_names = TRUE)
 #' # wide vs long format
 #' df_stats( hp ~ cyl, data = mtcars, mean, median, range)
 #' df_stats( hp + wt + mpg ~ cyl, data = mtcars, mean, median, range)
@@ -140,9 +140,9 @@ cond2sum <- function(formula) {
 #' # because the result is a data frame, df_stats() is also useful for creating plots
 #' if(require(ggformula)) {
 #'   gf_violin(hp ~ cyl, data = mtcars, group = ~ cyl) %>%
-#'   gf_point(mean_hp ~ cyl, data = df_stats(hp ~ cyl, data = mtcars, mean),
+#'   gf_point(mean ~ cyl, data = df_stats(hp ~ cyl, data = mtcars, mean),
 #'     color = ~ "mean") %>%
-#'   gf_point(median_hp ~ cyl, data = df_stats(hp ~ cyl, data = mtcars, median),
+#'   gf_point(median ~ cyl, data = df_stats(hp ~ cyl, data = mtcars, median),
 #'     color = ~"median") %>%
 #'   gf_labs(color = "")
 #' }
@@ -153,8 +153,8 @@ cond2sum <- function(formula) {
 #'     df_stats(hp ~ cyl, mean, median, range)
 #'   mtcars %>%
 #'     df_stats(hp ~ cyl + gear, mean, median, range) %>%
-#'     gf_point(mean_hp ~ cyl, color = ~ factor(gear)) %>%
-#'     gf_line(mean_hp ~ cyl, color = ~ factor(gear))
+#'     gf_point(mean ~ cyl, color = ~ factor(gear)) %>%
+#'     gf_line(mean ~ cyl, color = ~ factor(gear))
 #' }
 #'
 #' # can be used with a categorical response, too
@@ -171,7 +171,7 @@ cond2sum <- function(formula) {
 df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
                      sep = "_",
                      format = c("wide", "long"), groups = NULL,
-                     long_names = TRUE, nice_names = FALSE,
+                     long_names = FALSE, nice_names = FALSE,
                      na.action = "na.warn") {
 
   qdots <- rlang::enquos(...)

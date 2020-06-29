@@ -57,16 +57,16 @@ test_that("naming works", {
     c("response", "sex", "min", "Q1", "median", "Q3", "max", "mean", "sd", "n", "missing"))
   expect_equivalent(
     names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss, mean)),
-    c("response", "sex", "mean_cesd"))
+    c("response", "sex", "mean"))
   expect_equivalent(
     names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss, A = mean, median)),
-    c("response", "sex", "A", "median_cesd"))
+    c("response", "sex", "A", "median"))
   expect_equivalent(
     names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss, A = range, median)),
-    c("response", "sex", "A_1", "A_2", "median_cesd"))
+    c("response", "sex", "A_1", "A_2", "median"))
   expect_equivalent(
     names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss, range)),
-    c("response", "sex", "range_cesd_1", "range_cesd_2"))
+    c("response", "sex", "range_1", "range_2"))
   expect_equivalent(
     names(df_stats(~ cesd | sex, data = mosaicData::HELPmiss, range, long_names = FALSE)),
     c("response", "sex", "range_1", "range_2"))
@@ -74,11 +74,11 @@ test_that("naming works", {
 
 test_that("mean works", {
   expect_equivalent(
-    df_stats(~ cesd, data = mosaicData::HELPmiss, mean)[, "mean_cesd"],
+    df_stats(~ cesd, data = mosaicData::HELPmiss, mean)[, "mean"],
     mean( mosaicData::HELPmiss$cesd, na.rm = TRUE)
   )
   expect_equivalent(
-      df_stats(cesd ~ substance, data = mosaicData::HELPmiss, mean)[, "mean_cesd"],
+      df_stats(cesd ~ substance, data = mosaicData::HELPmiss, mean)[, "mean"],
       sapply(c("alcohol", "cocaine", "heroin", "missing"), function(s)
         mean( subset(mosaicData::HELPmiss$cesd, mosaicData::HELPmiss$substance == s), na.rm = TRUE)
       )

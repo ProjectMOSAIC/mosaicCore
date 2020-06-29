@@ -16,12 +16,14 @@ cond2sum <- function(formula) {
 }
 
 
-#' Calculate statistics "response" variables
+#' Calculate statistics for "response" variables
 #'
 #' Creates a data frame of statistics calculated on one or more response variables,
 #' possibly for each group formed by combinations of additional variables.
 #' The resulting data frame has one column
-#' for each of the statistics requested as well as columns for any grouping variables.
+#' for each of the statistics requested as well as columns for any grouping variables and a
+#' column identifying the response variable for which the statistics was calculated.
+#'
 #' @inheritParams stats::model.frame
 #'
 #' @param formula A formula indicating which variables are to be used.
@@ -47,7 +49,7 @@ cond2sum <- function(formula) {
 #'   If a function is specified using `::`, be sure to include the trailing
 #'   parens, even if there are no additional arguments required.
 #'
-#' @param groups An expression to be evaluated in `data` and defining (additional) groups.
+#' @param groups An expression or formula to be evaluated in `data` and defining (additional) groups.
 #'   This isn't necessary, since these can be placed into the formula, but it is provided
 #'   for similarity to other functions from the \pkg{mosaic} package.
 #' @param drop A logical indicating whether combinations of the grouping
@@ -117,7 +119,7 @@ cond2sum <- function(formula) {
 #' # There are several ways to specify functions
 #' df_stats( ~ hp, data = mtcars, mean, trimmed_mean = mean(trim = 0.1), "median",
 #'   range, Q = quantile(c(0.25, 0.75)))
-#' # When using ::, be sure to include parents, even if there are no additional arguments.
+#' # When using ::, be sure to include parens, even if there are no additional arguments.
 #' df_stats( ~ hp, data = mtcars, mean = base::mean(), trimmed_mean = base::mean(trim = 0.1))
 #'
 #' # force names to by syntactically valid
@@ -129,9 +131,10 @@ cond2sum <- function(formula) {
 #' df_stats( hp ~ cyl, data = mtcars, mean, median, range)
 #' df_stats( hp + wt + mpg ~ cyl, data = mtcars, mean, median, range)
 #' df_stats( hp ~ cyl, data = mtcars, mean, median, range, format = "long")
-#' # More than one grouping variable -- 3 ways.
+#' # More than one grouping variable -- 4 ways.
 #' df_stats( hp ~ cyl + gear, data = mtcars, mean, median, range)
 #' df_stats( hp ~ cyl | gear, data = mtcars, mean, median, range)
+#' df_stats( hp ~ cyl, groups = ~gear, data = mtcars, mean, median, range)
 #' df_stats( hp ~ cyl, groups = gear, data = mtcars, mean, median, range)
 #'
 #' # because the result is a data frame, df_stats() is also useful for creating plots

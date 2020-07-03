@@ -85,3 +85,14 @@ test_that("mean works", {
     )
 })
 
+test_that("formulas can be used to specify groups.", {
+  expect_equivalent(
+      df_stats(cesd ~ substance, data = mosaicData::HELPmiss, mean),
+      df_stats( ~ cesd, groups =  ~ substance, data = mosaicData::HELPmiss, mean)
+  )
+  expect_equivalent(
+      df_stats(cesd ~ substance, groups = sex, data = mosaicData::HELPmiss, mean),
+      df_stats(cesd ~ substance, groups = ~ sex, data = mosaicData::HELPmiss, mean)
+  )
+})
+

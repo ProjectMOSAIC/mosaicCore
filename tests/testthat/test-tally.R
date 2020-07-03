@@ -80,6 +80,17 @@ test_that("... passes through to table()", {
   expect_equivalent( tally(~x[1:6], useNA='always'), table(x[1:6], useNA = "always") )
 })
 
+test_that("formulas work for groups", {
+  expect_equivalent(
+    tally(sex ~ homeless, groups = substance, data = mosaicData::HELPrct),
+    tally(sex ~ homeless, groups = ~ substance, data = mosaicData::HELPrct)
+  )
+  expect_equivalent(
+    tally(~ homeless, groups = substance, data = mosaicData::HELPrct),
+    tally(~ homeless, groups = ~ substance, data = mosaicData::HELPrct)
+  )
+})
+
 context('Count Expansion')
 
 test_that("Count works", {

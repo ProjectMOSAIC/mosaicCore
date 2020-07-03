@@ -32,10 +32,10 @@ tally(x, ...)
 \item{...}{additional arguments passed to \code{\link[=table]{table()}}}
 
 \item{wt}{for weighted tallying,
-see \code{\link[dplyr:tally]{dplyr::tally()}} in \pkg{dplyr}}
+see \code{\link[dplyr:count]{dplyr::tally()}} in \pkg{dplyr}}
 
 \item{sort}{a logical,
-see \code{\link[dplyr:tally]{dplyr::tally()}} in \pkg{dplyr}}
+see \code{\link[dplyr:count]{dplyr::tally()}} in \pkg{dplyr}}
 
 \item{envir}{an environment in which to evaluate}
 
@@ -80,9 +80,9 @@ or converted to a data frame because \code{format} is \code{"data.frame"} or
 Tabulate categorical data
 }
 \details{
-The \pkg{dplyr} package also exports a \code{\link[dplyr:tally]{dplyr::tally()}} function.
+The \pkg{dplyr} package also exports a \code{\link[dplyr:count]{dplyr::tally()}} function.
 If \code{x} inherits from class \code{"tbl"} or \code{"data frame"},
-then \pkg{dplyr}'s \code{\link[dplyr:tally]{dplyr::tally()}} is called.  This makes it
+then \pkg{dplyr}'s \code{\link[dplyr:count]{dplyr::tally()}} is called.  This makes it
 easier to have the two packages coexist.
 
 Otherwise, \code{tally()} is designed as an alternative to \code{\link[=table]{table()}} and

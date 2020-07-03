@@ -53,7 +53,7 @@ if (require(mosaicData)) {
 
 }
 \seealso{
-\code{\link[mosaic:prop]{mosaic::prop()}}
+\code{\link[mosaic:reexports]{mosaic::prop()}}
 
-\code{\link[mosaic:count]{mosaic::count()}}
+\code{\link[mosaic:reexports]{mosaic::count()}}
 }

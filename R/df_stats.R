@@ -6,6 +6,30 @@ NA
 utils::globalVariables(c("stat", "value", "response_var_"))
 
 
+
+#' Return rhs of a formula or expression
+#'
+#' Return rhs of a formula or expression
+#'
+#' @param x A formula or some other object to be quoted
+#'
+#' @examples
+#' # This should evaluate to TRUE
+#' rhs_or_expr(~z)
+#' rhs_or_expr(z)
+#' identical(rhs_or_expr(~z), rhs_or_expr(z))
+
+#' @importFrom rlang is_formula f_rhs
+#' @export
+
+rhs_or_expr <- function(x) {
+  e <- enexpr(x)
+  if (rlang::is_formula(e)) {
+    return(rlang::f_rhs(e))
+  }
+  return(e)
+}
+
 # crude way to convert | to + in formulas
 
 cond2sum <- function(formula) {
@@ -165,7 +189,7 @@ cond2sum <- function(formula) {
 #'   df_stats(sex ~ substance, data = HELPrct, table, props)
 #' }
 #' @export
-#' @importFrom rlang eval_tidy exprs expr quos new_quosure
+#' @importFrom rlang eval_tidy exprs expr quos new_quosure enexpr !!
 #' @importFrom stats model.frame aggregate
 #'
 df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
@@ -193,7 +217,7 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   if ( ! inherits(formula, "formula")) stop("first arg must be a formula")
   if ( ! inherits(data, "data.frame")) stop("second arg must be a data.frame")
 
-  formula <- cond2sum(mosaic_formula_q(reop_formula(formula), groups = groups))
+  formula <- cond2sum(mosaic_formula_q(reop_formula(formula), groups = !!rlang::enexpr(groups)))
 
   if (length(formula) == 2L) {
     formula <- substitute(x ~ 1, list(x = formula[[2]]))
@@ -229,7 +253,7 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
         function(f) {
           df_stats(f, data, ..., drop = drop,
                    fargs = fargs, sep = sep, format = format,
-                   groups = groups, long_names = long_names,
+                   # groups = !!enexpr(groups), long_names = long_names,
                    nice_names = nice_names, na.action = na.action)
           #   dplyr::mutate(`_response_` = deparse(rlang::f_lhs(f)))
           # res <- dplyr::select(res,  `_response_`, names(res))

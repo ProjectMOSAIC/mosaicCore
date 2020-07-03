@@ -79,6 +79,6 @@ ci.mean(mtcars$hp)
 
 }
 \seealso{
-\code{\link[mosaicCore:df_stats]{mosaicCore::df_stats()}}, \code{\link[mosaic:binom.test]{mosaic::binom.test()}}, \code{\link[mosaic:t.test]{mosaic::t.test()}}
+\code{\link[=df_stats]{df_stats()}}, \code{\link[mosaic:binom.test]{mosaic::binom.test()}}, \code{\link[mosaic:ttest]{mosaic::t.test()}}
 }
 \keyword{stats}

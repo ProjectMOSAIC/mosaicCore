@@ -168,7 +168,7 @@ tally.formula <-
            ...) {
     format <- match.arg(format)
     formula_orig <- x
-    formula <- mosaic_formula_q(x, groups = groups, max.slots = 3, groups.first = groups.first)
+    formula <- mosaic_formula_q(x, groups = !!rlang::enexpr(groups), max.slots = 3, groups.first = groups.first)
     evalF <- evalFormula(formula, data)
 
     if (!missing(subset)) {

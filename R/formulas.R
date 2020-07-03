@@ -1,5 +1,5 @@
 #' Convert formulas into standard shapes
-#' 
+#'
 #' These functions convert formulas into standard shapes, including by
 #' incorporating a groups argument.
 #' @rdname mosaicformula
@@ -39,7 +39,7 @@ mosaic_formula <- function(
 {
   mosaic_formula_q(
     formula=formula,
-    groups=quote(groups),
+    groups=rlang::enexpr(groups),
     envir=envir,
     max.slots=max.slots,
     groups.first = groups.first)
@@ -57,7 +57,7 @@ mosaic_formula <- function(
 #' and the expression on the right hand side.
 #'
 #' @examples
-#' 
+#'
 #' formularise(rlang::quo(foo))
 #' formularise(rlang::quo(y ~ x))
 #' bar <- a ~ b
@@ -78,8 +78,10 @@ formularise <- function(lazy_formula, envir = parent.frame()) {
 }
 
 
+
 #' @rdname mosaicformula
 #' @param ... additional arguments (currently ignored)
+#' @importFrom rlang enexpr !!
 #' @export
 mosaic_formula_q <- function( formula,
                               groups = NULL,
@@ -88,17 +90,15 @@ mosaic_formula_q <- function( formula,
                               groups.first = FALSE,
                               ...
 ) {
-  lazy_groups <- rlang::quo(groups)
-
   slots <- alist()
   if (groups.first) {
     slots <- c(slots,
                lhs(formula), rhs(formula),
-               lazy_groups$expr, condition(formula))
+               rhs_or_expr(!!rlang::enexpr(groups)), condition(formula))
   } else {
     slots <- c(slots,
                lhs(formula), rhs(formula),
-               condition(formula), lazy_groups$expr)
+               condition(formula), rhs_or_expr(!!enexpr(groups)))
   }
 
   if (length(slots) > max.slots) {

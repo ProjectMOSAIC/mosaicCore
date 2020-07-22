@@ -24,8 +24,8 @@ a vector of counts of missing or non-missing values.
 Counting missing/non-missing elements
 }
 \examples{
-if (require(NHANES) && require(mosaic)) {
-  tally( ~ is.na(Height) + is.na(Weight), data = NHANES, margins = TRUE)
+if (require(NHANES) && require(mosaic) && require(dplyr)) {
+  mosaic::tally( ~ is.na(Height) + is.na(Weight), data = NHANES, margins = TRUE)
   NHANES \%>\%
     summarise(
       mean.wt = mean(Weight, na.rm = TRUE),

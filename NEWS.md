@@ -2,6 +2,8 @@
 # mosaicCore 0.7
 
 * `df_stats()` has been updated to handle multiple response variables on the LHS.
+* some internal changes to improve use of rlang
+* minor bug fixes
 
 # mosaicCore 0.6
 

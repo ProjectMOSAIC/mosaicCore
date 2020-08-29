@@ -48,8 +48,6 @@ cond2sum <- function(formula) {
 #' for each of the statistics requested as well as columns for any grouping variables and a
 #' column identifying the response variable for which the statistics was calculated.
 #'
-#' @inheritParams stats::model.frame
-#'
 #' @param formula A formula indicating which variables are to be used.
 #'   Semantics are approximately as in [lm()] since [stats::model.frame()]
 #'   is used to turn the formula into a data frame.  But first conditions and `groups`

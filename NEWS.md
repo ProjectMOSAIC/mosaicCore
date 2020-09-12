@@ -1,16 +1,16 @@
 
-# mosaicCore 0.7
+# mosaicCore 0.8
 
 * `df_stats()` has been updated to handle multiple response variables on the LHS.
 * some internal changes to improve use of rlang
 * minor bug fixes
+* some updates to documenation and examples
 
 # mosaicCore 0.6
 
 * API for for `fit_distr_fun()` relaxed a small amount.
 * `ci.mean()`, `ci.median()`, etc. now coerce inputs to numeric rather than
 throwing an error when they are not.
-* 
   
 # mosaicCore 0.5
 

@@ -15,7 +15,7 @@ compare(x, y, verbose = FALSE)
 This wrapper around \code{sign()} provides a more intuitive labeling.
 }
 \examples{
-tally( ~ compare(mcs, pcs), data = HELPrct)
-tally( ~ compare(mcs, pcs, verbose = TRUE), data = HELPrct)
-tally( ~ compare(sexrisk, drugrisk), data = HELPrct)
+tally( ~ compare(mcs, pcs), data = mosaicData::HELPrct)
+tally( ~ compare(mcs, pcs, verbose = TRUE), data = mosaicData::HELPrct)
+tally( ~ compare(sexrisk, drugrisk), data = mosaicData::HELPrct)
 }

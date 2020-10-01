@@ -4,7 +4,7 @@
 #'
 #' @param x,y numeric verctors to be compared item by item
 #' @param verbose a logical indicating whether verbose labeling is desired
-#' @value a factor with three levels (`<`, `=`, and `>` if `verbose` is `FALSE`)
+#' @return a factor with three levels (`<`, `=`, and `>` if `verbose` is `FALSE`)
 #' @export
 #' @examples
 #' tally( ~ compare(mcs, pcs), data = mosaicData::HELPrct)

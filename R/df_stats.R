@@ -298,8 +298,8 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   # extract argument names from names of list
   arg_names <- names(res)
 
-  d <- ncol(MF) - 1
-  groups <- res[[1]][, 1:d, drop = FALSE]
+  num_grouping_vars <- ncol(MF) - 1
+  groups <- res[[1]][, 1:num_grouping_vars, drop = FALSE]
 
   # res[[i]]$x can have a variety of formats depending on the function.
   # so we have to do some work to get things into our desired format (a
@@ -367,7 +367,7 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   # paste groups back in
   res <- do.call(cbind, c(list(groups), res))
 
-  names(res) <- c(names(res)[1:d], unlist(final_names))
+  names(res) <- c(names(res)[1:num_grouping_vars], unlist(final_names))
   if (nice_names) names(res) <- base::make.names(names(res), unique = TRUE)
   if (one_group) {
     res <- res[, -1, drop = FALSE]
@@ -386,11 +386,8 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
 
   # return the appropriate format
   if (format == "long") {
-    if (one_group) {
-      res %>% tidyr::gather(stat, value)
-    } else {
-      res %>% tidyr::gather(stat, value, !! -(1:d))
-    }
+    res %>%
+      tidyr::pivot_longer(names_to = "stat", values_to = "value", !! -(1:(1 + num_grouping_vars)))
   } else {
     res
   }

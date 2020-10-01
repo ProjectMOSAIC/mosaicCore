@@ -11,6 +11,9 @@ compare(x, y, verbose = FALSE)
 
 \item{verbose}{a logical indicating whether verbose labeling is desired}
 }
+\value{
+a factor with three levels (\code{<}, \code{=}, and \code{>} if \code{verbose} is \code{FALSE})
+}
 \description{
 This wrapper around \code{sign()} provides a more intuitive labeling.
 }

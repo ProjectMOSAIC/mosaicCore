@@ -1,5 +1,5 @@
 context("interval-calculations")
-library(mosaic)
+# library(mosaic)
 
 test_that("CI on quantitative variables give correct values and have right names", {
   t1 <- df_stats(~ hp, data = mtcars, mn = ci.mean, md = ci.median, sd = ci.sd, long_names = FALSE)
@@ -37,9 +37,11 @@ test_that("CI for sample proportions work.", {
 # })
 
 test_that("Alternative methods for proportion CI work", {
-  t3 <- ci.prop(mtcars$cyl == 6, method = "Plus4")
-  ref <- mosaic::binom.test(mtcars$cyl == 6, ci.method = "Plus4")
-  expect_equivalent(t3[c(1, 3)], ref$conf.int)
-  expect_equivalent(t3[2], ref$estimate)
+  if (require(mosaic)) {
+    t3 <- ci.prop(mtcars$cyl == 6, method = "Plus4")
+    ref <- mosaic::binom.test(mtcars$cyl == 6, ci.method = "Plus4")
+    expect_equivalent(t3[c(1, 3)], ref$conf.int)
+    expect_equivalent(t3[2], ref$estimate)
+  }
 })
 

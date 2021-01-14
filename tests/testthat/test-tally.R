@@ -98,7 +98,7 @@ test_that("Count works", {
     count( ~sex | substance, data = mosaicData::HELPrct),
     c(n_female.alcohol = 36L, n_female.cocaine = 41L, n_female.heroin = 30L))
   expect_equal(
-    mosaicCore::count( mosaicData::HELPrct, sort =TRUE),
+    count( mosaicData::HELPrct, sort =TRUE),
     data.frame(n = 453L)
   )
 })

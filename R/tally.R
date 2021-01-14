@@ -317,7 +317,7 @@ prop <- function(x, data=parent.frame(), useNA = "no", ...,
   format <- match.arg(format)
   if (!is.null(level)) stop("`level' has been depricated.  Use `success' instead.")
 
-  T <- mosaicCore::tally(x, data=data, useNA = useNA, ...)
+  T <- tally(x, data=data, useNA = useNA, ...)
 
   scale <- if (format == "percent") 100.0 else 1.0
 

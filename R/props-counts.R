@@ -100,7 +100,7 @@ counts.default <-
 #' @rdname props
 #' @export
 counts.formula <- function(x, data, ..., format = "count") {
-  df_stats(x, data = data, "counts", fargs = list(format = format), ...)
+  mosaicCore::df_stats(x, data = data, "counts", fargs = list(format = format), ...)
 }
 
 #' @rdname props

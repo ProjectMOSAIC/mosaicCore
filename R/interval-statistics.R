@@ -44,7 +44,7 @@
 #'
 #' @importFrom stats qbinom qchisq qnorm
 #'
-#' @seealso [df_stats()], [mosaic::binom.test()], [mosaic::t.test()]
+#' @seealso [mosaicCore::df_stats()], [mosaic::binom.test()], [mosaic::t.test()]
 #'
 #' @aliases coverage ci.mean ci.median ci.sd ci.prop
 #'

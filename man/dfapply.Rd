@@ -22,7 +22,6 @@ An \code{apply}-type function for data frames.
 }
 \examples{
 dfapply(iris, mean, select = is.numeric)
-dfapply(iris, mosaic::favstats, select = c(TRUE, TRUE, FALSE, FALSE, FALSE))
 dfapply(iris, mean, select = c(1,2))
 dfapply(iris, mean, select = c("Sepal.Length", "Petal.Length"))
 if (require(mosaicData)) {

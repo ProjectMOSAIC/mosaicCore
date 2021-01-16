@@ -2,18 +2,18 @@
 % Please edit documentation in R/tally.R
 \name{tally}
 \alias{tally}
-\alias{tally.tbl}
-\alias{tally.data.frame}
-\alias{tally.formula}
+\alias{mosaic_tally.tbl}
+\alias{mosaic_tally.data.frame}
+\alias{mosaic_tally.formula}
 \title{Tabulate categorical data}
 \usage{
 tally(x, ...)
 
-\method{tally}{tbl}(x, wt, sort = FALSE, ..., envir = parent.frame())
+\method{mosaic_tally}{tbl}(x, wt, sort = FALSE, ..., envir = parent.frame())
 
-\method{tally}{data.frame}(x, wt, sort = FALSE, ..., envir = parent.frame())
+\method{mosaic_tally}{data.frame}(x, wt, sort = FALSE, ..., envir = parent.frame())
 
-\method{tally}{formula}(
+\method{mosaic_tally}{formula}(
   x,
   data = parent.frame(),
   format = c("count", "proportion", "percent", "data.frame", "sparse", "default"),

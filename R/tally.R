@@ -125,7 +125,20 @@ logical2factor.data.frame  <- function( x, ... ) {
 #' @export
 
 tally <- function(x, ...) {
-  UseMethod("tally")
+  UseMethod("mosaic_tally")
+}
+
+
+#' Internal tally methods
+#'
+#' These are used to implement `tally()` in a way that allows {dplyr} and {mosaicCore} to co-exist.
+#' End users should call the generics `tally()` and `count()`.
+#'
+#' @rdname mosaic_tally
+#' @inheritParams tally
+#' @export
+mosaic_tally <- function(x, ...) {
+  UseMethod("mosaic_tally")
 }
 
 #' @rdname tally
@@ -135,7 +148,7 @@ tally <- function(x, ...) {
 #'   see [dplyr::tally()] in \pkg{dplyr}
 
 #' @export
-tally.tbl <- function(x, wt, sort=FALSE, ..., envir=parent.frame()) {
+mosaic_tally.tbl <- function(x, wt, sort=FALSE, ..., envir=parent.frame()) {
   if (missing(wt)) {
     return(do.call(dplyr::tally, list(x, sort=sort), envir=envir))
   } else {
@@ -146,7 +159,7 @@ tally.tbl <- function(x, wt, sort=FALSE, ..., envir=parent.frame()) {
 #' @rdname tally
 
 #' @export
-tally.data.frame <- function(x, wt, sort=FALSE, ..., envir=parent.frame()) {
+mosaic_tally.data.frame <- function(x, wt, sort=FALSE, ..., envir=parent.frame()) {
   if (missing(wt)) {
     return(do.call(dplyr::tally, list(x, sort=sort), envir=envir))
   } else {
@@ -156,7 +169,7 @@ tally.data.frame <- function(x, wt, sort=FALSE, ..., envir=parent.frame()) {
 
 #' @rdname tally
 #' @export
-tally.formula <-
+mosaic_tally.formula <-
   function(x, data = parent.frame(),
            format=c('count', 'proportion', 'percent', 'data.frame', 'sparse', 'default'),
            margins=FALSE,
@@ -221,7 +234,7 @@ tally.formula <-
   }
 
 #' @export
-tally.default <-
+mosaic_tally.default <-
   function(x, format=c('count', 'proportion', 'percent', 'data.frame', 'sparse', 'default'),
            margins=FALSE,
            quiet=TRUE,
@@ -372,18 +385,25 @@ prop1 <- function(..., pval.adjust = TRUE) {
 #' @export
 
 count <- function(x, ...) {
-  UseMethod("count")
+  UseMethod("mosaic_count")
+}
+
+#' @rdname mosaic_tally
+#' @inheritParams count
+#' @export
+mosaic_count <- function(x, ...) {
+  UseMethod("mosaic_count")
 }
 
 #' @export
-count.data.frame <-
+mosaic_count.data.frame <-
   function(
     x, ...) {
     dplyr::count(x, ...)
   }
 
 #' @export
-count.default <-
+mosaic_count.default <-
   function(
     x, data = parent.frame(), ..., format="count") {
     prop(x, data = data, ..., format = format)

@@ -6,7 +6,7 @@ Depends:
     R (>= 3.3.0)
 Imports:
     stats,
-    dplyr (>= 1.0.3),
+    dplyr,
     rlang,
     tidyr,
     MASS

@@ -75,7 +75,7 @@ is used to estimate the parameters by numerical maximum likelihood." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mosaicCore</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ is used to estimate the parameters by numerical maximum likelihood." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -97,7 +97,7 @@ is used to estimate the parameters by numerical maximum likelihood." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ProjectMOSAIC/mosaicCore/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -126,7 +126,7 @@ selected p, d, q, or r format. When analytical solutions do not exist, <code><a 
 is used to estimate the parameters by numerical maximum likelihood.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fit_distr_fun</span>(<span class='no'>data</span>, <span class='no'>formula</span>, <span class='no'>dist</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>fit_distr_fun</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>formula</span>, <span class='va'>dist</span>, start <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,13 +167,16 @@ values of the parameters set to their maximum likelihood estimates.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>fit_distr_fun</span>( ~ <span class='no'>cesd</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>mosaicData</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/mosaicData/man/HELPrct.html'>HELPrct</a></span>, <span class='kw'>dist</span> <span class='kw'>=</span> <span class='st'>"dnorm"</span>)</div><div class='output co'>#&gt; function (x, mean = 32.8476821192053, sd = 12.5006392830986, 
+<span class='fu'>fit_distr_fun</span><span class='op'>(</span> <span class='op'>~</span> <span class='va'>cesd</span>, data <span class='op'>=</span> <span class='fu'>mosaicData</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/mosaicData/man/HELPrct.html'>HELPrct</a></span>, dist <span class='op'>=</span> <span class='st'>"dnorm"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; function (x, mean = 32.8476821192053, sd = 12.5006392830986, 
 #&gt;     log = FALSE) 
 #&gt; .Call(C_dnorm, x, mean, sd, log)
-#&gt; &lt;environment: namespace:stats&gt;</div><div class='input'><span class='fu'>fit_distr_fun</span>( ~ <span class='no'>cesd</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>mosaicData</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/mosaicData/man/HELPrct.html'>HELPrct</a></span>, <span class='kw'>dist</span> <span class='kw'>=</span> <span class='st'>"pnorm"</span>)</div><div class='output co'>#&gt; function (q, mean = 32.8476821192053, sd = 12.5006392830986, 
+#&gt; &lt;environment: namespace:stats&gt;</div><div class='input'><span class='fu'>fit_distr_fun</span><span class='op'>(</span> <span class='op'>~</span> <span class='va'>cesd</span>, data <span class='op'>=</span> <span class='fu'>mosaicData</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/mosaicData/man/HELPrct.html'>HELPrct</a></span>, dist <span class='op'>=</span> <span class='st'>"pnorm"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; function (q, mean = 32.8476821192053, sd = 12.5006392830986, 
 #&gt;     lower.tail = TRUE, log.p = FALSE) 
 #&gt; .Call(C_pnorm, q, mean, sd, lower.tail, log.p)
-#&gt; &lt;environment: namespace:stats&gt;</div><div class='input'><span class='fu'>fit_distr_fun</span>( ~ <span class='no'>cesd</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>mosaicData</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/mosaicData/man/HELPrct.html'>HELPrct</a></span>, <span class='kw'>dist</span> <span class='kw'>=</span> <span class='st'>"qpois"</span>)</div><div class='output co'>#&gt; function (p, lambda = 32.8476821192053, lower.tail = TRUE, log.p = FALSE) 
+#&gt; &lt;environment: namespace:stats&gt;</div><div class='input'><span class='fu'>fit_distr_fun</span><span class='op'>(</span> <span class='op'>~</span> <span class='va'>cesd</span>, data <span class='op'>=</span> <span class='fu'>mosaicData</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/mosaicData/man/HELPrct.html'>HELPrct</a></span>, dist <span class='op'>=</span> <span class='st'>"qpois"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; function (p, lambda = 32.8476821192053, lower.tail = TRUE, log.p = FALSE) 
 #&gt; .Call(C_qpois, p, lambda, lower.tail, log.p)
 #&gt; &lt;environment: namespace:stats&gt;</div></pre>
   </div>
@@ -191,7 +194,7 @@ values of the parameters set to their maximum likelihood estimates.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mosaicCore</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -94,7 +94,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ProjectMOSAIC/mosaicCore/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -120,7 +120,7 @@
     <p>Return rhs of a formula or expression</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rhs_or_expr</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>rhs_or_expr</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -134,7 +134,10 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># This should evaluate to TRUE</span>
-<span class='fu'>rhs_or_expr</span>(~<span class='no'>z</span>)</div><div class='output co'>#&gt; z</div><div class='input'><span class='fu'>rhs_or_expr</span>(<span class='no'>z</span>)</div><div class='output co'>#&gt; z</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='fu'>rhs_or_expr</span>(~<span class='no'>z</span>), <span class='fu'>rhs_or_expr</span>(<span class='no'>z</span>))</div><div class='output co'>#&gt; [1] TRUE</div></pre>
+<span class='fu'>rhs_or_expr</span><span class='op'>(</span><span class='op'>~</span><span class='va'>z</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; z</div><div class='input'><span class='fu'>rhs_or_expr</span><span class='op'>(</span><span class='va'>z</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; z</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span><span class='op'>(</span><span class='fu'>rhs_or_expr</span><span class='op'>(</span><span class='op'>~</span><span class='va'>z</span><span class='op'>)</span>, <span class='fu'>rhs_or_expr</span><span class='op'>(</span><span class='va'>z</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -150,7 +153,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

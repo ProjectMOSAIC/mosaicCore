@@ -76,7 +76,7 @@ column identifying the response variable for which the statistics was calculated
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mosaicCore</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@ column identifying the response variable for which the statistics was calculated
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -98,7 +98,7 @@ column identifying the response variable for which the statistics was calculated
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ProjectMOSAIC/mosaicCore/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -128,19 +128,19 @@ for each of the statistics requested as well as columns for any grouping variabl
 column identifying the response variable for which the statistics was calculated.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>df_stats</span>(
-  <span class='no'>formula</span>,
-  <span class='no'>data</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>fargs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"_"</span>,
-  <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"wide"</span>, <span class='st'>"long"</span>),
-  <span class='kw'>groups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>long_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>nice_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>na.action</span> <span class='kw'>=</span> <span class='st'>"na.warn"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>df_stats</span><span class='op'>(</span>
+  <span class='va'>formula</span>,
+  <span class='va'>data</span>,
+  <span class='va'>...</span>,
+  drop <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  fargs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
+  sep <span class='op'>=</span> <span class='st'>"_"</span>,
+  format <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"wide"</span>, <span class='st'>"long"</span><span class='op'>)</span>,
+  groups <span class='op'>=</span> <span class='cn'>NULL</span>,
+  long_names <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  nice_names <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  na.action <span class='op'>=</span> <span class='st'>"na.warn"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,7 +151,7 @@ column identifying the response variable for which the statistics was calculated
 Semantics are approximately as in <code><a href='https://rdrr.io/r/stats/lm.html'>lm()</a></code> since <code><a href='https://rdrr.io/r/stats/model.frame.html'>stats::model.frame()</a></code>
 is used to turn the formula into a data frame.  But first conditions and <code>groups</code>
 are re-expressed into a form that <code><a href='https://rdrr.io/r/stats/model.frame.html'>stats::model.frame()</a></code> can interpret.
-Multiple response variables can be separated by <code>+</code> on the left hand side of
+Multiple response variables can be separated by <code><a href='https://rdrr.io/r/base/Arithmetic.html'>+</a></code> on the left hand side of
 the formula.  A one-sided formula <code>~ rhs | cond</code> is treated as <code>rhs ~ 1 | cond</code>.
 See details.</p></td>
     </tr>
@@ -172,7 +172,7 @@ examples.
 Note: If these arguments are named, those names will be used in the data
 frame returned (see details).  Such names may not be among the names of the named
 arguments of <code>df_stats</code>().</p>
-<p>If a function is specified using <code>::</code>, be sure to include the trailing
+<p>If a function is specified using <code><a href='https://rdrr.io/r/base/ns-dblcolon.html'>::</a></code>, be sure to include the trailing
 parens, even if there are no additional arguments required.</p></td>
     </tr>
     <tr>
@@ -246,7 +246,7 @@ expression(s) for each combination of levels of the expressions occurring on the
 right hand side.
 This is most useful when the left hand side is quantitative and each expression
 on the right hand side has relatively few unique values.  A function like
-<code><a href='https://rdrr.io/pkg/mosaic/man/ntiles.html'>mosaic::ntiles()</a></code> is often useful to create a few groups of roughly equal size
+<code><a href='https://projectmosaic.github.io/mosaic/reference/ntiles.html'>mosaic::ntiles()</a></code> is often useful to create a few groups of roughly equal size
 determined by ranges of a quantitative variable.  See the examples.</p>
 <p>Note that unlike <code>dplyr::<a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a>()</code>, <code>df_stats()</code> ignores
 any grouping defined in <code>data</code> if <code>data</code> is a grouped <code>tibble</code>.</p>
@@ -255,33 +255,40 @@ any grouping defined in <code>data</code> if <code>data</code> is a grouped <cod
     
 
 
-<p>The use of <code>|</code> to define groups is tricky because (a) <code><a href='https://rdrr.io/r/stats/model.frame.html'>stats::model.frame()</a></code>
-doesn't handle this sort of thing and (b) <code>|</code> is also used for logical or.  The
-current algorithm for handling this will turn the first  occurrence of <code>|</code> into an attempt
+<p>The use of <code><a href='https://rdrr.io/r/base/Logic.html'>|</a></code> to define groups is tricky because (a) <code><a href='https://rdrr.io/r/stats/model.frame.html'>stats::model.frame()</a></code>
+doesn't handle this sort of thing and (b) <code><a href='https://rdrr.io/r/base/Logic.html'>|</a></code> is also used for logical or.  The
+current algorithm for handling this will turn the first  occurrence of <code><a href='https://rdrr.io/r/base/Logic.html'>|</a></code> into an attempt
 to condition, so logical or cannot be used before conditioning in the formula.
 If you have need of logical or, we suggest creating a new variable that contains the
 results of evaluating the expression.</p>
-<p>Similarly, addition (<code>+</code>) is used to separate grouping variables, not for
+<p>Similarly, addition (<code><a href='https://rdrr.io/r/base/Arithmetic.html'>+</a></code>) is used to separate grouping variables, not for
 arithmetic.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>df_stats</span>( ~ <span class='no'>hp</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)</div><div class='output co'>#&gt;   response min   Q1 median  Q3 max     mean       sd  n missing
+    <pre class="examples"><div class='input'><span class='fu'>df_stats</span><span class='op'>(</span> <span class='op'>~</span> <span class='va'>hp</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   response min   Q1 median  Q3 max     mean       sd  n missing
 #&gt; 1       hp  52 96.5    123 180 335 146.6875 68.56287 32       0</div><div class='input'><span class='co'># There are several ways to specify functions</span>
-<span class='fu'>df_stats</span>( ~ <span class='no'>hp</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='no'>mean</span>, <span class='kw'>trimmed_mean</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='kw'>trim</span> <span class='kw'>=</span> <span class='fl'>0.1</span>), <span class='st'>"median"</span>,
-  <span class='no'>range</span>, <span class='kw'>Q</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.25</span>, <span class='fl'>0.75</span>)))</div><div class='output co'>#&gt;   response     mean trimmed_mean median range_1 range_2 Q_25% Q_75%
+<span class='fu'>df_stats</span><span class='op'>(</span> <span class='op'>~</span> <span class='va'>hp</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, <span class='va'>mean</span>, trimmed_mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span>trim <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span>, <span class='st'>"median"</span>,
+  <span class='va'>range</span>, Q <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.25</span>, <span class='fl'>0.75</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   response     mean trimmed_mean median range_1 range_2 Q_25% Q_75%
 #&gt; 1       hp 146.6875     141.1923    123      52     335  96.5   180</div><div class='input'><span class='co'># When using ::, be sure to include parens, even if there are no additional arguments.</span>
-<span class='fu'>df_stats</span>( ~ <span class='no'>hp</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>mean</span> <span class='kw'>=</span> <span class='kw pkg'>base</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(), <span class='kw'>trimmed_mean</span> <span class='kw'>=</span> <span class='kw pkg'>base</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='kw'>trim</span> <span class='kw'>=</span> <span class='fl'>0.1</span>))</div><div class='output co'>#&gt;   response     mean trimmed_mean
+<span class='fu'>df_stats</span><span class='op'>(</span> <span class='op'>~</span> <span class='va'>hp</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, mean <span class='op'>=</span> <span class='fu'>base</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='op'>)</span>, trimmed_mean <span class='op'>=</span> <span class='fu'>base</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span>trim <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   response     mean trimmed_mean
 #&gt; 1       hp 146.6875     141.1923</div><div class='input'>
 <span class='co'># force names to by syntactically valid</span>
-<span class='fu'>df_stats</span>( ~ <span class='no'>hp</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>Q</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.25</span>, <span class='fl'>0.75</span>)), <span class='kw'>nice_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   response Q_25. Q_75.
+<span class='fu'>df_stats</span><span class='op'>(</span> <span class='op'>~</span> <span class='va'>hp</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, Q <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.25</span>, <span class='fl'>0.75</span><span class='op'>)</span><span class='op'>)</span>, nice_names <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   response Q_25. Q_75.
 #&gt; 1       hp  96.5   180</div><div class='input'><span class='co'># longer names</span>
-<span class='fu'>df_stats</span>( ~ <span class='no'>hp</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='no'>mean</span>, <span class='kw'>trimmed_mean</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='kw'>trim</span> <span class='kw'>=</span> <span class='fl'>0.1</span>), <span class='st'>"median"</span>, <span class='no'>range</span>,
-  <span class='kw'>long_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   response  mean_hp trimmed_mean median_hp range_hp_1 range_hp_2
+<span class='fu'>df_stats</span><span class='op'>(</span> <span class='op'>~</span> <span class='va'>hp</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, <span class='va'>mean</span>, trimmed_mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span>trim <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span>, <span class='st'>"median"</span>, <span class='va'>range</span>,
+  long_names <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   response  mean_hp trimmed_mean median_hp range_hp_1 range_hp_2
 #&gt; 1       hp 146.6875     141.1923       123         52        335</div><div class='input'><span class='co'># wide vs long format</span>
-<span class='fu'>df_stats</span>( <span class='no'>hp</span> ~ <span class='no'>cyl</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='no'>mean</span>, <span class='no'>median</span>, <span class='no'>range</span>)</div><div class='output co'>#&gt;   response cyl      mean median range_1 range_2
+<span class='fu'>df_stats</span><span class='op'>(</span> <span class='va'>hp</span> <span class='op'>~</span> <span class='va'>cyl</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, <span class='va'>mean</span>, <span class='va'>median</span>, <span class='va'>range</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   response cyl      mean median range_1 range_2
 #&gt; 1       hp   4  82.63636   91.0      52     113
 #&gt; 2       hp   6 122.28571  110.0     105     175
-#&gt; 3       hp   8 209.21429  192.5     150     335</div><div class='input'><span class='fu'>df_stats</span>( <span class='no'>hp</span> + <span class='no'>wt</span> + <span class='no'>mpg</span> ~ <span class='no'>cyl</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='no'>mean</span>, <span class='no'>median</span>, <span class='no'>range</span>)</div><div class='output co'>#&gt;   response cyl       mean  median range_1 range_2
+#&gt; 3       hp   8 209.21429  192.5     150     335</div><div class='input'><span class='fu'>df_stats</span><span class='op'>(</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>cyl</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, <span class='va'>mean</span>, <span class='va'>median</span>, <span class='va'>range</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   response cyl       mean  median range_1 range_2
 #&gt; 1       hp   4  82.636364  91.000  52.000 113.000
 #&gt; 2       hp   6 122.285714 110.000 105.000 175.000
 #&gt; 3       hp   8 209.214286 192.500 150.000 335.000
@@ -290,23 +297,24 @@ arithmetic.</p>
 #&gt; 6       wt   8   3.999214   3.755   3.170   5.424
 #&gt; 7      mpg   4  26.663636  26.000  21.400  33.900
 #&gt; 8      mpg   6  19.742857  19.700  17.800  21.400
-#&gt; 9      mpg   8  15.100000  15.200  10.400  19.200</div><div class='input'><span class='fu'>df_stats</span>( <span class='no'>hp</span> ~ <span class='no'>cyl</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='no'>mean</span>, <span class='no'>median</span>, <span class='no'>range</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"long"</span>)</div><div class='output co'>#&gt;    response    stat     value
-#&gt; 1        hp     cyl   4.00000
-#&gt; 2        hp     cyl   6.00000
-#&gt; 3        hp     cyl   8.00000
-#&gt; 4        hp    mean  82.63636
-#&gt; 5        hp    mean 122.28571
-#&gt; 6        hp    mean 209.21429
-#&gt; 7        hp  median  91.00000
-#&gt; 8        hp  median 110.00000
-#&gt; 9        hp  median 192.50000
-#&gt; 10       hp range_1  52.00000
-#&gt; 11       hp range_1 105.00000
-#&gt; 12       hp range_1 150.00000
-#&gt; 13       hp range_2 113.00000
-#&gt; 14       hp range_2 175.00000
-#&gt; 15       hp range_2 335.00000</div><div class='input'><span class='co'># More than one grouping variable -- 4 ways.</span>
-<span class='fu'>df_stats</span>( <span class='no'>hp</span> ~ <span class='no'>cyl</span> + <span class='no'>gear</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='no'>mean</span>, <span class='no'>median</span>, <span class='no'>range</span>)</div><div class='output co'>#&gt;   response cyl gear     mean median range_1 range_2
+#&gt; 9      mpg   8  15.100000  15.200  10.400  19.200</div><div class='input'><span class='fu'>df_stats</span><span class='op'>(</span> <span class='va'>hp</span> <span class='op'>~</span> <span class='va'>cyl</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, <span class='va'>mean</span>, <span class='va'>median</span>, <span class='va'>range</span>, format <span class='op'>=</span> <span class='st'>"long"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 12 x 4</span><span>
+#&gt;    response   cyl stat    value
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> hp           4 mean     82.6
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> hp           4 median   91  
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> hp           4 range_1  52  
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> hp           4 range_2 113  
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> hp           6 mean    122. 
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> hp           6 median  110  
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> hp           6 range_1 105  
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> hp           6 range_2 175  
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> hp           8 mean    209. 
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> hp           8 median  192. 
+#&gt; </span><span style='color: #BCBCBC;'>11</span><span> hp           8 range_1 150  
+#&gt; </span><span style='color: #BCBCBC;'>12</span><span> hp           8 range_2 335  </div><div class='input'><span class='co'># More than one grouping variable -- 4 ways.</span>
+<span class='fu'>df_stats</span><span class='op'>(</span> <span class='va'>hp</span> <span class='op'>~</span> <span class='va'>cyl</span> <span class='op'>+</span> <span class='va'>gear</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, <span class='va'>mean</span>, <span class='va'>median</span>, <span class='va'>range</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   response cyl gear     mean median range_1 range_2
 #&gt; 1       hp   4    3  97.0000   97.0      97      97
 #&gt; 2       hp   6    3 107.5000  107.5     105     110
 #&gt; 3       hp   8    3 194.1667  180.0     150     245
@@ -314,7 +322,8 @@ arithmetic.</p>
 #&gt; 5       hp   6    4 116.5000  116.5     110     123
 #&gt; 6       hp   4    5 102.0000  102.0      91     113
 #&gt; 7       hp   6    5 175.0000  175.0     175     175
-#&gt; 8       hp   8    5 299.5000  299.5     264     335</div><div class='input'><span class='fu'>df_stats</span>( <span class='no'>hp</span> ~ <span class='no'>cyl</span> <span class='kw'>|</span> <span class='no'>gear</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='no'>mean</span>, <span class='no'>median</span>, <span class='no'>range</span>)</div><div class='output co'>#&gt;   response cyl gear     mean median range_1 range_2
+#&gt; 8       hp   8    5 299.5000  299.5     264     335</div><div class='input'><span class='fu'>df_stats</span><span class='op'>(</span> <span class='va'>hp</span> <span class='op'>~</span> <span class='va'>cyl</span> <span class='op'>|</span> <span class='va'>gear</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, <span class='va'>mean</span>, <span class='va'>median</span>, <span class='va'>range</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   response cyl gear     mean median range_1 range_2
 #&gt; 1       hp   4    3  97.0000   97.0      97      97
 #&gt; 2       hp   6    3 107.5000  107.5     105     110
 #&gt; 3       hp   8    3 194.1667  180.0     150     245
@@ -322,7 +331,8 @@ arithmetic.</p>
 #&gt; 5       hp   6    4 116.5000  116.5     110     123
 #&gt; 6       hp   4    5 102.0000  102.0      91     113
 #&gt; 7       hp   6    5 175.0000  175.0     175     175
-#&gt; 8       hp   8    5 299.5000  299.5     264     335</div><div class='input'><span class='fu'>df_stats</span>( <span class='no'>hp</span> ~ <span class='no'>cyl</span>, <span class='kw'>groups</span> <span class='kw'>=</span> ~<span class='no'>gear</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='no'>mean</span>, <span class='no'>median</span>, <span class='no'>range</span>)</div><div class='output co'>#&gt;   response cyl gear     mean median range_1 range_2
+#&gt; 8       hp   8    5 299.5000  299.5     264     335</div><div class='input'><span class='fu'>df_stats</span><span class='op'>(</span> <span class='va'>hp</span> <span class='op'>~</span> <span class='va'>cyl</span>, groups <span class='op'>=</span> <span class='op'>~</span><span class='va'>gear</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, <span class='va'>mean</span>, <span class='va'>median</span>, <span class='va'>range</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   response cyl gear     mean median range_1 range_2
 #&gt; 1       hp   4    3  97.0000   97.0      97      97
 #&gt; 2       hp   6    3 107.5000  107.5     105     110
 #&gt; 3       hp   8    3 194.1667  180.0     150     245
@@ -330,7 +340,8 @@ arithmetic.</p>
 #&gt; 5       hp   6    4 116.5000  116.5     110     123
 #&gt; 6       hp   4    5 102.0000  102.0      91     113
 #&gt; 7       hp   6    5 175.0000  175.0     175     175
-#&gt; 8       hp   8    5 299.5000  299.5     264     335</div><div class='input'><span class='fu'>df_stats</span>( <span class='no'>hp</span> ~ <span class='no'>cyl</span>, <span class='kw'>groups</span> <span class='kw'>=</span> <span class='no'>gear</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='no'>mean</span>, <span class='no'>median</span>, <span class='no'>range</span>)</div><div class='output co'>#&gt;   response cyl gear     mean median range_1 range_2
+#&gt; 8       hp   8    5 299.5000  299.5     264     335</div><div class='input'><span class='fu'>df_stats</span><span class='op'>(</span> <span class='va'>hp</span> <span class='op'>~</span> <span class='va'>cyl</span>, groups <span class='op'>=</span> <span class='va'>gear</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, <span class='va'>mean</span>, <span class='va'>median</span>, <span class='va'>range</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   response cyl gear     mean median range_1 range_2
 #&gt; 1       hp   4    3  97.0000   97.0      97      97
 #&gt; 2       hp   6    3 107.5000  107.5     105     110
 #&gt; 3       hp   8    3 194.1667  180.0     150     245
@@ -340,14 +351,15 @@ arithmetic.</p>
 #&gt; 7       hp   6    5 175.0000  175.0     175     175
 #&gt; 8       hp   8    5 299.5000  299.5     264     335</div><div class='input'>
 <span class='co'># because the result is a data frame, df_stats() is also useful for creating plots</span>
-<span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>ggformula</span>)) {
-  <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_violin.html'>gf_violin</a></span>(<span class='no'>hp</span> ~ <span class='no'>cyl</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>group</span> <span class='kw'>=</span> ~ <span class='no'>cyl</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_point.html'>gf_point</a></span>(<span class='no'>mean</span> ~ <span class='no'>cyl</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'>df_stats</span>(<span class='no'>hp</span> ~ <span class='no'>cyl</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='no'>mean</span>),
-    <span class='kw'>color</span> <span class='kw'>=</span> ~ <span class='st'>"mean"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_point.html'>gf_point</a></span>(<span class='no'>median</span> ~ <span class='no'>cyl</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'>df_stats</span>(<span class='no'>hp</span> ~ <span class='no'>cyl</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='no'>median</span>),
-    <span class='kw'>color</span> <span class='kw'>=</span> ~<span class='st'>"median"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_aux.html'>gf_labs</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>""</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: ggformula</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: ggplot2</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: ggstance</span></div><div class='output co'>#&gt; <span class='message'></span>
+<span class='kw'>if</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/ProjectMOSAIC/ggformula'>ggformula</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_violin.html'>gf_violin</a></span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>cyl</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, group <span class='op'>=</span> <span class='op'>~</span> <span class='va'>cyl</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_point.html'>gf_point</a></span><span class='op'>(</span><span class='va'>mean</span> <span class='op'>~</span> <span class='va'>cyl</span>, data <span class='op'>=</span> <span class='fu'>df_stats</span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>cyl</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, <span class='va'>mean</span><span class='op'>)</span>,
+    color <span class='op'>=</span> <span class='op'>~</span> <span class='st'>"mean"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_point.html'>gf_point</a></span><span class='op'>(</span><span class='va'>median</span> <span class='op'>~</span> <span class='va'>cyl</span>, data <span class='op'>=</span> <span class='fu'>df_stats</span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>cyl</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, <span class='va'>median</span><span class='op'>)</span>,
+    color <span class='op'>=</span> <span class='op'>~</span><span class='st'>"median"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_aux.html'>gf_labs</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: ggformula</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: ggplot2</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: ggstance</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘ggstance’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:ggplot2’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    geom_errorbarh, GeomErrorbarh</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: scales</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: ggridges</span></div><div class='output co'>#&gt; <span class='message'></span>
@@ -355,18 +367,20 @@ arithmetic.</p>
 #&gt; <span class='message'>	learnr::run_tutorial("introduction", package = "ggformula")</span>
 #&gt; <span class='message'>	learnr::run_tutorial("refining", package = "ggformula")</span></div><div class='img'><img src='df_stats-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># magrittr style piping is also supported</span>
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>ggformula</span>)) {
-  <span class='no'>mtcars</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>df_stats</span>(<span class='no'>hp</span> ~ <span class='no'>cyl</span>, <span class='no'>mean</span>, <span class='no'>median</span>, <span class='no'>range</span>)
-  <span class='no'>mtcars</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>df_stats</span>(<span class='no'>hp</span> ~ <span class='no'>cyl</span> + <span class='no'>gear</span>, <span class='no'>mean</span>, <span class='no'>median</span>, <span class='no'>range</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_point.html'>gf_point</a></span>(<span class='no'>mean</span> ~ <span class='no'>cyl</span>, <span class='kw'>color</span> <span class='kw'>=</span> ~ <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='no'>gear</span>)) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_line.html'>gf_line</a></span>(<span class='no'>mean</span> ~ <span class='no'>cyl</span>, <span class='kw'>color</span> <span class='kw'>=</span> ~ <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='no'>gear</span>))
-}</div><div class='img'><img src='df_stats-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/ProjectMOSAIC/ggformula'>ggformula</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>mtcars</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>df_stats</span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>cyl</span>, <span class='va'>mean</span>, <span class='va'>median</span>, <span class='va'>range</span><span class='op'>)</span>
+  <span class='va'>mtcars</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>df_stats</span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>cyl</span> <span class='op'>+</span> <span class='va'>gear</span>, <span class='va'>mean</span>, <span class='va'>median</span>, <span class='va'>range</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_point.html'>gf_point</a></span><span class='op'>(</span><span class='va'>mean</span> <span class='op'>~</span> <span class='va'>cyl</span>, color <span class='op'>=</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_line.html'>gf_line</a></span><span class='op'>(</span><span class='va'>mean</span> <span class='op'>~</span> <span class='va'>cyl</span>, color <span class='op'>=</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gear</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='img'><img src='df_stats-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># can be used with a categorical response, too</span>
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>mosaic</span>)) {
-  <span class='fu'>df_stats</span>(<span class='no'>sex</span> ~ <span class='no'>substance</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>HELPrct</span>, <span class='no'>table</span>, <span class='kw'>prop_female</span> <span class='kw'>=</span> <span class='no'>prop</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: mosaic</span></div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'mosaic':</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/ProjectMOSAIC/mosaic'>mosaic</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'>df_stats</span><span class='op'>(</span><span class='va'>sex</span> <span class='op'>~</span> <span class='va'>substance</span>, data <span class='op'>=</span> <span class='va'>HELPrct</span>, <span class='va'>table</span>, prop_female <span class='op'>=</span> <span class='va'>prop</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: mosaic</span></div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'mosaic':</span>
 #&gt; <span class='message'>  method                           from   </span>
 #&gt; <span class='message'>  fortify.SpatialPolygonsDataFrame ggplot2</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>The 'mosaic' package masks several functions from core packages in order to add </span>
@@ -379,7 +393,9 @@ arithmetic.</p>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    rescale</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:ggplot2’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    stat</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
+#&gt; <span class='message'>    stat</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:testthat’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    compare</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    binom.test, cor, cor.test, cov, fivenum, IQR, median, prop.test,</span>
 #&gt; <span class='message'>    quantile, sd, t.test, var</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
@@ -387,12 +403,13 @@ arithmetic.</p>
 #&gt; <span class='message'>    max, mean, min, prod, range, sample, sum</span></div><div class='output co'>#&gt;   response substance female male prop_female_prop_female
 #&gt; 1      sex   alcohol     36  141               0.2033898
 #&gt; 2      sex   cocaine     41  111               0.2697368
-#&gt; 3      sex    heroin     30   94               0.2419355</div><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>mosaic</span>)) {
-  <span class='fu'>df_stats</span>(<span class='no'>sex</span> ~ <span class='no'>substance</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>HELPrct</span>, <span class='no'>table</span>, <span class='no'>props</span>)
-}</div><div class='output co'>#&gt;   response substance female male prop_female prop_male
+#&gt; 3      sex    heroin     30   94               0.2419355</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/ProjectMOSAIC/mosaic'>mosaic</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'>df_stats</span><span class='op'>(</span><span class='va'>sex</span> <span class='op'>~</span> <span class='va'>substance</span>, data <span class='op'>=</span> <span class='va'>HELPrct</span>, <span class='va'>table</span>, <span class='va'>props</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt;   response substance female male prop_female prop_male
 #&gt; 1      sex   alcohol     36  141   0.2033898 0.7966102
 #&gt; 2      sex   cocaine     41  111   0.2697368 0.7302632
-#&gt; 3      sex    heroin     30   94   0.2419355 0.7580645</div></pre>
+#&gt; 3      sex    heroin     30   94   0.2419355 0.7580645</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -408,7 +425,7 @@ arithmetic.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

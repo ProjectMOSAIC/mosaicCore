@@ -73,7 +73,7 @@ functions via a formula interface." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mosaicCore</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
       </span>
     </div>
 
@@ -81,7 +81,7 @@ functions via a formula interface." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -95,7 +95,7 @@ functions via a formula interface." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ProjectMOSAIC/mosaicCore/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -122,34 +122,34 @@ functions via a formula interface." />
 functions via a formula interface.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>makeFun</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>makeFun</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for `function`</span>
-<span class='fu'>makeFun</span>(
-  <span class='no'>object</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>strict.declaration</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>use.environment</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>suppress.warnings</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)
+<span class='fu'>makeFun</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>...</span>,
+  strict.declaration <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  use.environment <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  suppress.warnings <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for formula</span>
-<span class='fu'>makeFun</span>(
-  <span class='no'>object</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>strict.declaration</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>use.environment</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>suppress.warnings</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)
+<span class='fu'>makeFun</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>...</span>,
+  strict.declaration <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  use.environment <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  suppress.warnings <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for lm</span>
-<span class='fu'>makeFun</span>(<span class='no'>object</span>, <span class='no'>...</span>, <span class='kw'>transformation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>makeFun</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span>, transformation <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
 <span class='co'># S3 method for glm</span>
-<span class='fu'>makeFun</span>(<span class='no'>object</span>, <span class='no'>...</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"response"</span>, <span class='st'>"link"</span>), <span class='kw'>transformation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>makeFun</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span>, type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"response"</span>, <span class='st'>"link"</span><span class='op'>)</span>, transformation <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
 <span class='co'># S3 method for nls</span>
-<span class='fu'>makeFun</span>(<span class='no'>object</span>, <span class='no'>...</span>, <span class='kw'>transformation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>makeFun</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span>, transformation <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -213,43 +213,50 @@ This means that having variables in the model with names that match arguments of
 <code>predict</code> will lead to potentially ambiguous situations and should be avoided.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>makeFun</span>( <span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>sin</a></span>(<span class='no'>x</span>^<span class='fl'>2</span> * <span class='no'>b</span>) ~ <span class='no'>x</span> <span class='kw'>&amp;</span> <span class='no'>y</span> <span class='kw'>&amp;</span> <span class='no'>a</span>); <span class='no'>f</span></div><div class='output co'>#&gt; function (x, y, a, b) 
+    <pre class="examples"><div class='input'><span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'>makeFun</span><span class='op'>(</span> <span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>sin</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>^</span><span class='fl'>2</span> <span class='op'>*</span> <span class='va'>b</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>x</span> <span class='op'>&amp;</span> <span class='va'>y</span> <span class='op'>&amp;</span> <span class='va'>a</span><span class='op'>)</span>; <span class='va'>f</span>
+</div><div class='output co'>#&gt; function (x, y, a, b) 
 #&gt; sin(x^2 * b)
-#&gt; &lt;environment: 0x7fa0ee2ff7b0&gt;</div><div class='input'><span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'>makeFun</span>( <span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>sin</a></span>(<span class='no'>x</span>^<span class='fl'>2</span> * <span class='no'>b</span>) ~ <span class='no'>x</span> <span class='kw'>&amp;</span> <span class='no'>y</span> <span class='kw'>&amp;</span> <span class='no'>a</span>, <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>2</span> ); <span class='no'>g</span></div><div class='output co'>#&gt; function (x, y, a = 2, b) 
+#&gt; &lt;environment: 0x7fa3143ce178&gt;</div><div class='input'><span class='va'>g</span> <span class='op'>&lt;-</span> <span class='fu'>makeFun</span><span class='op'>(</span> <span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>sin</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>^</span><span class='fl'>2</span> <span class='op'>*</span> <span class='va'>b</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>x</span> <span class='op'>&amp;</span> <span class='va'>y</span> <span class='op'>&amp;</span> <span class='va'>a</span>, a <span class='op'>=</span> <span class='fl'>2</span> <span class='op'>)</span>; <span class='va'>g</span>
+</div><div class='output co'>#&gt; function (x, y, a = 2, b) 
 #&gt; sin(x^2 * b)
-#&gt; &lt;environment: 0x7fa0ee2ff7b0&gt;</div><div class='input'><span class='no'>h</span> <span class='kw'>&lt;-</span> <span class='fu'>makeFun</span>( <span class='no'>a</span> * <span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>sin</a></span>(<span class='no'>x</span>^<span class='fl'>2</span> * <span class='no'>b</span>) ~ <span class='no'>b</span> <span class='kw'>&amp;</span> <span class='no'>y</span>, <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>3</span>); <span class='no'>h</span></div><div class='output co'>#&gt; function (b, a = 2, y = 3, x) 
+#&gt; &lt;environment: 0x7fa3143ce178&gt;</div><div class='input'><span class='va'>h</span> <span class='op'>&lt;-</span> <span class='fu'>makeFun</span><span class='op'>(</span> <span class='va'>a</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>sin</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>^</span><span class='fl'>2</span> <span class='op'>*</span> <span class='va'>b</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>b</span> <span class='op'>&amp;</span> <span class='va'>y</span>, a <span class='op'>=</span> <span class='fl'>2</span>, y <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>; <span class='va'>h</span>
+</div><div class='output co'>#&gt; function (b, a = 2, y = 3, x) 
 #&gt; a * sin(x^2 * b)
-#&gt; &lt;environment: 0x7fa0ee2ff7b0&gt;</div><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>mosaicData</span>)) {
-  <span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>( <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>length</span>) ~ <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>width</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>KidsFeet</span>)
-  <span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>makeFun</span>(<span class='no'>model</span>, <span class='kw'>transformation</span> <span class='kw'>=</span> <span class='no'>exp</span>)
-  <span class='fu'>f</span>(<span class='fl'>8.4</span>)
-  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>KidsFeet</span>, <span class='fl'>1</span>)
-}</div><div class='output co'>#&gt;    name birthmonth birthyear length width sex biggerfoot domhand
+#&gt; &lt;environment: 0x7fa3143ce178&gt;</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/ProjectMOSAIC/mosaicData'>mosaicData</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>length</span><span class='op'>)</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>width</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>KidsFeet</span><span class='op'>)</span>
+  <span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'>makeFun</span><span class='op'>(</span><span class='va'>model</span>, transformation <span class='op'>=</span> <span class='va'>exp</span><span class='op'>)</span>
+  <span class='fu'>f</span><span class='op'>(</span><span class='fl'>8.4</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>KidsFeet</span>, <span class='fl'>1</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt;    name birthmonth birthyear length width sex biggerfoot domhand
 #&gt; 1 David          5        88   24.4   8.4   B          L       R</div><div class='input'>
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>mosaicData</span>)) {
-  <span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>wage</span> ~ <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span>(<span class='no'>exper</span>, <span class='kw'>degree</span> <span class='kw'>=</span> <span class='fl'>2</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CPS85</span>)
-  <span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'>makeFun</span>(<span class='no'>model</span>)
-  <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>ggformula</span>)) {
-    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_point.html'>gf_point</a></span>(<span class='no'>wage</span> ~ <span class='no'>exper</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CPS85</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_function.html'>gf_fun</a></span>(<span class='fu'>fit</span>(<span class='no'>exper</span>) ~ <span class='no'>exper</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>)
-  }
-}</div><div class='img'><img src='makeFun-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>mosaicData</span>)) {
-<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(<span class='no'>wage</span> ~ <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span>(<span class='no'>exper</span>, <span class='kw'>degree</span> <span class='kw'>=</span> <span class='fl'>2</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CPS85</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>gaussian</span>)
-<span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'>makeFun</span>(<span class='no'>model</span>)
-  <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>ggformula</span>)) {
-    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_jitter.html'>gf_jitter</a></span>(<span class='no'>wage</span> ~ <span class='no'>exper</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CPS85</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_function.html'>gf_fun</a></span>(<span class='fu'>fit</span>(<span class='no'>exper</span>) ~ <span class='no'>exper</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>)
-    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_jitter.html'>gf_jitter</a></span>(<span class='no'>wage</span> ~ <span class='no'>exper</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CPS85</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_function.html'>gf_function</a></span>(<span class='kw'>fun</span> <span class='kw'>=</span> <span class='no'>fit</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"blue"</span>)
-  }
-}</div><div class='img'><img src='makeFun-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>mosaicData</span>)) {
-<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/nls.html'>nls</a></span>( <span class='no'>wage</span> ~ <span class='no'>A</span> + <span class='no'>B</span> * <span class='no'>exper</span> + <span class='no'>C</span> * <span class='no'>exper</span>^<span class='fl'>2</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CPS85</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>A</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>B</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>C</span> <span class='kw'>=</span> <span class='fl'>1</span>) )
-<span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'>makeFun</span>(<span class='no'>model</span>)
-  <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>ggformula</span>)) {
-    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_point.html'>gf_point</a></span>(<span class='no'>wage</span> ~ <span class='no'>exper</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>CPS85</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_function.html'>gf_fun</a></span>(<span class='fu'>fit</span>(<span class='no'>exper</span>) ~ <span class='no'>exper</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>)
-  }
-}</div><div class='img'><img src='makeFun-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/ProjectMOSAIC/mosaicData'>mosaicData</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>wage</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span><span class='op'>(</span><span class='va'>exper</span>, degree <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>CPS85</span><span class='op'>)</span>
+  <span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'>makeFun</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+  <span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/ProjectMOSAIC/ggformula'>ggformula</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_point.html'>gf_point</a></span><span class='op'>(</span><span class='va'>wage</span> <span class='op'>~</span> <span class='va'>exper</span>, data <span class='op'>=</span> <span class='va'>CPS85</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_function.html'>gf_fun</a></span><span class='op'>(</span><span class='fu'>fit</span><span class='op'>(</span><span class='va'>exper</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>exper</span>, color <span class='op'>=</span> <span class='st'>"red"</span><span class='op'>)</span>
+  <span class='op'>}</span>
+<span class='op'>}</span>
+</div><div class='img'><img src='makeFun-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/ProjectMOSAIC/mosaicData'>mosaicData</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>wage</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span><span class='op'>(</span><span class='va'>exper</span>, degree <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>CPS85</span>, family <span class='op'>=</span> <span class='va'>gaussian</span><span class='op'>)</span>
+<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'>makeFun</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+  <span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/ProjectMOSAIC/ggformula'>ggformula</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_jitter.html'>gf_jitter</a></span><span class='op'>(</span><span class='va'>wage</span> <span class='op'>~</span> <span class='va'>exper</span>, data <span class='op'>=</span> <span class='va'>CPS85</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_function.html'>gf_fun</a></span><span class='op'>(</span><span class='fu'>fit</span><span class='op'>(</span><span class='va'>exper</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>exper</span>, color <span class='op'>=</span> <span class='st'>"red"</span><span class='op'>)</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_jitter.html'>gf_jitter</a></span><span class='op'>(</span><span class='va'>wage</span> <span class='op'>~</span> <span class='va'>exper</span>, data <span class='op'>=</span> <span class='va'>CPS85</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_function.html'>gf_function</a></span><span class='op'>(</span>fun <span class='op'>=</span> <span class='va'>fit</span>, color <span class='op'>=</span> <span class='st'>"blue"</span><span class='op'>)</span>
+  <span class='op'>}</span>
+<span class='op'>}</span>
+</div><div class='img'><img src='makeFun-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/ProjectMOSAIC/mosaicData'>mosaicData</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/nls.html'>nls</a></span><span class='op'>(</span> <span class='va'>wage</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>+</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>exper</span> <span class='op'>+</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>exper</span><span class='op'>^</span><span class='fl'>2</span>, data <span class='op'>=</span> <span class='va'>CPS85</span>, start <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>A <span class='op'>=</span> <span class='fl'>1</span>, B <span class='op'>=</span> <span class='fl'>1</span>, C <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>)</span>
+<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'>makeFun</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+  <span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/ProjectMOSAIC/ggformula'>ggformula</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_point.html'>gf_point</a></span><span class='op'>(</span><span class='va'>wage</span> <span class='op'>~</span> <span class='va'>exper</span>, data <span class='op'>=</span> <span class='va'>CPS85</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/ggformula/man/gf_function.html'>gf_fun</a></span><span class='op'>(</span><span class='fu'>fit</span><span class='op'>(</span><span class='va'>exper</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>exper</span>, color <span class='op'>=</span> <span class='st'>"red"</span><span class='op'>)</span>
+  <span class='op'>}</span>
+<span class='op'>}</span>
+</div><div class='img'><img src='makeFun-3.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -266,7 +273,7 @@ This means that having variables in the model with names that match arguments of
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

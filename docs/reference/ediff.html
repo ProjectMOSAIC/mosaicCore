@@ -74,7 +74,7 @@ make its output the same length as the input." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mosaicCore</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@ make its output the same length as the input." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -96,7 +96,7 @@ make its output the same length as the input." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ProjectMOSAIC/mosaicCore/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -124,15 +124,15 @@ vector is shorter than the original.  <code>ediff</code> pads with <code>pad.val
 make its output the same length as the input.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ediff</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>lag</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>differences</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>pad</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"head"</span>, <span class='st'>"tail"</span>, <span class='st'>"symmetric"</span>),
-  <span class='kw'>pad.value</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='no'>frontPad</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ediff</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  lag <span class='op'>=</span> <span class='fl'>1</span>,
+  differences <span class='op'>=</span> <span class='fl'>1</span>,
+  pad <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"head"</span>, <span class='st'>"tail"</span>, <span class='st'>"symmetric"</span><span class='op'>)</span>,
+  pad.value <span class='op'>=</span> <span class='cn'>NA</span>,
+  <span class='va'>frontPad</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -176,8 +176,16 @@ back (tail) end. This exists for backward compatibility. New code should use
 <code>ediff</code> is a thin wrapper around <code><a href='https://rdrr.io/r/base/diff.html'>diff()</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ediff</span>(<span class='fl'>1</span>:<span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] NA  1  1  1  1  1  1  1  1  1</div><div class='input'><span class='fu'>ediff</span>(<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>pad.value</span> <span class='kw'>=</span> <span class='fl'>0</span>)</div><div class='output co'>#&gt;  [1] 0 1 1 1 1 1 1 1 1 1</div><div class='input'><span class='fu'>ediff</span>(<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt;  [1] NA NA  2  2  2  2  2  2  2  2</div><div class='input'><span class='fu'>ediff</span>(<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt;  [1] NA NA NA NA  0  0  0  0  0  0</div><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cumsum.html'>cumsum</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cumsum.html'>cumsum</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>))
-<span class='fu'>ediff</span>(<span class='no'>x</span>, <span class='kw'>lag</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt;  [1]  NA  NA   9  16  25  36  49  64  81 100</div><div class='input'><span class='fu'>ediff</span>(<span class='no'>x</span>, <span class='kw'>differences</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt;  [1] NA NA  3  4  5  6  7  8  9 10</div><div class='input'><span class='fu'>ediff</span>(<span class='no'>x</span>, <span class='kw'>differences</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>pad</span> <span class='kw'>=</span> <span class='st'>"symmetric"</span>)</div><div class='output co'>#&gt;  [1] NA  3  4  5  6  7  8  9 10 NA</div><div class='input'><span class='fu'>ediff</span>(<span class='no'>.leap.seconds</span>)</div><div class='output co'>#&gt;  [1]   NA  184  365  365  365  366  365  365  365  547  365  365  731  914  731
+    <pre class="examples"><div class='input'><span class='fu'>ediff</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] NA  1  1  1  1  1  1  1  1  1</div><div class='input'><span class='fu'>ediff</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, pad.value <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] 0 1 1 1 1 1 1 1 1 1</div><div class='input'><span class='fu'>ediff</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] NA NA  2  2  2  2  2  2  2  2</div><div class='input'><span class='fu'>ediff</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] NA NA NA NA  0  0  0  0  0  0</div><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cumsum.html'>cumsum</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cumsum.html'>cumsum</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>ediff</span><span class='op'>(</span><span class='va'>x</span>, lag <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1]  NA  NA   9  16  25  36  49  64  81 100</div><div class='input'><span class='fu'>ediff</span><span class='op'>(</span><span class='va'>x</span>, differences <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] NA NA  3  4  5  6  7  8  9 10</div><div class='input'><span class='fu'>ediff</span><span class='op'>(</span><span class='va'>x</span>, differences <span class='op'>=</span> <span class='fl'>2</span>, pad <span class='op'>=</span> <span class='st'>"symmetric"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] NA  3  4  5  6  7  8  9 10 NA</div><div class='input'><span class='fu'>ediff</span><span class='op'>(</span><span class='va'>.leap.seconds</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1]   NA  184  365  365  365  366  365  365  365  547  365  365  731  914  731
 #&gt; [16]  365  547  365  365  549  547  549 2557 1096 1277 1095  550</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -194,7 +202,7 @@ back (tail) end. This exists for backward compatibility. New code should use
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

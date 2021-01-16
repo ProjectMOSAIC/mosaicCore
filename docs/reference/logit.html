@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mosaicCore</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -94,7 +94,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ProjectMOSAIC/mosaicCore/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -120,9 +120,9 @@
     <p>Logit and inverse logit functions</p>
     </div>
 
-    <pre class="usage"><span class='fu'>logit</span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='fu'>logit</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>ilogit</span>(<span class='no'>x</span>)</pre>
+<span class='fu'>ilogit</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,9 +141,12 @@ $$log(x/(1 - x))$$</p>
 $$exp(x)/(1 + exp(x))$$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>.1</span>, <span class='fl'>.9</span>, <span class='kw'>by</span><span class='kw'>=</span><span class='fl'>.10</span>)
-<span class='no'>l</span> <span class='kw'>&lt;-</span> <span class='fu'>logit</span>(<span class='no'>p</span>); <span class='no'>l</span></div><div class='output co'>#&gt; [1] -2.1972246 -1.3862944 -0.8472979 -0.4054651  0.0000000  0.4054651  0.8472979
-#&gt; [8]  1.3862944  2.1972246</div><div class='input'><span class='fu'>ilogit</span>(<span class='no'>l</span>)</div><div class='output co'>#&gt; [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9</div><div class='input'><span class='fu'>ilogit</span>(<span class='no'>l</span>) <span class='kw'>==</span> <span class='no'>p</span></div><div class='output co'>#&gt; [1] FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE</div></pre>
+    <pre class="examples"><div class='input'><span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>.1</span>, <span class='fl'>.9</span>, by<span class='op'>=</span><span class='fl'>.10</span><span class='op'>)</span>
+<span class='va'>l</span> <span class='op'>&lt;-</span> <span class='fu'>logit</span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>; <span class='va'>l</span>
+</div><div class='output co'>#&gt; [1] -2.1972246 -1.3862944 -0.8472979 -0.4054651  0.0000000  0.4054651  0.8472979
+#&gt; [8]  1.3862944  2.1972246</div><div class='input'><span class='fu'>ilogit</span><span class='op'>(</span><span class='va'>l</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9</div><div class='input'><span class='fu'>ilogit</span><span class='op'>(</span><span class='va'>l</span><span class='op'>)</span> <span class='op'>==</span> <span class='va'>p</span>
+</div><div class='output co'>#&gt; [1] FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -159,7 +162,7 @@ $$exp(x)/(1 + exp(x))$$</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

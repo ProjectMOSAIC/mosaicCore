@@ -73,7 +73,7 @@ incorporating a groups argument." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mosaicCore</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
       </span>
     </div>
 
@@ -81,7 +81,7 @@ incorporating a groups argument." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -95,7 +95,7 @@ incorporating a groups argument." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ProjectMOSAIC/mosaicCore/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -122,21 +122,21 @@ incorporating a groups argument." />
 incorporating a groups argument.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mosaic_formula</span>(
-  <span class='no'>formula</span>,
-  <span class='kw'>groups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>envir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>(),
-  <span class='kw'>max.slots</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>groups.first</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)
+    <pre class="usage"><span class='fu'>mosaic_formula</span><span class='op'>(</span>
+  <span class='va'>formula</span>,
+  groups <span class='op'>=</span> <span class='cn'>NULL</span>,
+  envir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span><span class='op'>(</span><span class='op'>)</span>,
+  max.slots <span class='op'>=</span> <span class='fl'>3</span>,
+  groups.first <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span>
 
-<span class='fu'>mosaic_formula_q</span>(
-  <span class='no'>formula</span>,
-  <span class='kw'>groups</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>max.slots</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>groups.first</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
-)</pre>
+<span class='fu'>mosaic_formula_q</span><span class='op'>(</span>
+  <span class='va'>formula</span>,
+  groups <span class='op'>=</span> <span class='cn'>NULL</span>,
+  max.slots <span class='op'>=</span> <span class='fl'>3</span>,
+  groups.first <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -177,17 +177,22 @@ necessary for use within other functions.  <code>mosaic_formula</code> is a wrap
 around <code>mosaic_formula_q</code> and quotes <code>groups</code> before passing it along.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>mosaic_formula</span>( ~ <span class='no'>x</span> <span class='kw'>|</span> <span class='no'>z</span> )</div><div class='output co'>#&gt; x ~ z | rlang::enexpr(groups)
-#&gt; &lt;environment: 0x7fa0e8fb51c8&gt;</div><div class='input'><span class='fu'>mosaic_formula</span>( ~ <span class='no'>x</span>, <span class='kw'>groups</span><span class='kw'>=</span><span class='no'>g</span> )</div><div class='output co'>#&gt; x ~ rlang::enexpr(groups)
-#&gt; &lt;environment: 0x7fa0e8fb51c8&gt;</div><div class='input'><span class='fu'>mosaic_formula</span>( <span class='no'>y</span> ~ <span class='no'>x</span>, <span class='kw'>groups</span><span class='kw'>=</span><span class='no'>g</span> )</div><div class='output co'>#&gt; y ~ x | rlang::enexpr(groups)
-#&gt; &lt;environment: 0x7fa0e8fb51c8&gt;</div><div class='input'><span class='co'># this is probably not what you want for interactive use.</span>
-<span class='fu'>mosaic_formula_q</span>( <span class='no'>y</span> ~ <span class='no'>x</span>, <span class='kw'>groups</span><span class='kw'>=</span><span class='no'>g</span> )</div><div class='output co'>#&gt; y ~ x | g
-#&gt; &lt;environment: 0x7fa0e8fb51c8&gt;</div><div class='input'><span class='co'># but it is for programming</span>
-<span class='no'>foo</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>, <span class='no'>groups</span><span class='kw'>=</span><span class='kw'>NULL</span>) {
-    <span class='fu'>mosaic_formula_q</span>(<span class='no'>x</span>, <span class='kw'>groups</span><span class='kw'>=</span><span class='no'>groups</span>, <span class='kw'>envir</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>())
-}
-<span class='fu'>foo</span>( <span class='no'>y</span> ~ <span class='no'>x</span> , <span class='kw'>groups</span> <span class='kw'>=</span> <span class='no'>g</span>)</div><div class='output co'>#&gt; y ~ x | groups
-#&gt; &lt;environment: 0x7fa0e8fb51c8&gt;</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>mosaic_formula</span><span class='op'>(</span> <span class='op'>~</span> <span class='va'>x</span> <span class='op'>|</span> <span class='va'>z</span> <span class='op'>)</span>
+</div><div class='output co'>#&gt; x ~ z | rlang::enexpr(groups)
+#&gt; &lt;environment: 0x7fa306f16c00&gt;</div><div class='input'><span class='fu'>mosaic_formula</span><span class='op'>(</span> <span class='op'>~</span> <span class='va'>x</span>, groups<span class='op'>=</span><span class='va'>g</span> <span class='op'>)</span>
+</div><div class='output co'>#&gt; x ~ rlang::enexpr(groups)
+#&gt; &lt;environment: 0x7fa306f16c00&gt;</div><div class='input'><span class='fu'>mosaic_formula</span><span class='op'>(</span> <span class='va'>y</span> <span class='op'>~</span> <span class='va'>x</span>, groups<span class='op'>=</span><span class='va'>g</span> <span class='op'>)</span>
+</div><div class='output co'>#&gt; y ~ x | rlang::enexpr(groups)
+#&gt; &lt;environment: 0x7fa306f16c00&gt;</div><div class='input'><span class='co'># this is probably not what you want for interactive use.</span>
+<span class='fu'>mosaic_formula_q</span><span class='op'>(</span> <span class='va'>y</span> <span class='op'>~</span> <span class='va'>x</span>, groups<span class='op'>=</span><span class='va'>g</span> <span class='op'>)</span>
+</div><div class='output co'>#&gt; y ~ x | g
+#&gt; &lt;environment: 0x7fa306f16c00&gt;</div><div class='input'><span class='co'># but it is for programming</span>
+<span class='va'>foo</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>groups</span><span class='op'>=</span><span class='cn'>NULL</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='fu'>mosaic_formula_q</span><span class='op'>(</span><span class='va'>x</span>, groups<span class='op'>=</span><span class='va'>groups</span>, envir<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+<span class='fu'>foo</span><span class='op'>(</span> <span class='va'>y</span> <span class='op'>~</span> <span class='va'>x</span> , groups <span class='op'>=</span> <span class='va'>g</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; y ~ x | groups
+#&gt; &lt;environment: 0x7fa306f16c00&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -203,7 +208,7 @@ around <code>mosaic_formula_q</code> and quotes <code>groups</code> before passi
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

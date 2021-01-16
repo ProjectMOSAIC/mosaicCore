@@ -2,16 +2,19 @@
 
 * local
 
-  * R (4.0.2 and 4.1 (unstable))
-  * Platform: x86_64-apple-darwin17.0 (64-bit)
-  * Running under: macOS Catalina 10.15.4
 
+  * R version 4.0.3 (2020-10-10)
+  * Platform: x86_64-apple-darwin17.0 (64-bit)
+  * Running under: macOS Catalina 10.15.6
+  * devtools::check(env_vars = c(`_R_CHECK_DEPENDS_ONLY_` = "true"))
+  
 * win-builder
 
 ## Mosaic suite udpates
 
-This is submission is part of parallel submissions of mosaicCore, mosaicData, mosaic, and ggformula.
-All of which are currently checking clean locally and with check_win_devel()
+This update mainly handles a breaking change in dplyr which now exports tally() and count() as generics.
+Also handles some URL issues, and exports one new function. This should make it possible to update 
+the mosaic package, which will follow soon.
 
 
 

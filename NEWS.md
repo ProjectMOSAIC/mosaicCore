@@ -1,5 +1,10 @@
-# mosaicCore (development version)
+# mosaicCore 
 
+# mosaicCore 0.9
+
+* new function: `compare()`, a pretty version of `sign()`
+* internal adjustments to `count()` and `tally()` allow `mosaicCore` and `dplyr` to co-exist after changes in `dplyr` 1.0.3.
+* more careful use of suggested packages in tests, etc.
 
 # mosaicCore 0.8
 

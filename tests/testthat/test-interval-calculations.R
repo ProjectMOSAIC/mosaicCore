@@ -28,13 +28,13 @@ test_that("CI for sample proportions work.", {
   expect_equivalent(t2[c("six_center")], ref$estimate)
 })
 
-# test_that("CI for sample proportions work with long_names.", {
-#   t2 <- df_stats(~ cyl, data = mtcars, six = ci.prop(success = 6))
-#   ref <- stats::binom.test(table(mtcars$cyl != 6))
-#   expect_equivalent(t2[c("six_cyl_lower", "six_cyl_upper")],
-#                     as.numeric(ref$conf.int))
-#   expect_equivalent(t2[c("six_cyl_center")], ref$estimate)
-# })
+test_that("CI for sample proportions work with long_names.", {
+  t2 <- df_stats(~ cyl, data = mtcars, six = ci.prop(success = 6))
+  ref <- stats::binom.test(table(mtcars$cyl != 6))
+  expect_equivalent(t2[c("six_lower", "six_upper")],
+                    as.numeric(ref$conf.int))
+  expect_equivalent(t2[c("six_center")], ref$estimate)
+})
 
 test_that("Alternative methods for proportion CI work", {
   if (require(mosaic)) {

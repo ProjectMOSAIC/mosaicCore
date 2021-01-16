@@ -3,10 +3,10 @@ Type: Package
 Title: Common Utilities for Other MOSAIC-Family Packages
 Version: 0.9.0
 Depends:
-    R (>= 3.0.0),
+    R (>= 3.3.0)
 Imports:
     stats,
-    dplyr,
+    dplyr (>= 1.0.3),
     rlang,
     tidyr,
     MASS

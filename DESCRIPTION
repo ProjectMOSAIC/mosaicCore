@@ -1,7 +1,7 @@
 Package: mosaicCore
 Type: Package
 Title: Common Utilities for Other MOSAIC-Family Packages
-Version: 0.9.0
+Version: 0.9.1
 Depends:
     R (>= 3.3.0)
 Imports:
@@ -15,7 +15,8 @@ Suggests:
     mosaic,
     ggformula,
     NHANES,
-    testthat
+    testthat,
+    mosaicCalc (>= 0.5.9)
 Author: Randall Pruim <rpruim@calvin.edu>, Daniel T. Kaplan
     <kaplan@macalester.edu>, Nicholas J. Horton <nhorton@amherst.edu>
 Maintainer: Randall Pruim <rpruim@calvin.edu>
@@ -26,6 +27,6 @@ LazyLoad: yes
 LazyData: yes
 URL: https://github.com/ProjectMOSAIC/mosaicCore
 BugReports: https://github.com/ProjectMOSAIC/mosaicCore/issues
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8

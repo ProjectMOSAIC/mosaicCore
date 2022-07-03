@@ -1,5 +1,9 @@
 # mosaicCore 
 
+# mosaicCore 0.9.1 
+
+* added support for one-sided formulas in `makeFun()`. This has effect only when `mosaicCalc` is installed.
+
 # mosaicCore 0.9
 
 * new function: `compare()`, a pretty version of `sign()`

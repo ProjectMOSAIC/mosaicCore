@@ -76,9 +76,24 @@ makeFun.formula <-
   function( object, ..., strict.declaration  = TRUE, use.environment = TRUE,
             suppress.warnings = TRUE) {
 	  sexpr <- object
-	  if (! inherits( sexpr, "formula") || length(sexpr) != 3)
-		  stop('First argument must be a formula with both left and right sides.')
+	  if (! inherits( sexpr, "formula")) 
+		  stop('First argument must be a formula.')
 
+	  dots <- list(...)
+	  if(length(sexpr) == 2) { # one-sided formula
+	    # if mosaicCalc is available, allow a one-sided formula to define a function
+	    if (requireNamespace("mosaicCalc", quietly = TRUE)) {
+	      # build the argument list automatically to create a two-sided formula
+	      # with arguments in the canonical order.
+	      res <- makeFun.formula(mosaicCalc::infer_RHS(sexpr[[2]]))
+	      return(mosaicCalc::bind_params(res, dots))
+	    } else {
+	      # mosaicCalc not installed, so default to old behavior
+	      stop("First argument must be a two-sided formula.")
+	    }
+	  }
+	  
+	  # two-sided
 	  dots <- list(...)
 	  expr <- eval(sexpr)  # not sure if eval() is needed here or not.
 	  lhs <- lhs(expr) # expr[[2]]

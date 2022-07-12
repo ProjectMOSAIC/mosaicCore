@@ -17,7 +17,9 @@ NA
 #' @return a function
 #'
 #' @details
-#' The definition of the function is given by the left side of a formula.  The right
+#' The definition of the function is given by the left side of a two-sided formula 
+#' or the right side of a one-sided formula.
+#' The right
 #' side lists at least one of the inputs to the function.
 #' The inputs to the function are all variables appearing on either the left
 #' or right sides of the formula.  Those appearing in the right side will
@@ -28,6 +30,8 @@ NA
 #' f <- makeFun( sin(x^2 * b) ~ x & y & a); f
 #' g <- makeFun( sin(x^2 * b) ~ x & y & a, a = 2 ); g
 #' h <- makeFun( a * sin(x^2 * b) ~ b & y, a = 2, y = 3); h
+#' ff <- makeFun(~ a*x^b + y ); ff # one sided formula
+#' gg <- makeFun(cos(a*x^b + y) ~ . ); gg # dummy right-hand side
 #' @export
 
 makeFun <- function(object, ...) {
@@ -80,20 +84,14 @@ makeFun.formula <-
 		  stop('First argument must be a formula.')
 
 	  dots <- list(...)
-	  if(length(sexpr) == 2) { # one-sided formula
-	    # if mosaicCalc is available, allow a one-sided formula to define a function
-	    if (requireNamespace("mosaicCalc", quietly = TRUE)) {
+	  if (length(sexpr) == 2 || sexpr[[3]] == ".") { # one-sided formula
 	      # build the argument list automatically to create a two-sided formula
 	      # with arguments in the canonical order.
-	      res <- makeFun.formula(mosaicCalc::infer_RHS(sexpr[[2]]))
-	      return(mosaicCalc::bind_params(res, dots))
-	    } else {
-	      # mosaicCalc not installed, so default to old behavior
-	      stop("First argument must be a two-sided formula.")
-	    }
-	  }
+	      res <- makeFun.formula(infer_RHS(sexpr[[2]]))
+	      return(bind_params(res, dots))
+	  } 
 	  
-	  # two-sided
+	  # two-sided formula
 	  dots <- list(...)
 	  expr <- eval(sexpr)  # not sure if eval() is needed here or not.
 	  lhs <- lhs(expr) # expr[[2]]
@@ -368,3 +366,41 @@ modelVars <- function(model) {
 
 coef.function <- function(object, ...) { attr(object, "coefficients") }
 
+# Internal functions from mosaicCalc duplicated here
+# in order to avoid dependency on mosaicCalc or tie mosaicCalc 
+# internal functionality to mosaicCore.
+
+# copy of mosaicCalc infer_RHS
+infer_RHS <- function(ex) {
+  RHS <- paste(
+    sort_args_by_convention(all.vars(ex)),
+    collapse="&")
+  res <- as.formula(paste("a ~", RHS))
+  res[[2]] <- ex
+  
+  res
+}
+
+# copy of mosaicCalc sort_args_by_convention
+sort_args_by_convention <- function(vars) {
+  special <- c("x", "y", "t", "u", "v", "w", "z")
+  hits <- special %in% vars
+  first_ones <- special[hits]
+  remaining_ones <- sort(setdiff(vars, first_ones))
+  
+  c(first_ones, remaining_ones)
+}
+
+# copy of mosaicCalc bind_params
+bind_params <- function(f, ...) {
+  new_values <- list(...) # there can be extras
+  # if the ... contain only one item, a list, undue the list() make in the previous line
+  if (length(new_values) == 1 && is.list(new_values[[1]])) new_values <- new_values[[1]]
+  params <- formals(f)
+  for (k in names(params)) {
+    if (k %in% names(new_values)) params[k] <- new_values[[k]]
+  }
+  formals(f) <- params
+  
+  f
+}

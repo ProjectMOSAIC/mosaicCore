@@ -14,9 +14,9 @@ test_that("One-sided formulas work in makeFun()", {
 })
 
 test_that("Two-sided formulas work in makeFun()", {
-  new_fun1 <- makeFun( ~ x^b + y^a ~ y & b & x)
+  new_fun1 <- makeFun( ~ x^b + y^a ) 
   # check the order follows the right-hand side
-  expect_equal(names(formals(new_fun1)), c("y", "b", "x", "a"))
+  expect_equal(names(formals(new_fun1)), c("x", "y", "a", "b"))
   expect_equal(class(formals(new_fun1)$a), "name")
   # make sure default values are respected
   new_fun2 <- makeFun(x^b + y^a ~ y + b + x, b=7, a=3)
@@ -24,4 +24,11 @@ test_that("Two-sided formulas work in makeFun()", {
   expect_equal(formals(new_fun2)$a, 3)
   expect_equal(formals(new_fun2)$b, 7)
   expect_equal(new_fun2(2, 3), 2195)
+})
+
+test_that("Contents dot (.) or 1 or 0 are equivalent to a one-sided formula", {
+  new_fun1 <- makeFun(x^b + y^a ~ .)
+  # check the order follows the right-hand side
+  expect_equal(names(formals(new_fun1)), c("x", "y", "a", "b"))
+  expect_equal(class(formals(new_fun1)$a), "name")
 })

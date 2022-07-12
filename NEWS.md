@@ -2,7 +2,7 @@
 
 # mosaicCore 0.9.1 
 
-* added support for one-sided formulas in `makeFun()`. This has effect only when `mosaicCalc` is installed.
+* added support for one-sided formulas in `makeFun()`. 
 
 # mosaicCore 0.9
 

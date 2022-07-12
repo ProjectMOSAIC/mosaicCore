@@ -68,7 +68,9 @@ Provides an easy mechanism for creating simple "mathematical"
 functions via a formula interface.
 }
 \details{
-The definition of the function is given by the left side of a formula.  The right
+The definition of the function is given by the left side of a two-sided formula
+or the right side of a one-sided formula.
+The right
 side lists at least one of the inputs to the function.
 The inputs to the function are all variables appearing on either the left
 or right sides of the formula.  Those appearing in the right side will
@@ -84,6 +86,8 @@ This means that having variables in the model with names that match arguments of
 f <- makeFun( sin(x^2 * b) ~ x & y & a); f
 g <- makeFun( sin(x^2 * b) ~ x & y & a, a = 2 ); g
 h <- makeFun( a * sin(x^2 * b) ~ b & y, a = 2, y = 3); h
+ff <- makeFun(~ a*x^b + y ); ff # one sided formula
+gg <- makeFun(cos(a*x^b + y) ~ . ); gg # dummy right-hand side
 if (require(mosaicData)) {
   model <- lm( log(length) ~ log(width), data = KidsFeet)
   f <- makeFun(model, transformation = exp)

@@ -32,3 +32,12 @@ test_that("Contents dot (.) or 1 or 0 are equivalent to a one-sided formula", {
   expect_equal(names(formals(new_fun1)), c("x", "y", "a", "b"))
   expect_equal(class(formals(new_fun1)$a), "name")
 })
+
+test_that("The name 'pi' is excluded as an argument.", {
+  f1 <- makeFun(x*pi*t ~ .)
+  f2 <- makeFun(~ x*pi*t)
+  f3 <- makeFun(x*pi*t ~ t)
+  expect_false("pi" %in% names(formals(f1)))
+  expect_false("pi" %in% names(formals(f2)))
+  expect_false("pi" %in% names(formals(f3)))
+})

@@ -386,8 +386,10 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
 
   # return the appropriate format
   if (format == "long") {
+    # avoid off-by-one error when there is only a response and no true grouping vars
+    cols_to_delete <- num_grouping_vars + 1 - as.integer(one_group)
     res %>%
-      tidyr::pivot_longer(names_to = "stat", values_to = "value", !! -(1:(1 + num_grouping_vars)))
+      tidyr::pivot_longer(names_to = "stat", values_to = "value", !! -(1:cols_to_delete))
   } else {
     res
   }

@@ -1,20 +1,15 @@
 ## Test environments
 
 * local
+    * R version 4.2.1 (2022-06-23)
+    * macOS Monterey 12.5.1
+    * x86_64, darwin17.0
 
-
-  * R version 4.0.3 (2020-10-10)
-  * Platform: x86_64-apple-darwin17.0 (64-bit)
-  * Running under: macOS Catalina 10.15.6
-  * devtools::check(env_vars = c(`_R_CHECK_DEPENDS_ONLY_` = "true"))
-  
 * win-builder
 
-## Mosaic suite udpates
+## Notes
 
-This update mainly handles a breaking change in dplyr which now exports tally() and count() as generics.
-Also handles some URL issues, and exports one new function. This should make it possible to update 
-the mosaic package, which will follow soon.
-
-
+This is a relatively modest update, fixing bug and expanding one function to handle 
+additional cases (without changing existing behavior) to support new features in
+mosaicCalc (which will be submitted soon).
 

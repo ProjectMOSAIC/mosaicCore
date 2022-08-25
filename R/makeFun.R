@@ -117,13 +117,17 @@ makeFun.formula <-
 	  valVec <- rep("", length(vars))
 	  names(valVec) <- vars
 
-	  for( n in varsWithDefaults ) valVec[n] <- as.character(dots[[n]])
+	  # grabbing only first value of dots[[n]] in case this is passed in
+	  # as a range from plotFun().  The avoid the warning message that 
+	  # would otherwise result from bad recycling.
+	  
+	  for( n in varsWithDefaults ) valVec[n] <- as.character(dots[[n]][1])
 
     if (use.environment) {
       for( n in setdiff(varsWithoutDefaults, rhsVars) ) {
         v <- tryCatch(get(n, parent.frame()), error = function(e) "")
         if (is.numeric(v)) {
-          valVec[n] <- as.character(v)
+          valVec[n] <- as.character(v[1])
           varsFromEnv <- c(varsFromEnv, n)
           varsWithoutDefaults <- setdiff(varsWithoutDefaults, n)
         }

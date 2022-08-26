@@ -9,7 +9,11 @@
 
 ## Notes
 
-This is a relatively modest update, fixing bug and expanding one function to handle 
+This is a relatively modest update, fixing bug and expanding one function (makeFun) to handle 
 additional cases (without changing existing behavior) to support new features in
 mosaicCalc (which will be submitted soon).
+
+Adding that expanded version of makeFun() breaks a test in the mosaic package since
+that use case used to throw an error and now does something useful.  So the mosaic
+package will be submitted in tandem with this package.
 

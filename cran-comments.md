@@ -9,11 +9,7 @@
 
 ## Notes
 
-This is a relatively modest update, fixing bug and expanding one function (makeFun) to handle 
-additional cases (without changing existing behavior) to support new features in
-mosaicCalc (which will be submitted soon).
-
-Adding that expanded version of makeFun() breaks a test in the mosaic package since
-that use case used to throw an error and now does something useful.  So the mosaic
-package will be submitted in tandem with this package.
-
+CRAN reports new issue with a test failure (appaerntly only under openBLAS). The test uses
+randomly generated data, and a call to nls() seems to be failing.  Since this doesn't fail
+elsewhere and I've been unable to recreate, I'm adding a call to set.seed() to at least freeze
+the data used in the test.

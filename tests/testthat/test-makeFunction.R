@@ -105,6 +105,7 @@ test_that('Can make functions from glm models (Gamma)', {
 
 test_that('Can make functions from nls models', {
   # example from documentation for nlm
+  set.seed(12345)
   x <- -(1:100)/10
   y <- 100 + 10 * exp(x / 2) + rnorm(x)/10
   nlmod <- nls(y ~  Const + A * exp(B * x), start=list(Const=1,A=1,B=1))

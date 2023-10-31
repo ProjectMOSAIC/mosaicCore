@@ -131,7 +131,7 @@ tally <- function(x, ...) {
 
 #' Internal tally methods
 #'
-#' These are used to implement `tally()` in a way that allows {dplyr} and {mosaicCore} to co-exist.
+#' These are used to implement `tally()` in a way that allows `dplyr` and `mosaicCore` to co-exist.
 #' End users should call the generics `tally()` and `count()`.
 #'
 #' @rdname mosaic_tally

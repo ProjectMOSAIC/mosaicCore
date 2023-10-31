@@ -15,6 +15,6 @@ mosaic_count(x, ...)
 \item{...}{additional arguments passed to \code{\link[=table]{table()}}}
 }
 \description{
-These are used to implement \code{tally()} in a way that allows {dplyr} and {mosaicCore} to co-exist.
+These are used to implement \code{tally()} in a way that allows \code{dplyr} and \code{mosaicCore} to co-exist.
 End users should call the generics \code{tally()} and \code{count()}.
 }

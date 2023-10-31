@@ -24,6 +24,6 @@ parse_call <- function(x) {
   return(list(x))
 }
 
-# parse_call(rlang::f_lhs(a + b ~ x + y)) %>% lapply(class)
-# parse_call(rlang::f_lhs(a + b + c ~ x + y)) %>% lapply(class)
-# parse_call(rlang::f_lhs((a + b) * c ~ x + y)) %>% lapply(class)
+# parse_call(rlang::f_lhs(a + b ~ x + y)) |> lapply(class)
+# parse_call(rlang::f_lhs(a + b + c ~ x + y)) |> lapply(class)
+# parse_call(rlang::f_lhs((a + b) * c ~ x + y)) |> lapply(class)

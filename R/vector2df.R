@@ -56,21 +56,21 @@ make_df <- function(object, ...) {
 #' @rdname make_df
 #' @export
 make_df.list <- function(object, ...) {
-  object %>% lapply(vector2df, ...) %>% bind_rows()
+  object |> lapply(vector2df, ...) |> bind_rows()
 }
 
 #' @rdname make_df
 #' @export
 make_df.matrix <- function(object, ...) {
-  lapply(1:ncol(object), function(c) unlist(object[, c, drop = FALSE])) %>%
-    as.data.frame() %>%
+  lapply(1:ncol(object), function(c) unlist(object[, c, drop = FALSE])) |>
+    as.data.frame() |>
     setNames(colnames(object))
 }
 
 #' @rdname make_df
 #' @export
 make_df.numeric <- function(object, ...) {
-  object %>% as.data.frame()
+  object |> as.data.frame()
 }
 
 #' @rdname make_df

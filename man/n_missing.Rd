@@ -26,7 +26,7 @@ Counting missing/non-missing elements
 \examples{
 if (require(NHANES) && require(mosaic) && require(dplyr)) {
   mosaic::tally( ~ is.na(Height) + is.na(Weight), data = NHANES, margins = TRUE)
-  NHANES \%>\%
+  NHANES |>
     summarise(
       mean.wt = mean(Weight, na.rm = TRUE),
       missing.Wt = n_missing(Weight),

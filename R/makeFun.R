@@ -163,7 +163,7 @@ makeFun.formula <-
 #'   model <- lm(wage ~ poly(exper, degree = 2), data = CPS85)
 #'   fit <- makeFun(model)
 #'   if (require(ggformula)) {
-#'     gf_point(wage ~ exper, data = CPS85) %>%
+#'     gf_point(wage ~ exper, data = CPS85) |>
 #'     gf_fun(fit(exper) ~ exper, color = "red")
 #'   }
 #' }
@@ -218,9 +218,9 @@ makeFun.lm <-
 #' model <- glm(wage ~ poly(exper, degree = 2), data = CPS85, family = gaussian)
 #' fit <- makeFun(model)
 #'   if (require(ggformula)) {
-#'     gf_jitter(wage ~ exper, data = CPS85) %>%
+#'     gf_jitter(wage ~ exper, data = CPS85) |>
 #'     gf_fun(fit(exper) ~ exper, color = "red")
-#'     gf_jitter(wage ~ exper, data = CPS85) %>%
+#'     gf_jitter(wage ~ exper, data = CPS85) |>
 #'     gf_function(fun = fit, color = "blue")
 #'   }
 #' }
@@ -282,7 +282,7 @@ makeFun.glm <-
 #' model <- nls( wage ~ A + B * exper + C * exper^2, data = CPS85, start = list(A = 1, B = 1, C = 1) )
 #' fit <- makeFun(model)
 #'   if (require(ggformula)) {
-#'     gf_point(wage ~ exper, data = CPS85) %>%
+#'     gf_point(wage ~ exper, data = CPS85) |>
 #'     gf_fun(fit(exper) ~ exper, color = "red")
 #'   }
 #' }

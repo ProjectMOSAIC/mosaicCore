@@ -1,5 +1,5 @@
 #' @importFrom tidyr gather
-#' @importFrom dplyr %>% bind_rows
+#' @importFrom dplyr bind_rows
 #' @importFrom rlang is_character f_rhs eval_tidy quos
 #' @importFrom stats as.formula na.exclude
 NA
@@ -161,21 +161,21 @@ cond2sum <- function(formula) {
 #'
 #' # because the result is a data frame, df_stats() is also useful for creating plots
 #' if(require(ggformula)) {
-#'   gf_violin(hp ~ cyl, data = mtcars, group = ~ cyl) %>%
+#'   gf_violin(hp ~ cyl, data = mtcars, group = ~ cyl) |>
 #'   gf_point(mean ~ cyl, data = df_stats(hp ~ cyl, data = mtcars, mean),
-#'     color = ~ "mean") %>%
+#'     color = ~ "mean") |>
 #'   gf_point(median ~ cyl, data = df_stats(hp ~ cyl, data = mtcars, median),
-#'     color = ~"median") %>%
+#'     color = ~"median") |>
 #'   gf_labs(color = "")
 #' }
 #'
 #' # magrittr style piping is also supported
 #' if (require(ggformula)) {
-#'   mtcars %>%
+#'   mtcars |>
 #'     df_stats(hp ~ cyl, mean, median, range)
-#'   mtcars %>%
-#'     df_stats(hp ~ cyl + gear, mean, median, range) %>%
-#'     gf_point(mean ~ cyl, color = ~ factor(gear)) %>%
+#'   mtcars |>
+#'     df_stats(hp ~ cyl + gear, mean, median, range) |>
+#'     gf_point(mean ~ cyl, color = ~ factor(gear)) |>
 #'     gf_line(mean ~ cyl, color = ~ factor(gear))
 #' }
 #'
@@ -189,6 +189,7 @@ cond2sum <- function(formula) {
 #' @export
 #' @importFrom rlang eval_tidy exprs expr quos new_quosure enexpr !!
 #' @importFrom stats model.frame aggregate
+#' @importFrom dplyr %>%
 #'
 df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
                      sep = "_",
@@ -285,7 +286,7 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
       function(f) {
         if (inherits(rlang::f_rhs(f), "call")) {
           df_aggregate(MF[, 1], by = MF[, -1, drop = FALSE],
-                    FUN = function(x) eval(substitute(x %>% foo, list(foo = rlang::f_rhs(f)))),
+                    FUN = function(x) eval(substitute(dplyr::`%>%`(x, foo), list(foo = rlang::f_rhs(f)))),
                     drop = drop)
         } else {
           df_aggregate(MF[, 1], by = MF[, -1, drop = FALSE],
@@ -375,8 +376,8 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   row.names(res) <- NULL
 
   res <-
-    res %>%
-    dplyr::mutate(response_var_ = deparse(rlang::f_lhs(formula))) %>%
+    res |>
+    dplyr::mutate(response_var_ = deparse(rlang::f_lhs(formula))) |>
     dplyr::select(response_var_, names(res))
 
   if (! "response" %in% names(res)) {
@@ -388,7 +389,7 @@ df_stats <- function(formula, data, ..., drop = TRUE, fargs = list(),
   if (format == "long") {
     # avoid off-by-one error when there is only a response and no true grouping vars
     cols_to_delete <- num_grouping_vars + 1 - as.integer(one_group)
-    res %>%
+    res |>
       tidyr::pivot_longer(names_to = "stat", values_to = "value", !! -(1:cols_to_delete))
   } else {
     res

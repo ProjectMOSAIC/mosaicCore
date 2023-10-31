@@ -35,13 +35,13 @@ inspect.list <- function(object, max.level = 2, ...) {
 #' @rdname inspect
 #' @export
 inspect.character <- function(object, ...) {
-  inspect(factor(object)) %>% dplyr::mutate(class = "character")
+  inspect(factor(object)) |> dplyr::mutate(class = "character")
 }
 
 #' @rdname inspect
 #' @export
 inspect.logical <- function(object, ...) {
-  inspect(as.character(object, ...)) %>% dplyr::mutate(class = "logical")
+  inspect(as.character(object, ...)) |> dplyr::mutate(class = "logical")
 }
 
 #' @rdname inspect

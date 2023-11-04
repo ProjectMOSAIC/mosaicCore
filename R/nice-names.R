@@ -12,7 +12,7 @@
 #' @export
 
 nice_names <- function(x, unique=TRUE) {
-  x <- gsub('|>', '.result.', x)
+  x <- gsub('\\|>', '.result.', x)
   x <- gsub('%>%', '.result.', x)
   x <- gsub('\\(Intercept\\)','Intercept', x)
   x <- gsub('resample\\(([^\\)]*)\\)','\\1', x)

@@ -1,5 +1,9 @@
 # mosaicCore 
 
+# mosaicCore 0.9.4
+
+* migrated from `%>%` to `|>`
+
 # mosaicCore 0.9.1 
 
 * added support for one-sided formulas in `makeFun()`. 

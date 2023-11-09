@@ -21,7 +21,7 @@ column identifying the response variable for which the statistics was calculated
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mosaicCore</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.4.0</span>
       </span>
     </div>
 
@@ -301,21 +301,15 @@ arithmetic.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># because the result is a data frame, df_stats() is also useful for creating plots</span></span></span>
 <span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ProjectMOSAIC/ggformula" class="external-link">ggformula</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/ggformula/man/gf_violin.html" class="external-link">gf_violin</a></span><span class="op">(</span><span class="va">hp</span> <span class="op">~</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span>, group <span class="op">=</span> <span class="op">~</span> <span class="va">cyl</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/ggformula/man/gf_violin.html" class="external-link">gf_violin</a></span><span class="op">(</span><span class="va">hp</span> <span class="op">~</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span>, group <span class="op">=</span> <span class="op">~</span> <span class="va">cyl</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/ggformula/man/gf_point.html" class="external-link">gf_point</a></span><span class="op">(</span><span class="va">mean</span> <span class="op">~</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="fu">df_stats</span><span class="op">(</span><span class="va">hp</span> <span class="op">~</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span>, <span class="va">mean</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    color <span class="op">=</span> <span class="op">~</span> <span class="st">"mean"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    color <span class="op">=</span> <span class="op">~</span> <span class="st">"mean"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/ggformula/man/gf_point.html" class="external-link">gf_point</a></span><span class="op">(</span><span class="va">median</span> <span class="op">~</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="fu">df_stats</span><span class="op">(</span><span class="va">hp</span> <span class="op">~</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span>, <span class="va">median</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    color <span class="op">=</span> <span class="op">~</span><span class="st">"median"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    color <span class="op">=</span> <span class="op">~</span><span class="st">"median"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/ggformula/man/gf_aux.html" class="external-link">gf_labs</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: ggformula</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: ggplot2</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: ggstance</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘ggstance’</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:ggplot2’:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     GeomErrorbarh, geom_errorbarh</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: scales</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: ggridges</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
@@ -326,11 +320,11 @@ arithmetic.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># magrittr style piping is also supported</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ProjectMOSAIC/ggformula" class="external-link">ggformula</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="va">mtcars</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>    <span class="fu">df_stats</span><span class="op">(</span><span class="va">hp</span> <span class="op">~</span> <span class="va">cyl</span>, <span class="va">mean</span>, <span class="va">median</span>, <span class="va">range</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>    <span class="fu">df_stats</span><span class="op">(</span><span class="va">hp</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span>, <span class="va">mean</span>, <span class="va">median</span>, <span class="va">range</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/ggformula/man/gf_point.html" class="external-link">gf_point</a></span><span class="op">(</span><span class="va">mean</span> <span class="op">~</span> <span class="va">cyl</span>, color <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">gear</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="va">mtcars</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>    <span class="fu">df_stats</span><span class="op">(</span><span class="va">hp</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span>, <span class="va">mean</span>, <span class="va">median</span>, <span class="va">range</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/ggformula/man/gf_point.html" class="external-link">gf_point</a></span><span class="op">(</span><span class="va">mean</span> <span class="op">~</span> <span class="va">cyl</span>, color <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">gear</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/ggformula/man/gf_line.html" class="external-link">gf_line</a></span><span class="op">(</span><span class="va">mean</span> <span class="op">~</span> <span class="va">cyl</span>, color <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">gear</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-plt img"><img src="df_stats-2.png" alt="" width="700" height="433"></span>
@@ -395,7 +389,7 @@ arithmetic.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

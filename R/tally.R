@@ -395,11 +395,18 @@ mosaic_count <- function(x, ...) {
   UseMethod("mosaic_count")
 }
 
+ns_dplyr <- rlang::ns_env("dplyr")
+
 #' @export
 mosaic_count.data.frame <-
   function(
     x, ...) {
-    dplyr::count(x, ...)
+
+    if (exists("count.data.frame", ns_dplyr)) {
+      get("count.data.frame", ns_dplyr)(x, ...)
+    } else {
+      dplyr::count(x, ...)
+    }
   }
 
 #' @export

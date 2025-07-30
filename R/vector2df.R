@@ -42,7 +42,7 @@ vector2df <- function(x, nice_names = FALSE) {
 #' names of `object`, even if that results in `NULL`.
 #' A numeric vector is converted into a data frame with 1 column.
 #' If `object` is a list, each element is converted using [vector2df()]
-#' and the resulting columns are joined with [bind_rows()].
+#' and the resulting columns are joined with [dplyr::bind_rows()].
 #'
 #' @param object An object to be converted into a data frame.
 #' @param ... Additional arguments used by methods.

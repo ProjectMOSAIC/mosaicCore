@@ -37,5 +37,5 @@ The names are then set to the column
 names of \code{object}, even if that results in \code{NULL}.
 A numeric vector is converted into a data frame with 1 column.
 If \code{object} is a list, each element is converted using \code{\link[=vector2df]{vector2df()}}
-and the resulting columns are joined with \code{\link[=bind_rows]{bind_rows()}}.
+and the resulting columns are joined with \code{\link[dplyr:bind_rows]{dplyr::bind_rows()}}.
 }

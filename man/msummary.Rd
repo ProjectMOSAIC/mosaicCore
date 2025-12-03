@@ -14,6 +14,7 @@
   digits = max(3L, getOption("digits") - 3L),
   symbolic.cor = x$symbolic.cor,
   signif.stars = getOption("show.signif.stars"),
+  show.call = getOption("msummary.show.call"),
   ...
 )
 
@@ -22,6 +23,7 @@
   digits = max(3L, getOption("digits") - 3L),
   symbolic.cor = x$symbolic.cor,
   signif.stars = getOption("show.signif.stars"),
+  show.call = getOption("msummary.show.call"),
   ...
 )
 

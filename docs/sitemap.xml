@@ -1,120 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ashplot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/coef.html</loc>
-  </url>
-  <url>
-    <loc>/reference/columns.html</loc>
-  </url>
-  <url>
-    <loc>/reference/compare.html</loc>
-  </url>
-  <url>
-    <loc>/reference/df_stats.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dfapply.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ediff.html</loc>
-  </url>
-  <url>
-    <loc>/reference/evalFormula.html</loc>
-  </url>
-  <url>
-    <loc>/reference/evalSubFormula.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fit_distr_fun.html</loc>
-  </url>
-  <url>
-    <loc>/reference/formularise.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/infer_transformation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/inspect.html</loc>
-  </url>
-  <url>
-    <loc>/reference/interval_statistics.html</loc>
-  </url>
-  <url>
-    <loc>/reference/joinFrames.html</loc>
-  </url>
-  <url>
-    <loc>/reference/list-utils.html</loc>
-  </url>
-  <url>
-    <loc>/reference/logical2factor.html</loc>
-  </url>
-  <url>
-    <loc>/reference/logit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/makeFun.html</loc>
-  </url>
-  <url>
-    <loc>/reference/make_df.html</loc>
-  </url>
-  <url>
-    <loc>/reference/modelVars.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mosaic_tally.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mosaicformula.html</loc>
-  </url>
-  <url>
-    <loc>/reference/msummary.html</loc>
-  </url>
-  <url>
-    <loc>/reference/n_missing.html</loc>
-  </url>
-  <url>
-    <loc>/reference/na.warn.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nicenames.html</loc>
-  </url>
-  <url>
-    <loc>/reference/parseFormula.html</loc>
-  </url>
-  <url>
-    <loc>/reference/prop.html</loc>
-  </url>
-  <url>
-    <loc>/reference/props.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reop_formula.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rhs_or_expr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tally.html</loc>
-  </url>
-  <url>
-    <loc>/reference/vector2df.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/ashplot.html</loc></url>
+<url><loc>/reference/coef.html</loc></url>
+<url><loc>/reference/columns.html</loc></url>
+<url><loc>/reference/compare.html</loc></url>
+<url><loc>/reference/df_stats.html</loc></url>
+<url><loc>/reference/dfapply.html</loc></url>
+<url><loc>/reference/ediff.html</loc></url>
+<url><loc>/reference/evalFormula.html</loc></url>
+<url><loc>/reference/evalSubFormula.html</loc></url>
+<url><loc>/reference/fit_distr_fun.html</loc></url>
+<url><loc>/reference/formularise.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/infer_transformation.html</loc></url>
+<url><loc>/reference/inspect.html</loc></url>
+<url><loc>/reference/interval_statistics.html</loc></url>
+<url><loc>/reference/joinFrames.html</loc></url>
+<url><loc>/reference/list-utils.html</loc></url>
+<url><loc>/reference/logical2factor.html</loc></url>
+<url><loc>/reference/logit.html</loc></url>
+<url><loc>/reference/makeFun.html</loc></url>
+<url><loc>/reference/make_df.html</loc></url>
+<url><loc>/reference/modelVars.html</loc></url>
+<url><loc>/reference/mosaic_tally.html</loc></url>
+<url><loc>/reference/mosaicformula.html</loc></url>
+<url><loc>/reference/msummary.html</loc></url>
+<url><loc>/reference/n_missing.html</loc></url>
+<url><loc>/reference/na.warn.html</loc></url>
+<url><loc>/reference/nicenames.html</loc></url>
+<url><loc>/reference/parseFormula.html</loc></url>
+<url><loc>/reference/prop.html</loc></url>
+<url><loc>/reference/props.html</loc></url>
+<url><loc>/reference/reop_formula.html</loc></url>
+<url><loc>/reference/rhs_or_expr.html</loc></url>
+<url><loc>/reference/tally.html</loc></url>
+<url><loc>/reference/vector2df.html</loc></url>
 </urlset>
+

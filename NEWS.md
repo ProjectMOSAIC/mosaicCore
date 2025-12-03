@@ -2,6 +2,10 @@
 
 # mosaicCore 
 
+# mosaicCore 1.0  
+
+* provide option to display model call when printing msummary objects. (#040)
+
 # mosaicCore 0.9.4
 
 * migrated from `%>%` to `|>`
